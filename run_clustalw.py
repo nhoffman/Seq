@@ -4,7 +4,11 @@
 
 __version__ = '$Id: run_clustalw.py 1513 2007-10-16 00:09:27Z n.hoffman $'
 
-import os, sys, logging, commands
+import os
+import sys
+import logging
+import subprocess
+
 import sequtil
 
 log = logging
@@ -12,6 +16,12 @@ log = logging
 def getparams(**args):
     return args
 
+def check_clustalw():
+    """Try to find the clustalw executable. If it exists, print the version number.
+    """
+    
+    retval = subprocess.call('clustalw -help')
+    
 def run_clustalw(target_file, clustal_cmd='clustalw', run=True, **params):
     """Run clustalw -options for command line parameters"""
     
