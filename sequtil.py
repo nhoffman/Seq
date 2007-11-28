@@ -3,6 +3,10 @@ import copy
 import random
 import string
 import Seq
+import os
+import logging
+
+log = logging
 
 from Dictionaries import translationWithoutAmbiguity, translationWithAmbiguity, translationWithoutAmbiguity3, translationWithAmbiguity3, complementDict, threeToOneLetterAADict, IUPAC_rev
 
@@ -585,7 +589,7 @@ def run_bat(cmds, name=None, path='.', run=True, cleanup=True):
 	if name:
 		outfilename = os.path.join(path, name+suffix)
 	else:
-		outfilename = os.path.join(path, util.tmpname()+suffix)
+		outfilename = os.path.join(path, randomname()+suffix)
 	
 	log.info('writing %s' % outfilename)
 	
@@ -607,8 +611,9 @@ def test():
 	import sys, pprint, os
 	from io_clustal import readAlnStr
 		
-	mdir,_ = os.path.split(__file__)	
-	infile = os.path.join(mdir, 'testfiles', 'oscillo_F41669_top20.aln')
+	#mdir,_ = os.path.split(__file__)	
+	#infile = os.path.join(mdir, 'testfiles', 'oscillo_F41669_top20.aln')
+	infile = os.path.join('testfiles', 'oscillo_F41669_top20.aln')
 	
 	seqlist = readAlnStr(open(infile).read())
 	seq = seqlist[0]

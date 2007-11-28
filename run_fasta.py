@@ -14,11 +14,6 @@ log = logging
 TEMPDIR = tempfile.gettempdir()
 ALIGN_SUFFIX = '.falign'
 
-try:
-    USER = os.environ['USER']
-except KeyError:
-    USER = os.environ['LOGNAME']
-
 FASTAPATH = '/usr/local/bin'
 
 class FormatError(Exception):

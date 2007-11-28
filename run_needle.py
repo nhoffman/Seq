@@ -18,11 +18,6 @@ ALIGN_SUFFIX = '.needle'
 EDNAFULL = os.path.join(os.path.abspath(os.path.split(__file__)[0]),'data','EDNAFULL')
 #EDNAFULL = os.path.join(sys.prefix, 'lib', 'python'+sys.version[:3],'site-packages','Seq','data','EDNAFULL')
 
-try:
-	USER = os.environ['USER']
-except KeyError:
-	USER = os.environ['LOGNAME']
-
 EXEC_PATH = '/usr/local/bin'
 
 class FormatError(Exception):

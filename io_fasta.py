@@ -92,10 +92,12 @@ def test():
     """Test routines in this module"""
         
     import glob 
-    mdir,_ = os.path.split(__file__)
-    infiles = glob.glob(os.path.join(mdir,'testfiles/*.fasta'))
+    #need to fix MANIFEST file to install testfiles at the below location
+    #mdir,_ = os.path.split(__file__)
+    #infiles = glob.glob(os.path.join(mdir,'testfiles/*.fasta'))
+    infiles = glob.glob('testfiles/*.fasta')
     
-    print mdir
+    #print mdir
     print infiles
     
     seqlist = []
