@@ -1,0 +1,368 @@
+<100> GENERAL INFORMATION:
+<160> NUMBER OF SEQ ID NOS: 14
+<200> SEQUENCE CHARACTERISTICS:
+<210> SEQ ID NO 1
+<211> LENGTH: 2160
+<212> TYPE: DNA
+<213> ORGANISM: Bacillus sp.
+<220> FEATURE:
+<221> NAME/KEY: CDS
+<222> LOCATION: (1)..(2160)
+<220> FEATURE:
+<221> NAME/KEY: mat_peptide
+<222> LOCATION: (100)..(2157)
+<400> SEQUENCE:  1
+atg aaa aag aaa acg ctt tct tta ttt gtg gga ctg atg ctc ctc atc       48
+Met Lys Lys Lys Thr Leu Ser Leu Phe Val Gly Leu Met Leu Leu Ile
+  -30                     -25                 -20
+ggt ctt ctg ttc agc ggt tct ctt ccg tac aat cca aac gcc gct gaa       96
+Gly Leu Leu Phe Ser Gly Ser Leu Pro Tyr Asn Pro Asn Ala Ala Glu
+		-15                 -10                  -5
+gcc agc agt tcc gca agc gtc aaa ggg gac gtg att tac cag att atc      144
+Ala Ser Ser Ser Ala Ser Val Lys Gly Asp Val Ile Tyr Gln Ile Ile
+ -1   1               5                  10                  15
+att gac cgg ttt tac gat ggg gac acg acg aac aac aat cct gcc aaa      192
+Ile Asp Arg Phe Tyr Asp Gly Asp Thr Thr Asn Asn Asn Pro Ala Lys
+				 20                  25                  30
+agt tat gga ctt tac gat ccg acc aaa tcg aag tgg aaa atg tat tgg      240
+Ser Tyr Gly Leu Tyr Asp Pro Thr Lys Ser Lys Trp Lys Met Tyr Trp
+			 35                  40                  45
+ggc ggg gat ctg gag ggg gtt cgt caa aaa ctt cct tat ctt aaa cag      288
+Gly Gly Asp Leu Glu Gly Val Arg Gln Lys Leu Pro Tyr Leu Lys Gln
+		 50                  55                  60
+ctg ggc gta acg aca atc tgg ttg tcc ccg gtt ttg gac aat ctg gat      336
+Leu Gly Val Thr Thr Ile Trp Leu Ser Pro Val Leu Asp Asn Leu Asp
+	 65                  70                  75
+aca ctg gcg ggc acc gat aac acg ggc tat cac gga tac tgg acg cgc      384
+Thr Leu Ala Gly Thr Asp Asn Thr Gly Tyr His Gly Tyr Trp Thr Arg
+ 80                  85                  90                  95
+gat ttt aaa cag att gag gaa cat ttc ggg aat tgg acc aca ttt gac      432
+Asp Phe Lys Gln Ile Glu Glu His Phe Gly Asn Trp Thr Thr Phe Asp
+				100                 105                 110
+acg ttg gtc aat gat gct cac caa aac gga atc aag gtg att gtc gac      480
+Thr Leu Val Asn Asp Ala His Gln Asn Gly Ile Lys Val Ile Val Asp
+			115                 120                 125
+ttt gtg ccc aat cat tcg act cct ttt aag gca aac gat tcc acc ttt      528
+Phe Val Pro Asn His Ser Thr Pro Phe Lys Ala Asn Asp Ser Thr Phe
+		130                 135                 140
+gcg gaa ggc ggc gcc ctc tac aac aat gga acc tat atg ggc aat tat      576
+Ala Glu Gly Gly Ala Leu Tyr Asn Asn Gly Thr Tyr Met Gly Asn Tyr
+	145                 150                 155
+ttt gat gac gca aca aaa ggg tac ttc cac cat aat ggg gac atc agc      624
+Phe Asp Asp Ala Thr Lys Gly Tyr Phe His His Asn Gly Asp Ile Ser
+160                 165                 170                 175
+aac tgg gac gac cgg tac gag gcg caa tgg aaa aac ttc acg gat cca      672
+Asn Trp Asp Asp Arg Tyr Glu Ala Gln Trp Lys Asn Phe Thr Asp Pro
+				180                 185                 190
+gcc ggt ttc tcg ctt gcc gat ttg tcg cag gaa aat ggc acg att gct      720
+Ala Gly Phe Ser Leu Ala Asp Leu Ser Gln Glu Asn Gly Thr Ile Ala
+			195                 200                 205
+caa tac ctg acc gat gcg gcg gtt caa ttg gta gca cat gga gcg gat      768
+Gln Tyr Leu Thr Asp Ala Ala Val Gln Leu Val Ala His Gly Ala Asp
+		210                 215                 220
+ggt ttg cgg att gat gcg gtg aag cat ttt aat tcg ggg ttc tcc aaa      816
+Gly Leu Arg Ile Asp Ala Val Lys His Phe Asn Ser Gly Phe Ser Lys
+	225                 230                 235
+tcg ttg gcc gat aaa ctg tac caa aag aaa gac att ttc ctg gtg ggg      864
+Ser Leu Ala Asp Lys Leu Tyr Gln Lys Lys Asp Ile Phe Leu Val Gly
+240                 245                 250                 255
+gaa tgg tac gga gat gac ccc gga aca gcc aat cat ctg gaa aag gtc      912
+Glu Trp Tyr Gly Asp Asp Pro Gly Thr Ala Asn His Leu Glu Lys Val
+				260                 265                 270
+cgg tac gcc aac aac agc ggt gtc aat gtg ctg gat ttt gat ctc aac      960
+Arg Tyr Ala Asn Asn Ser Gly Val Asn Val Leu Asp Phe Asp Leu Asn
+			275                 280                 285
+acg gtg att cga aat gtg ttc ggc aca ttt acg caa acg atg tac gat     1008
+Thr Val Ile Arg Asn Val Phe Gly Thr Phe Thr Gln Thr Met Tyr Asp
+		290                 295                 300
+ctt aac aat atg gtg aac caa acg ggg aac gag tac aaa tac aaa gaa     1056
+Leu Asn Asn Met Val Asn Gln Thr Gly Asn Glu Tyr Lys Tyr Lys Glu
+	305                 310                 315
+aat cta atc aca ttt atc gat aac cat gat atg tca aga ttt ctt tcg     1104
+Asn Leu Ile Thr Phe Ile Asp Asn His Asp Met Ser Arg Phe Leu Ser
+320                 325                 330                 335
+gta aat tcg aac aag gcg aat ttg cac cag gcg ctt gct ttc att ctc     1152
+Val Asn Ser Asn Lys Ala Asn Leu His Gln Ala Leu Ala Phe Ile Leu
+				340                 345                 350
+act tcg cgg ggt acg ccc tcc atc tat tat gga acc gaa caa tac atg     1200
+Thr Ser Arg Gly Thr Pro Ser Ile Tyr Tyr Gly Thr Glu Gln Tyr Met
+			355                 360                 365
+gca ggc ggc aat gac ccg tac aac cgg ggg atg atg ccg gcg ttt gat     1248
+Ala Gly Gly Asn Asp Pro Tyr Asn Arg Gly Met Met Pro Ala Phe Asp
+		370                 375                 380
+acg aca acc acc gcc ttt aaa gag gtg tca act ctg gcg ggg ttg cgc     1296
+Thr Thr Thr Thr Ala Phe Lys Glu Val Ser Thr Leu Ala Gly Leu Arg
+	385                 390                 395
+agg aac aat gcg gcg atc cag tac ggc acc acc acc cag cgt tgg atc     1344
+Arg Asn Asn Ala Ala Ile Gln Tyr Gly Thr Thr Thr Gln Arg Trp Ile
+400                 405                 410                 415
+aac aat gat gtt tac att tat gaa cgg aaa ttt ttc aac gat gtc gtg     1392
+Asn Asn Asp Val Tyr Ile Tyr Glu Arg Lys Phe Phe Asn Asp Val Val
+				420                 425                 430
+ttg gtg gcc atc aat cga aac acg caa tcc tcc tat tcg att tcc ggt     1440
+Leu Val Ala Ile Asn Arg Asn Thr Gln Ser Ser Tyr Ser Ile Ser Gly
+			435                 440                 445
+ttg cag acg gcc ttg cca aat ggc agc tat gcg gat tat ctg tca ggg     1488
+Leu Gln Thr Ala Leu Pro Asn Gly Ser Tyr Ala Asp Tyr Leu Ser Gly
+		450                 455                 460
+ctg ttg ggg ggg aac ggg att tcc gtt tcc aat gga agt gtc gct tcg     1536
+Leu Leu Gly Gly Asn Gly Ile Ser Val Ser Asn Gly Ser Val Ala Ser
+	465                 470                 475
+ttc acg ctt gcg cct gga gcc gtg tct gtt tgg cag tac agc aca tcc     1584
+Phe Thr Leu Ala Pro Gly Ala Val Ser Val Trp Gln Tyr Ser Thr Ser
+480                 485                 490                 495
+gct tca gcg ccg caa atc gga tcg gtt gct cca aat atg ggg att ccg     1632
+Ala Ser Ala Pro Gln Ile Gly Ser Val Ala Pro Asn Met Gly Ile Pro
+				500                 505                 510
+ggt aat gtg gtc acg atc gac ggg aaa ggt ttt ggg acg acg cag gga     1680
+Gly Asn Val Val Thr Ile Asp Gly Lys Gly Phe Gly Thr Thr Gln Gly
+			515                 520                 525
+acc gtg aca ttt ggc gga gtg aca gcg act gtg aaa tcc tgg aca tcc     1728
+Thr Val Thr Phe Gly Gly Val Thr Ala Thr Val Lys Ser Trp Thr Ser
+		530                 535                 540
+aat cgg att gaa gtg tac gtt ccc aac atg gcc gcc ggg ctg acc gat     1776
+Asn Arg Ile Glu Val Tyr Val Pro Asn Met Ala Ala Gly Leu Thr Asp
+	545                 550                 555
+gtg aaa gtc acc gcg ggt gga gtt tcc agc aat ctg tat tct tac aat     1824
+Val Lys Val Thr Ala Gly Gly Val Ser Ser Asn Leu Tyr Ser Tyr Asn
+560                 565                 570                 575
+att ttg agt gga acg cag aca tcg gtt gtg ttt act gtg aaa agt gcg     1872
+Ile Leu Ser Gly Thr Gln Thr Ser Val Val Phe Thr Val Lys Ser Ala
+				580                 585                 590
+cct ccg acc aac ctg ggg gat aag att tac ctg acg ggc aac ata ccg     1920
+Pro Pro Thr Asn Leu Gly Asp Lys Ile Tyr Leu Thr Gly Asn Ile Pro
+			595                 600                 605
+gaa ttg ggg aat tgg agc acg gat acg agc gga gcc gtt aac aat gcg     1968
+Glu Leu Gly Asn Trp Ser Thr Asp Thr Ser Gly Ala Val Asn Asn Ala
+		610                 615                 620
+caa ggg ccc ctg ctc gcg ccc aat tat ccg gat tgg ttt tat gta ttc     2016
+Gln Gly Pro Leu Leu Ala Pro Asn Tyr Pro Asp Trp Phe Tyr Val Phe
+	625                 630                 635
+agc gtt cca gca gga aag acg att caa ttc aag ttc ttc atc aag cgt     2064
+Ser Val Pro Ala Gly Lys Thr Ile Gln Phe Lys Phe Phe Ile Lys Arg
+640                 645                 650                 655
+gcg gat gga acg att caa tgg gag aat ggt tcg aac cac gtg gcc aca     2112
+Ala Asp Gly Thr Ile Gln Trp Glu Asn Gly Ser Asn His Val Ala Thr
+				660                 665                 670
+act ccc acg ggt gca acc ggt aac att act gtt acg tgg caa aac tag     2160
+Thr Pro Thr Gly Ala Thr Gly Asn Ile Thr Val Thr Trp Gln Asn
+			675                 680                 685
+<200> SEQUENCE CHARACTERISTICS:
+<210> SEQ ID NO 2
+<211> LENGTH: 719
+<212> TYPE: PRT
+<213> ORGANISM: Bacillus sp.
+<400> SEQUENCE:  2
+Met Lys Lys Lys Thr Leu Ser Leu Phe Val Gly Leu Met Leu Leu Ile
+  1               5                  10                  15
+Gly Leu Leu Phe Ser Gly Ser Leu Pro Tyr Asn Pro Asn Ala Ala Glu
+			 20                  25                  30
+Ala Ser Ser Ser Ala Ser Val Lys Gly Asp Val Ile Tyr Gln Ile Ile
+		 35                  40                  45
+Ile Asp Arg Phe Tyr Asp Gly Asp Thr Thr Asn Asn Asn Pro Ala Lys
+	 50                  55                  60
+Ser Tyr Gly Leu Tyr Asp Pro Thr Lys Ser Lys Trp Lys Met Tyr Trp
+ 65                  70                  75                  80
+Gly Gly Asp Leu Glu Gly Val Arg Gln Lys Leu Pro Tyr Leu Lys Gln
+				 85                  90                  95
+Leu Gly Val Thr Thr Ile Trp Leu Ser Pro Val Leu Asp Asn Leu Asp
+			100                 105                 110
+Thr Leu Ala Gly Thr Asp Asn Thr Gly Tyr His Gly Tyr Trp Thr Arg
+		115                 120                 125
+Asp Phe Lys Gln Ile Glu Glu His Phe Gly Asn Trp Thr Thr Phe Asp
+	130                 135                 140
+Thr Leu Val Asn Asp Ala His Gln Asn Gly Ile Lys Val Ile Val Asp
+145                 150                 155                 160
+Phe Val Pro Asn His Ser Thr Pro Phe Lys Ala Asn Asp Ser Thr Phe
+				165                 170                 175
+Ala Glu Gly Gly Ala Leu Tyr Asn Asn Gly Thr Tyr Met Gly Asn Tyr
+			180                 185                 190
+Phe Asp Asp Ala Thr Lys Gly Tyr Phe His His Asn Gly Asp Ile Ser
+		195                 200                 205
+Asn Trp Asp Asp Arg Tyr Glu Ala Gln Trp Lys Asn Phe Thr Asp Pro
+	210                 215                 220
+Ala Gly Phe Ser Leu Ala Asp Leu Ser Gln Glu Asn Gly Thr Ile Ala
+225                 230                 235                 240
+Gln Tyr Leu Thr Asp Ala Ala Val Gln Leu Val Ala His Gly Ala Asp
+				245                 250                 255
+Gly Leu Arg Ile Asp Ala Val Lys His Phe Asn Ser Gly Phe Ser Lys
+			260                 265                 270
+Ser Leu Ala Asp Lys Leu Tyr Gln Lys Lys Asp Ile Phe Leu Val Gly
+		275                 280                 285
+Glu Trp Tyr Gly Asp Asp Pro Gly Thr Ala Asn His Leu Glu Lys Val
+	290                 295                 300
+Arg Tyr Ala Asn Asn Ser Gly Val Asn Val Leu Asp Phe Asp Leu Asn
+305                 310                 315                 320
+Thr Val Ile Arg Asn Val Phe Gly Thr Phe Thr Gln Thr Met Tyr Asp
+				325                 330                 335
+Leu Asn Asn Met Val Asn Gln Thr Gly Asn Glu Tyr Lys Tyr Lys Glu
+			340                 345                 350
+Asn Leu Ile Thr Phe Ile Asp Asn His Asp Met Ser Arg Phe Leu Ser
+		355                 360                 365
+Val Asn Ser Asn Lys Ala Asn Leu His Gln Ala Leu Ala Phe Ile Leu
+	370                 375                 380
+Thr Ser Arg Gly Thr Pro Ser Ile Tyr Tyr Gly Thr Glu Gln Tyr Met
+385                 390                 395                 400
+Ala Gly Gly Asn Asp Pro Tyr Asn Arg Gly Met Met Pro Ala Phe Asp
+				405                 410                 415
+Thr Thr Thr Thr Ala Phe Lys Glu Val Ser Thr Leu Ala Gly Leu Arg
+			420                 425                 430
+Arg Asn Asn Ala Ala Ile Gln Tyr Gly Thr Thr Thr Gln Arg Trp Ile
+		435                 440                 445
+Asn Asn Asp Val Tyr Ile Tyr Glu Arg Lys Phe Phe Asn Asp Val Val
+	450                 455                 460
+Leu Val Ala Ile Asn Arg Asn Thr Gln Ser Ser Tyr Ser Ile Ser Gly
+465                 470                 475                 480
+Leu Gln Thr Ala Leu Pro Asn Gly Ser Tyr Ala Asp Tyr Leu Ser Gly
+				485                 490                 495
+Leu Leu Gly Gly Asn Gly Ile Ser Val Ser Asn Gly Ser Val Ala Ser
+			500                 505                 510
+Phe Thr Leu Ala Pro Gly Ala Val Ser Val Trp Gln Tyr Ser Thr Ser
+		515                 520                 525
+Ala Ser Ala Pro Gln Ile Gly Ser Val Ala Pro Asn Met Gly Ile Pro
+	530                 535                 540
+Gly Asn Val Val Thr Ile Asp Gly Lys Gly Phe Gly Thr Thr Gln Gly
+545                 550                 555                 560
+Thr Val Thr Phe Gly Gly Val Thr Ala Thr Val Lys Ser Trp Thr Ser
+				565                 570                 575
+Asn Arg Ile Glu Val Tyr Val Pro Asn Met Ala Ala Gly Leu Thr Asp
+			580                 585                 590
+Val Lys Val Thr Ala Gly Gly Val Ser Ser Asn Leu Tyr Ser Tyr Asn
+		595                 600                 605
+Ile Leu Ser Gly Thr Gln Thr Ser Val Val Phe Thr Val Lys Ser Ala
+	610                 615                 620
+Pro Pro Thr Asn Leu Gly Asp Lys Ile Tyr Leu Thr Gly Asn Ile Pro
+625                 630                 635                 640
+Glu Leu Gly Asn Trp Ser Thr Asp Thr Ser Gly Ala Val Asn Asn Ala
+				645                 650                 655
+Gln Gly Pro Leu Leu Ala Pro Asn Tyr Pro Asp Trp Phe Tyr Val Phe
+			660                 665                 670
+Ser Val Pro Ala Gly Lys Thr Ile Gln Phe Lys Phe Phe Ile Lys Arg
+		675                 680                 685
+Ala Asp Gly Thr Ile Gln Trp Glu Asn Gly Ser Asn His Val Ala Thr
+	690                 695                 700
+Thr Pro Thr Gly Ala Thr Gly Asn Ile Thr Val Thr Trp Gln Asn
+705                 710                 715
+<200> SEQUENCE CHARACTERISTICS:
+<210> SEQ ID NO 3
+<211> LENGTH: 38
+<212> TYPE: DNA
+<213> ORGANISM: Artificial Sequence
+<220> FEATURE:
+<223> OTHER INFORMATION: Description of Artificial Sequence F 188H
+	  Primer
+<400> SEQUENCE:  3
+
+
+
+gcaatggaaa aaccacacgg atccagccgg cttctcgc                             38
+<200> SEQUENCE CHARACTERISTICS:
+<210> SEQ ID NO 4
+<211> LENGTH: 38
+<212> TYPE: DNA
+<213> ORGANISM: Artificial Sequence
+<220> FEATURE:
+<223> OTHER INFORMATION: Description of Artificial Sequence F188E
+	  Primer
+<400> SEQUENCE:  4
+gcaatggaaa aacgagacgg atccagccgg cttctcgc                             38
+<200> SEQUENCE CHARACTERISTICS:
+<210> SEQ ID NO 5
+<211> LENGTH: 36
+<212> TYPE: DNA
+<213> ORGANISM: Artificial Sequence
+<220> FEATURE:
+<223> OTHER INFORMATION: Description of Artificial Sequence F 284E
+	  Primer
+<400> SEQUENCE:  5
+ggtgtcaatg tgctggatga agatctcaac acggtg                               36
+<200> SEQUENCE CHARACTERISTICS:
+<210> SEQ ID NO 6
+<211> LENGTH: 36
+<212> TYPE: DNA
+<213> ORGANISM: Artificial Sequence
+<220> FEATURE:
+<223> OTHER INFORMATION: Description of Artificial Sequence F 284D
+	  Primer
+<400> SEQUENCE:  6
+ggtgtcaatg ttctagatga tgatctcaac acggtg                               36
+<200> SEQUENCE CHARACTERISTICS:
+<210> SEQ ID NO 7
+<211> LENGTH: 36
+<212> TYPE: DNA
+<213> ORGANISM: Artificial Sequence
+<220> FEATURE:
+<223> OTHER INFORMATION: Description of Artificial Sequence F 284K
+	  Primer
+<400> SEQUENCE:  7
+ggtgtcaatg tgctggataa agatctcaac acggtg                               36
+<200> SEQUENCE CHARACTERISTICS:
+<210> SEQ ID NO 8
+<211> LENGTH: 35
+<212> TYPE: DNA
+<213> ORGANISM: Artificial Sequence
+<220> FEATURE:
+<223> OTHER INFORMATION: Description of Artificial Sequence N 327D
+	  Primer
+<400> SEQUENCE:  8
+cacatttatc gatgatcatg atatgtcaag atttc                                35
+<200> SEQUENCE CHARACTERISTICS:
+<210> SEQ ID NO 9
+<211> LENGTH: 34
+<212> TYPE: DNA
+<213> ORGANISM: Artificial Sequence
+<220> FEATURE:
+<223> OTHER INFORMATION: Description of Artificial Sequence T 288K
+	  Primer
+<400> SEQUENCE:  9
+cctaaaacta gagttgttcc actaggcctt acac                                 34
+<200> SEQUENCE CHARACTERISTICS:
+<210> SEQ ID NO 10
+<211> LENGTH: 34
+<212> TYPE: DNA
+<213> ORGANISM: Artificial Sequence
+<220> FEATURE:
+<223> OTHER INFORMATION: Description of Artificial Sequence T 288R
+	  Primer
+<400> SEQUENCE:  10
+cctaaaacta gagttgtccc actaggcctt acac                                 34
+<200> SEQUENCE CHARACTERISTICS:
+<210> SEQ ID NO 11
+<211> LENGTH: 22
+<212> TYPE: DNA
+<213> ORGANISM: Artificial Sequence
+<220> FEATURE:
+<223> OTHER INFORMATION: Description of Artificial SequenceA 189
+	  Primer
+<400> SEQUENCE:  11
+tgggcaatta ttttgatgac gc                                              22
+<200> SEQUENCE CHARACTERISTICS:
+<210> SEQ ID NO 12
+<211> LENGTH: 20
+<212> TYPE: DNA
+<213> ORGANISM: Artificial Sequence
+<220> FEATURE:
+<223> OTHER INFORMATION: Description of Artificial Sequence B 649
+	  Primer
+<400> SEQUENCE:  12
+tccgctcgta tccgtgctcc                                                 20
+<200> SEQUENCE CHARACTERISTICS:
+<210> SEQ ID NO 13
+<211> LENGTH: 20
+<212> TYPE: DNA
+<213> ORGANISM: Artificial Sequence
+<220> FEATURE:
+<223> OTHER INFORMATION: Description of Artificial Sequence A 82
+	  Primer
+<400> SEQUENCE:  13
+ggggatctgg agggggttcg                                                 20
+<200> SEQUENCE CHARACTERISTICS:
+<210> SEQ ID NO 14
+<211> LENGTH: 22
+<212> TYPE: DNA
+<213> ORGANISM: Artificial Sequence
+<220> FEATURE:
+<223> OTHER INFORMATION: Description of Artificial Sequence B 346
+	  Primer
+<400> SEQUENCE:  14
+tttgtactcg ttccccgttt gg                                              22
