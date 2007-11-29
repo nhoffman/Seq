@@ -10,7 +10,7 @@ log = logging
 
 from Dictionaries import translationWithoutAmbiguity, translationWithAmbiguity, translationWithoutAmbiguity3, translationWithAmbiguity3, complementDict, threeToOneLetterAADict, IUPAC_rev
 
-__version__ = '$Id: sequtil.py 1627 2007-11-02 20:35:31Z n.hoffman $'
+__version__ = '$Id$'
 
 #to find all single gaps
 singleGapsReo = re.compile( r'[-.~]', re.I)

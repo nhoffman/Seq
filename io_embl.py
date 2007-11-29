@@ -5,7 +5,7 @@ readEMBLStr
 writeEMBLStr
 """
 
-__version__ = "$Id: io_embl.py 1487 2007-10-10 17:42:39Z n.hoffman $"
+__version__ = "$Id$"
 
 import re, os, sys
 import Seq

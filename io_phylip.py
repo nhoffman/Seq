@@ -2,7 +2,7 @@
 I/O for phylip format sequences.
 """
 
-__version__ = "$Id: io_phylip.py 1487 2007-10-10 17:42:39Z n.hoffman $"
+__version__ = "$Id$"
 
 import re, os, sys
 from Seq import Seq

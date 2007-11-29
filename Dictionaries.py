@@ -2,7 +2,7 @@
 Contains various dictionaries for translation, encoding, etc. of nucleotide and amino acid sequences.
 """
 
-__version__ = '$Id: Dictionaries.py 1487 2007-10-10 17:42:39Z n.hoffman $'
+__version__ = '$Id$'
 
 translationWithoutAmbiguity = {'TAG': '*', 'TGG': 'W', 'CAG': 'Q', 'CCG': 'P', 'CGT': 'R', 'CTC': 'L',
 'CTT': 'L', 'CGC': 'R', 'GCT': 'A', 'GTT': 'V', 'AAG': 'K', 'AAT': 'N', 'GTG': 'V',

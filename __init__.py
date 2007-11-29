@@ -1,6 +1,6 @@
 import os
 
-__version__ = '$Id: __init__.py 1696 2007-11-22 01:07:16Z n.hoffman $'
+__version__ = '$Id$'
 
 __all__ = """
 Dictionaries

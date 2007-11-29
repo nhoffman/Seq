@@ -6,7 +6,7 @@ Create windows package: python setup.py bdist_wininst
 from distutils.core import setup
 import glob, os, sys
 
-revision = '$Revision: 1557 $'
+revision = '$Revision$'
 
 files = ['__init__.py','Sequence.py','Dictionaries.py','sequtil.py']
 files.extend(glob.glob('io_*.py'))

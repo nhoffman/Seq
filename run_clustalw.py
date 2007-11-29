@@ -2,7 +2,7 @@
 
 """Module to run clustalw"""
 
-__version__ = '$Id: run_clustalw.py 1513 2007-10-16 00:09:27Z n.hoffman $'
+__version__ = '$Id$'
 
 import os
 import sys

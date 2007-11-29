@@ -4,7 +4,7 @@ Public methods:
 readSeqListing
 """
 
-__version__ = "$Id: io_uspto.py 1487 2007-10-10 17:42:39Z n.hoffman $"
+__version__ = "$Id$"
 
 import re
 from Seq import Seq

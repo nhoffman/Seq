@@ -5,7 +5,7 @@ readFasta
 writeFasta
 """
 
-__version__ = "$Id: io_fasta.py 1557 2007-10-25 00:20:58Z n.hoffman $"
+__version__ = "$Id$"
 
 import re, os, sys
 import warnings

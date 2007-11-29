@@ -5,7 +5,7 @@ a header string, accession number.
 
 from sequtil import wrap
 
-__version__ = '$Id: Sequence.py 1487 2007-10-10 17:42:39Z n.hoffman $'
+__version__ = '$Id$'
 
 class Seq(object):
 	"""
