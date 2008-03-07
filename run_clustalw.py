@@ -40,11 +40,17 @@ def run_clustalw(target_file, clustal_cmd='clustalw', run=True, **params):
     defaults.update(params)
     args = []
     args.append('"%s"'%clustal_cmd) # surround with quotes to accomodate spaces
+    
+    if os_type == 'POSIX':
+        argchar='-'
+    elif os_type == 'WINDOWS':
+        argchar='/'
+    
     for k,v in defaults.items():
         if v:
-            args.append('-%s="%s"' % (k,v))
+            args.append('%s%s="%s"' % (argchar,k,v))
         else:
-            args.append('-%s' % k)
+            args.append('%s%s' % (argchar,k))
     
     cmd = ' '.join(args)
     log.info(cmd)
