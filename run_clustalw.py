@@ -39,7 +39,7 @@ def run_clustalw(target_file, clustal_cmd='clustalw', run=True, **params):
     defaults = getparams(infile=target_file)
     defaults.update(params)
     args = []
-    args.append(clustal_cmd)
+    args.append('"%s"'%clustal_cmd) # surround with quotes to accomodate spaces
     for k,v in defaults.items():
         if v:
             args.append('-%s="%s"' % (k,v))
