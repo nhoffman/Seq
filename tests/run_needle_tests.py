@@ -21,11 +21,13 @@ fastaname = os.path.join(datadir, '10patients.fasta')
 class TestRunNeedle(unittest.TestCase):
     
     def setUp(self):
-        seqs = Seq.io_fasta.read(open(fastaname).read())
+        self.seqs = Seq.io_fasta.read(open(fastaname).read())
         
-    def test1(self):    
+    def test1(self):
+        output = Seq.run_needle.needle(self.seqs[0], self.seqs[0:5])
+        #Seq.run_needle.show_records(output)
         
-
+        
 def main():
     """
     Usage: thisfile.py [method-name]
