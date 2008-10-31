@@ -81,8 +81,8 @@ def _write_fasta( seq, linelength, hea ):
     
     output = ['>']
     output.append( seq.name )
-    if hea:
-        output.append( ' ' + seq.hea )
+    if hea and seq.hea:
+        output.append( ' ' + seq.hea)
     output.append('\n')
     output.append( wrap(seq.seq, linelength) )
     
