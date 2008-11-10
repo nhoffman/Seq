@@ -76,7 +76,8 @@ def needle(query, target, outputfile=None, exec_path=None, submat=None, cleanup=
 		needle_prog = os.path.join(exec_path, 'needle')
 	else:
 	    # use default location for installed apps
-		needle_prog = os.path.join(EXEC_PATH, 'needle')
+		# needle_prog = os.path.join(EXEC_PATH, 'needle')
+		needle_prog = 'needle'
 	
 	cwd = os.path.abspath(os.getcwd())
 
@@ -197,6 +198,8 @@ def parseNeedle(instr):
 		q_data = dict([get_tup(e, 'q') for e in query.split(';') if e.strip()])
 		t_data = dict([get_tup(e, 't') for e in target.split(';') if e.strip()])
 
+		d['align_num'] = i
+		
 		## add data
 		d['q_name'] = q_name
 		d.update(q_data)
@@ -339,6 +342,12 @@ def show_record(row, width=60, align=True):
 		print 'q_aln_str[%(start)s:%(stop)s], t_aln_str[%(start)s:%(stop)s]' % locals()
 		print_align(q_al_str[start:stop], t_al_str[start:stop], width)
 
+def show_records(records, width=60, align=True):
+    
+    for k,row in sorted(records.items(), key=lambda x: x[1]['align_num']):
+        print k
+        show_record(row, width, align)
+    
 def main():
 		
 	logging.basicConfig(level=logging.DEBUG, format='%(lineno)s %(levelname)s %(message)s', stream=sys.stdout)
