@@ -1,8 +1,5 @@
 """
 I/O for fasta sequence format.
-Public methods:
-readFasta
-writeFasta
 """
 
 __version__ = "$Id$"
@@ -16,9 +13,16 @@ from sequtil import wrap, removeWhitespace, removeAllButAlpha
 class FastaFormatError(Exception):
     pass
 
-def read( strin, degap=False, style=None):
-    """strin is one or more fasta format sequences. The first non-whitespace
-    character must be >. Non-alphanumeric characters are removed if degap is True. Choose a value of style from among None (no change to input), 'upper', and 'lower'"""
+def read( strin, degap=False, style=None, preprocess=None):
+    """
+    * strin - one or more fasta format sequences. The first non-whitespace
+    character must be >. 
+    * degap (bool) - if True, Non-alphanumeric characters are removed
+    * style - None (no change to input), 'upper', or 'lower'
+    * preprocess - None or a function accepting a single argument "seqstr"
+      for modifying the input sequence string arbitrarily. If a function
+      is provided, degap and style are ignored.
+    """
     
     gt_count = strin.count('>')
     flist = strin.strip().split('>')
@@ -41,16 +45,19 @@ def read( strin, degap=False, style=None):
         except ValueError:
             name, header = firstline.strip(), ''
         
-        if degap:
-            seq = removeAllButAlpha(rawseq)
+        if preprocess is None:        
+            if degap:
+                seq = removeAllButAlpha(rawseq)
+            else:
+                seq = removeWhitespace(rawseq)
+                
+            if style == 'upper':
+                seq = seq.upper()
+            elif style == 'lower':
+                seq = seq.lower()
         else:
-            seq = removeWhitespace(rawseq)
-            
-        if style == 'upper':
-            seq = seq.upper()
-        elif style == 'lower':
-            seq = seq.lower()
-            
+            seq = preprocess(seq)
+        
         seqlist.append(Seq(name, seq, header))
     
     #sanity check
@@ -87,28 +94,3 @@ def _write_fasta( seq, linelength, hea ):
     output.append( wrap(seq.seq, linelength) )
     
     return ''.join(output)
-    
-def test():
-    """Test routines in this module"""
-        
-    import glob 
-    #need to fix MANIFEST file to install testfiles at the below location
-    #mdir,_ = os.path.split(__file__)
-    #infiles = glob.glob(os.path.join(mdir,'testfiles/*.fasta'))
-    infiles = glob.glob('testfiles/*.fasta')
-    
-    #print mdir
-    print infiles
-    
-    seqlist = []
-    for file in infiles:
-        s = open(file).read()
-        seqlist += read(s)
-        
-    print write( seqlist[0] )
-    print write( seqlist[0], hea=False )
-    print write( seqlist[1:] )
-
-    
-    
-    

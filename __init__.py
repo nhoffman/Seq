@@ -10,6 +10,7 @@ io_embl
 io_fasta
 io_phylip
 io_uspto
+io_rdp
 sequtil
 run_fasta
 run_needle
@@ -24,6 +25,7 @@ import io_embl
 import io_fasta
 import io_phylip
 import io_uspto
+import io_rdp
 import sequtil
 import run_fasta
 import run_needle
