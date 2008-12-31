@@ -1,27 +1,24 @@
 RUNIT_DIR=$(shell pwd)
 
-all: install test
+ifdef TARGET
+	TARG=-t ${TARGET}
+endif
 
-full: build install test
+all: test
 
 install:
 	cd ..; \
 	python setup.py install && \
 	cd ${RUNIT_DIR}
 
-build:
-	cd ${TOP}; \
-	${R_CMD} CMD build ${PKG_PATH} && \
-	cd ${RUNIT_DIR}
-
 test:
-	./runalltests.py
+	runtests.py ${TARG} ${FLAGS}
 
 %.py: FORCE
-	./$@ ${METHOD} 
+	runtests.py $@ ${TARG} ${FLAGS}
 
 FORCE:
 
 clean:
-	rm *.pdf prof
+	rm -f *.pyc profile ../test_output/* 
 
