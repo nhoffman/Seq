@@ -1,14 +1,18 @@
 """
 I/O for USPTO sequence listing format sequences.
 Public methods:
-readSeqListing
+read
+readSeqListing (deprecated)
 """
 
 __version__ = "$Id$"
 
 import re
+import logging
 from Seq import Seq
 from sequtil import allButAlphaRexp, threeletter_to_oneletter_aa
+
+log = logging
 
 class SeqListingFormatError(Exception):
 	pass
@@ -72,7 +76,7 @@ def _process_USPTO_dna_str( instr ):
 	
 	return allButAlphaRexp.sub('', instr)
 
-def readSeqListing( instr, matter='', client='' ):
+def read( instr, matter='', client='' ):
 	"""Converts USPTO-format sequence listing to a SEQ object.
 	see http://www.uspto.gov/web/offices/com/sol/og/con/files/cons082.htm
 	Some metadata from sequence listing header is transferred to each sequence
@@ -195,18 +199,11 @@ def readSeqListing( instr, matter='', client='' ):
 		seqList.append(Seq(name=name, seq=seq, hea=hea, data=seqData))
 		
 	return seqList
+
+# for backward compatibility
+def readSeqListing(*args, **kwargs):
+    log.info('io_embl.readSeqListing is deprecated: use io_embl.read instead')
+    return read(*args, **kwargs)
 	
-def test():
-	"""Test routines in this module"""
-	
-	import glob	
-	infiles = glob.glob('testfiles/*.uspto')
-	
-	seqlist = []
-	for file in infiles:
-		s = open(file).read()
-		seqlist += readSeqListing(s, matter='999999', client='888888')
-	
-	for seq in seqlist:
-		print `seq`
+
 	

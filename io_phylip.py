@@ -15,9 +15,9 @@ def _seqToPhylip( seq, name=None):
 	Mercilessly truncates names to 10 characters."""
 	
 	if name == None:
-		name = seq.getName()
+		name = seq.name
 		
-	str = '%-10s%s' % (name[:10], seq.getSeq())
+	str = '%-10s%s' % (name[:10], seq.seq)
 	
 	output = breakLines(str, 60)
 	

@@ -1,15 +1,20 @@
 """
 I/O for EMBL format sequences.
 Public methods are:
-readEMBLStr
-writeEMBLStr
+read
+write
+readEMBLStr (deprecated)
+writeEMBLStr (deprecated)
 """
 
 __version__ = "$Id$"
 
 import re, os, sys
+import logging
 import Seq
 from sequtil import wrap, removeAllButAlpha
+
+log = logging
 
 class EMBLFormatError(TypeError):
 	pass
@@ -32,7 +37,7 @@ def _writeEMBLLine(key, val, linelength ):
 	return os.linesep.join(strList)
 
 
-def writeEMBLStr( seqList, linelength=60, insert_blanklines=0 ):
+def write( seqList, linelength=60, insert_blanklines=0 ):
 	
 	if type(seqList) != type([]):
 		raise ValueError, 'input should be a list of Seq objects'
@@ -96,7 +101,7 @@ def _writeSingleEMBLStr( seqObj, linelength, insert_blanklines ):
 	
 	return entrysep.join(strList)
 		
-def readEMBLStr( strin ):
+def read( strin ):
 	"""Reads data corresponding to one or more sequences in EMBL format.
 	Return a list of Seq objects"""
 	
@@ -213,21 +218,13 @@ def _readSingleEMBLStr( strin ):
 		
 	# def __init__( self, name, seq, type='', acc='',hea='' ):
 	return Seq.Seq(name, seqStr, type='', acc=acc, hea=hea, data=data)
-	
-def test():
-	"""Test routines in this module"""	
-	import glob
-	
-	mdir,_ = os.path.split(__file__)
-	infiles = glob.glob(os.path.join(mdir,'testfiles/*.embl'))
-	
-	seqlist = []
-	for file in infiles:
-		s = open(file).read()
-		thisseqlist = readEMBLStr(s)
-		seqlist += thisseqlist
-	
-	for seq in seqlist:
-		print `seq`
-		print writeEMBLStr([seq])
+
+# for backward compatibility
+def readEMBLStr(instr):
+    log.info('io_embl.readEMBLStr is deprecated: use io_embl.read instead')
+    return read(instr)
+
+def writeEMBLStr(seqs):
+    log.info('io_embl.writeEMBLStr is deprecated: use io_embl.write instead')
+    return write(seqs)
 	

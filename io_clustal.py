@@ -1,15 +1,21 @@
 """
 I/O for clustalw aln format sequences.
 Public methods are:
-readAlnStr
+read
+readAlnStr (deprecated)
 """
 
 __version__ = "$Id$"
 
-import re, os, sys
-from Seq import Seq
+import os
+import sys
+import logging
 
-def readAlnStr(instr):
+log = logging
+
+import Seq
+
+def read(instr):
 	"""Input is a clustalw .aln file; returns a list of Seq objects"""
 	
 	data = {}
@@ -31,24 +37,12 @@ def readAlnStr(instr):
 	
 	seqlist = []
 	for name in namelist:
-		seq = Seq(name=name, seq=''.join(data[name]))
+		seq = Seq.Seq(name=name, seq=''.join(data[name]))
 		seqlist.append(seq)
 	
 	return seqlist
 			
-def test():
-	"""Test routines in this module"""
-	import glob
-	mdir,_ = os.path.split(__file__)
-	infiles = glob.glob(os.path.join(mdir,'testfiles/*.aln'))
-	
-	for filename in infiles:
-		instr = open(filename).read()
-		seqlist = readAlnStr(instr)
-		print 'found %s sequences in %s' % (len(seqlist), filename)
-		for seq in seqlist:
-			print '%15s' % seq.name, len(seq), seq[:10],'...',seq[-10:]
-		
-if __name__ == '__main__':
-	test()
-	
+# for backward compatibility
+def readAlnStr(instr):
+    log.info('io_clustal.readAln is deprecated: use io_clustal.read instead')
+    return read(instr)
