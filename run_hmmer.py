@@ -17,7 +17,24 @@ log = logging
 def getparams(**args):
     return args
 
-def run(cmd, infile, outfile=False, dryrun=False, defaults=None, **params):
+def find_hmmcmd(cmd, path=None):
+    """
+    Path is a list of directories possibly containing the executable.
+    """
+
+    if path is None:
+        path = os.environ['PATH'].split(':')
+    elif not hasattr(path, '__iter__'):
+        path = [path]
+    
+    for pth in path:
+        fasta = os.path.join(pth, cmd)
+        if os.access(fasta, os.X_OK):
+            return fasta
+    
+    return None
+
+def run(hmmcmd, infile, outfile=False, dryrun=False, defaults=None, quiet=False, **params):
     """
     Returns the name of the outfile.    
     
@@ -31,6 +48,10 @@ def run(cmd, infile, outfile=False, dryrun=False, defaults=None, **params):
     * params - pass arguments as either key=val pairs, or as
       key=None if key is a command line switch
     """
+    
+    cmd = find_hmmcmd(hmmcmd)
+    if cmd is None:
+        raise OSError('%s could not be found' % hmmcmd)
     
     os_type = sequtil.get_os_type()
     log.debug('os type is set as %s' % os_type)
@@ -66,18 +87,24 @@ def run(cmd, infile, outfile=False, dryrun=False, defaults=None, **params):
         args.append(fstr % locals())
     
     args.extend(outin)
-    
+        
     log.info(' '.join(args))
     
     if os_type == 'POSIX' and not dryrun:
-        subprocess.check_call(args)
+        #subprocess.check_call(args)
+        if quiet:
+            stdout = open(os.devnull)
+        else:
+            stdout = None
+        subprocess.Popen(args, stdout=stdout).communicate()
+        
     elif os_type == 'WINDOWS':
         # completely untested
         cwd,_ = os.path.split(target_file)
         cmds = ['cd "%s"' % cwd, cmd]
         sequtil.run_bat(cmds, path=cwd, run=not dryrun)
         
-    return cmd
+    return outfile
     
 def main():
     """

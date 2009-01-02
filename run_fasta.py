@@ -19,6 +19,24 @@ FASTAPATH = '/usr/local/bin'
 class FormatError(Exception):
     pass
 
+def find_fasta(path=None):
+    """
+    Path is a list of directories possibly containing the fasta executable.
+    """
+    fa_versions = ['fasta35']
+    if path is None:
+        path = os.environ['PATH'].split(':')
+    elif not hasattr(path, '__iter__'):
+        path = [path]
+    
+    for fa_exec in fa_versions:
+        for pth in path:
+            fasta = os.path.join(pth, fa_exec)
+            if os.access(fasta, os.X_OK):
+                return fasta
+    
+    return None
+            
 def randomname(length=12):
     
     letters = string.letters
@@ -34,46 +52,56 @@ def make_temp_fasta(seq_or_list, tempdir):
     f = open(fname, 'w')
     f.write(Seq.io_fasta.write(seq_or_list))
     f.close()
-    
+        
     return fname
     
-def get_path_or_write_file(seq, tempdir=TEMPDIR):
+def get_path_or_write_file(seq, outdir):
     """If seq is a Seq instance or list of Seq
     instances, returns the absolute path of a temporary file 
     containing the fasta format sequence; if a readable
     file, returns the absolute path."""
-    
+        
     try:
         path = os.path.abspath(seq)
     except AttributeError:
-        path = make_temp_fasta(seq, tempdir)
+        path = make_temp_fasta(seq, outdir)
+        is_existing_file = False
+    else:
+        is_existing_file = True
     
-    return path
+    return path, is_existing_file
     
 
-def run(query, target, e_val=10, outputfile=None, fastapath=None, format=10, cleanup=True):
+def run(query, target, e_val=10, outfile=None, 
+    fastapath=None, format=10, cleanup=True):
     
     """Returns a dict keyed by (seqname1,seqname2) pairs containing
-    alignment data"""
+    alignment data. 
+    
+    * query - Seq object or filename of fasta format sequences
+    * target - list of Seq objects or filename of fasta format sequences
+    * e_val - (see FASTA3* documentation)
+    * outfile - name of output file
+    * outdir - directory to write fasta output
+    * fastapath - name of directory containing fasta3* executable
+    * format - (see FASTA3* documentation)
+    * cleanup - if True, delete fasta output file
+    """
     
     # see http://helix.nih.gov/apps/bioinfo/fasta3x.txt
     # format = 10 for machine-readable alignments, 0 for traditional aligns
     
-    query_file = get_path_or_write_file(query)
-    target_file = get_path_or_write_file(target)
-    
-    if fastapath:
-        fasta_prog = os.path.join(fastapath, 'fasta34')
+    if outfile:
+        outdir = os.path.abspath(os.path.split(outfile)[0])
     else:
-        fasta_prog = os.path.join(FASTAPATH, 'fasta34')
+        outdir = TEMPDIR
+        outfile = os.path.join(outdir, randomname(12)+ALIGN_SUFFIX)
+        
+    query_file, query_is_file = get_path_or_write_file(query, outdir)
+    target_file, target_is_file = get_path_or_write_file(target, outdir)
+        
+    fasta_prog = find_fasta(path=fastapath)
     
-    cwd = os.path.abspath(os.getcwd())
-
-    if not outputfile:
-        outputfile = os.path.join(TEMPDIR, randomname(12)+ALIGN_SUFFIX)
-    else:
-        outputfile = os.path.join(cwd, outputfile)
-
     # -A Force Smith-Waterman alignment
     # -H Omit Histogram
     # -q Quiet - does not prompt for any input.
@@ -89,7 +117,7 @@ def run(query, target, e_val=10, outputfile=None, fastapath=None, format=10, cle
     -q
     -z 0
     -m %(format)s
-    -O %(outputfile)s
+    -O %(outfile)s
     %(query_file)s 
     %(target_file)s""".split())
     
@@ -100,32 +128,28 @@ def run(query, target, e_val=10, outputfile=None, fastapath=None, format=10, cle
     log.debug(cmd_output)
     
     # check for successful execution
-    if not os.access(outputfile,os.F_OK):
+    if not os.access(outfile,os.F_OK):
         log.critical('The following command failed:')
         log.critical(cmd)
         log.critical('...with output:')
         log.critical(cmd_output)
         raise ExecutionError, cmd_output
-        
+    
     # parse the data
-    data = parseFasta(open(outputfile).read())
+    data = parseFasta(open(outfile).read())
     
     if cleanup:
-        tempfiles = set(glob.glob(os.path.join(TEMPDIR, '*.fasta')) + \
-            glob.glob(os.path.join(TEMPDIR, '*' + ALIGN_SUFFIX)))
-        for f in [query_file, target_file, outputfile]:
-            if f in tempfiles:
-                #log.debug('removing %s' % f)
-                os.remove(f)
-        query_file = target_file = outputfile = None
+        if not query_is_file:
+            os.remove(query_file)
+        if not target_is_file:
+            os.remove(target_file)
+        os.remove(outfile)
+        query_file = target_file = outfile = None
 
     for k in data.keys():   
         data[k]['file_q'] = query_file
         data[k]['file_t'] = target_file
-        data[k]['file_out'] = outputfile    
-    
-#   pprint.pprint(data)
-#   sys.exit()
+        data[k]['file_out'] = outfile    
     
     return data
     
@@ -143,18 +167,18 @@ def get_tup(s, prefix=None):
 
 
 def parseFasta(instr):
-    """Extracts various data from output of fasta34 with -m 10
+    """Extracts various data from output of fasta34/fasta35 with -m 10
     return a dict of dicts keyed by string seqid. Restrict parsed output to
     N=max_hits top matches."""
         
     # remove footer
     instr, _ = instr.split('>>><<<')
-    
+        
     # remove header
     try:
-        _, instr = instr.split('>>>')
+        _, _, instr = instr.split('>>>')
     except ValueError:
-        raise FormatError, 'The input file contains no significant alignments:\n\n' + instr
+        raise FormatError, 'The input file contains no significant alignments:\n\n' + instr[:500]
             
     datablocks = instr.split('>>')
 
@@ -271,51 +295,6 @@ def show_alignment(row, width=60, align=True):
             print a
             print t
             print ''
-    
-
-def main():
-    
-    
-    test_input = os.path.abspath('../testfiles/10patients.fasta')
-    print 'reading fasta format file %s' % test_input
-    seqlist = Seq.io_fasta.readFasta(open(test_input).read())
-    
-    query, target = seqlist[0], seqlist[1:] 
-    
-    pairs = runfasta(query, target, cleanup=False)
-    print 'master dict keyed by: %s ...' % `pairs.keys()[:10]`
-    print 'each dict keyed by: ' + `pairs.values()[0].keys()`
-
-    
-    for k,v in sorted(pairs.items()):
-        #pprint.pprint(v)
-        
-        print k, v['q_sq_len'], v['t_sq_len'],
-        
-        try:
-            print v['bs_overlap'], v['bs_ident'] 
-        except KeyError:
-            print v['sw_overlap'], v['sw_ident']
-        
-        show_alignment(v)
-        
-    
-    
-    sys.exit()
-        
-    print 'trimming sequences'
-    trimmed_seqlist = trim_align(seqlist, fasta_output_data)
-    
-    print 'query sequence:'
-    print Seq.io_fasta.readFasta(open(query_file).read())[0]
-
-    print 'first target sequence - trimmed'
-    print trimmed_seqlist[0]
-    
-    print 'first target sequence - untrimmed'
-    print seqlist[0]
-
-
     
 if __name__ == '__main__':
     main()
