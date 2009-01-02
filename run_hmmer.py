@@ -17,23 +17,6 @@ log = logging
 def getparams(**args):
     return args
 
-def find_hmmcmd(cmd, path=None):
-    """
-    Path is a list of directories possibly containing the executable.
-    """
-
-    if path is None:
-        path = os.environ['PATH'].split(':')
-    elif not hasattr(path, '__iter__'):
-        path = [path]
-    
-    for pth in path:
-        fasta = os.path.join(pth, cmd)
-        if os.access(fasta, os.X_OK):
-            return fasta
-    
-    return None
-
 def run(hmmcmd, infile, outfile=False, dryrun=False, defaults=None, quiet=False, **params):
     """
     Returns the name of the outfile.    
@@ -49,7 +32,7 @@ def run(hmmcmd, infile, outfile=False, dryrun=False, defaults=None, quiet=False,
       key=None if key is a command line switch
     """
     
-    cmd = find_hmmcmd(hmmcmd)
+    cmd = sequtil.find_exec(hmmcmd)
     if cmd is None:
         raise OSError('%s could not be found' % hmmcmd)
     
@@ -106,35 +89,3 @@ def run(hmmcmd, infile, outfile=False, dryrun=False, defaults=None, quiet=False,
         
     return outfile
     
-def main():
-    """
-Test routine for clustalw module"""
-    
-    logging.basicConfig(level=logging.DEBUG, format='%(lineno)s %(levelname)s %(message)s', stream=sys.stdout)
-        
-    align = 'testfiles/s_trimmed.aln'
-    log.warning('infile: %s' % align)
-    
-    path, fname = os.path.split(align)
-    fname = os.path.splitext(fname)[0]
-    
-    path = 'test_output'
-    try:
-        os.mkdir(path)
-    except OSError:
-        pass
-    
-    hmm = os.path.join(path, fname + '.hmm')
-    
-    dryrun = False
-    
-    # make the alignment
-    run('hmmbuild',
-        infile=align,
-        outfile=hmm,
-        F=None,
-        dryrun=dryrun)
-               
-if __name__ =='__main__':
-    main()
-

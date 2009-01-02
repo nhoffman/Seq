@@ -17,10 +17,10 @@ datadir = config.datadir
 
 class TestHmmerInstalled(unittest.TestCase):
     def test1(self):
-        if not Seq.run_hmmer.find_hmmcmd('hmmbuild'):
+        if not Seq.find_exec('hmmbuild'):
             log.error('hmm software could not be found - skipping tests in this module')
 
-if Seq.run_hmmer.find_hmmcmd('hmmbuild') is not None:
+if Seq.find_exec('hmmbuild') is not None:
     class TestRunHmmer(unittest.TestCase):
         
         def setUp(self):

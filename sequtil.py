@@ -589,17 +589,25 @@ def get_os_type():
     
     return os_type
 
-def find_exec(dir_list, name):
+def find_exec(cmd, path=None):
     """
-    Returns first encountered absolute path to an executable 
-    file given a list of directories (dir_list) and a filename (name),
-    or None if the file is not encountered.
+    * cmd - name of the executable
+    * path - directory name or a list of directories possibly 
+      containing the executable. Searches PATH environment variable 
+      if None
     """
 
-    for dirname in dir_list:
-        path = os.path.abspath(os.path.join(dirname, name))
-        if os.access(path, os.X_OK): # is it executable?
-            return path
+    if path is None:
+        path = os.environ['PATH'].split(':')
+    elif not hasattr(path, '__iter__'):
+        path = [path]
+    
+    for pth in path:
+        fasta = os.path.join(pth, cmd)
+        if os.access(fasta, os.X_OK):
+            return fasta
+    
+    return None
 
 def run_bat(cmds, name=None, path='.', run=True, cleanup=True):
     """Execute a series of commands as a windows batch file."""

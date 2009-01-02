@@ -31,6 +31,9 @@ import run_fasta
 import run_needle
 import run_clustalw
 import run_hmmer
+import run_infernal
+
+from sequtil import find_exec
 
 class ExecutionError(Exception):
     pass

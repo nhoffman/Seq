@@ -18,24 +18,6 @@ FASTAPATH = '/usr/local/bin'
 
 class FormatError(Exception):
     pass
-
-def find_fasta(path=None):
-    """
-    Path is a list of directories possibly containing the fasta executable.
-    """
-    fa_versions = ['fasta35']
-    if path is None:
-        path = os.environ['PATH'].split(':')
-    elif not hasattr(path, '__iter__'):
-        path = [path]
-    
-    for fa_exec in fa_versions:
-        for pth in path:
-            fasta = os.path.join(pth, fa_exec)
-            if os.access(fasta, os.X_OK):
-                return fasta
-    
-    return None
             
 def randomname(length=12):
     
@@ -99,9 +81,11 @@ def run(query, target, e_val=10, outfile=None,
         
     query_file, query_is_file = get_path_or_write_file(query, outdir)
     target_file, target_is_file = get_path_or_write_file(target, outdir)
-        
-    fasta_prog = find_fasta(path=fastapath)
     
+    fasta_prog = Seq.find_exec('fasta35', fastapath)
+    if fasta_prog is None:
+        raise OSError('fasta35 could not be found')
+
     # -A Force Smith-Waterman alignment
     # -H Omit Histogram
     # -q Quiet - does not prompt for any input.
@@ -296,5 +280,3 @@ def show_alignment(row, width=60, align=True):
             print t
             print ''
     
-if __name__ == '__main__':
-    main()
