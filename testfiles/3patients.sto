@@ -1,0 +1,195 @@
+# STOCKHOLM 1.0
+#=GF AU Infernal 1.0rc5
+
+F62024                             -AGAGUUUGAUCCUGGCUCAGGACGAACGCUGGCGGCGUGCUUAACACAU
+T70854                             ------------------------------UGGCGGCAGGCCUAACACAU
+T70854_revcomp_also_with_long_name --------------------------------------------------
+#=GC SS_cons                       ::<<<<<_______>>>>>,{{{{-{{{{{{,{{{{{{{{{----{{{-{
+#=GC RF                            aAGaGuuUGAUccUggCuCAGaacGaaCGCuGGCGGCagGCUUaACaCAu
+
+F62024                             GCAAGUCGAACGAUGAAGCCUUUCggggu....ggauuAGUGGCGAACGG
+T70854                             GCAAGUCGAGCGGAUGACGGGAGCuugcuccuugauucAGCGGCGGACGG
+T70854_revcomp_also_with_long_name ------------------------..............------------
+#=GC SS_cons                       {{,,<<<--<<<____________..............>>>>>>,,,,,,
+#=GC RF                            GCAAGuCGagCgccacgaaAggga..............aGcGgCagAcGG
+
+F62024                             GUGAGUAACACGUGGGCAaUCUGCCCUUCACUCUGGGACAAGCCCUGGAA
+T70854                             GUGAGUAAUGCCUAGGAA.UCUGCCUGGUAGUGGGGGACAACGUUUCGAA
+T70854_revcomp_also_with_long_name --GCUUAUUCUGUCGGUA.ACGUCAAAACAGCAAGGUAUU-----AGCUU
+#=GC SS_cons                       [[[,,,,,,((((((((-.((---(((((((,<<<<----<<<<<<<___
+#=GC RF                            GuGAGUAAcgcgcgGGcA.cgUAcCcaucacUgcGGaAuAgCucaugGAA
+
+F62024                             ACGGGGUCUAAUACCGGAUAAcacucuGUCCcgCAUGGGAcgggGuuaAA
+T70854                             AGGAACGCUAAUACCGCAUAC......GUCC..UACGGGA....G...AA
+T70854_revcomp_also_with_long_name ACUGCCCUUCCUCCC--AACU......UAAA..GUGCUUU....A...CA
+#=GC SS_cons                       _>>>>>>>----->>>>,,,,......,<<<..____>>>....,...,,
+#=GC RF                            AcaugaGcUAAUACCgcAUaa......GcCc..UuaGgGg....G...AA
+
+F62024                             AGCUCCG..............GCGGUGAAGGAUGAGC.CCGCGGCCUAUC
+T70854                             AGCAGGGgaccuucgggccuuGCGCUAUCAGAUGAGC.CUAGGUCGGAUU
+T70854_revcomp_also_with_long_name AUCCGAA..............GACCUUCUUCACACACgCGGCAU-GGCUG
+#=GC SS_cons                       ,<<____..............>>,)))))))--)))).))))))<<<--<
+#=GC RF                            AGaauua..............uCGgugaugGAucggC.CcgcgccgGAUu
+
+F62024                             AGCUUGUUGGUGGGGUAAUGGCCUACCAA.......GGCGACGACGGGUA
+T70854                             AGCUAGUUGGUGGGGUAAUGGCUCACCAA.......GGCGACGAUCCGUA
+T70854_revcomp_also_with_long_name GAUCAGGCUUUCGCCCAUUGUCCAAUAUUccccacuGCUG-CCUCCC---
+#=GC SS_cons                       -<<<--<<<<<<<<_______>>>>>>>>.......>>>----->>>>,,
+#=GC RF                            AGCuAGuuGGugGGGUAAAGGCCcaCCaa.......gGCGAcGAuCcgUA
+
+F62024                             GCCGGCCUGAGAGGGCGACC......GGCCACACUGGGACUGAGACACGG
+T70854                             ACUGGUCUGAGAGGAUGAUC......AGUCACACUGGAACUGAGACACGG
+T70854_revcomp_also_with_long_name ----GUAGGAGUCUGGACCGugucucAGUUCCAGUGUGACUGAUCAUCCU
+#=GC SS_cons                       <<<<<<<<____>>>>--->......>>>]]],<<<<<<__________>
+#=GC RF                            GCgGguCuGAGAgGauGAUC......cGCCaCAcuGGGccUGAGAcAcGg
+
+F62024                             CCCAGAC.UCCUACGGGA.GGCAGCAGUGGGGAAUAUUGCACAAUGGGC.
+T70854                             UCCAGAC.UCCUACGGGA.GGCAGCAGUGGGGAAUAUUGGACAAUGGGC.
+T70854_revcomp_also_with_long_name CUCAGACcAGUUACGGAUcG-UCGCCUUGGUGA-------GCCAUUACCc
+#=GC SS_cons                       >>>>>,<.<<<____>>>.>,,,}}}}}}-},,,,,<-<<<--<<<<<<.
+#=GC RF                            CCCagAC.uCCUAcGGGa.GGcAGCaGuGGGGAAUauUGGacAuugGGC.
+
+F62024                             .....GAAAGCCUGAUGCAGCGACGCCGC..GUGAGGGAUGACGGCCUUC
+T70854                             .....GAAAGCCUGAUCCAGCCAUGCCGC..GUGUGUGAAGAAGGUCUUC
+T70854_revcomp_also_with_long_name caccaACUAGCUAAUCCG-ACCUAGGCUCauCUGAUAGCGCAAGGCCCGA
+#=GC SS_cons                       .....____>>>>>>>>>>,}}-}}}}}}..,,<<<<------<<<<___
+#=GC RF                            .....GcAAGCCugauCCaGCcAuGCCGC..GUGaguGAaGAAggCCuUa
+
+F62024                             GGGUUGUAAA.CCUCUUUCAGCAGGGAAGAAGCga...............
+T70854                             GGAUUGUAAA.GCACUUUAAGUUGGGAGGAAGGgcaguaagcuaauaccu
+T70854_revcomp_also_with_long_name AGGUCCCCUGcUUUCU-CCCGUAGGACG--UAUgcg..............
+#=GC SS_cons                       _>>>>-----.>>>>,<--<<<<<<---<____.................
+#=GC RF                            GGGuuGUAAA.gcuCUuUuacCgGgGAAGAaAA.................
+
+F62024                             .....aagUGA.CGGUACCUGCAGAAGAAGCGCC---------------.
+T70854                             ugcuguuuUGA.CGUUACCGACAGAAUAAGC------------------.
+T70854_revcomp_also_with_long_name .....guaUUAg-CGUUCCUUUCGA-AACG----------UUGUCCCCCa
+#=GC SS_cons                       ........___.>---->>>>>>-->,,,<<<<<------<<<<<----.
+#=GC RF                            ........UGA.CGGUAcCcGguGAagAAGCcCCGGcUAACuuCGUGcc.
+
+F62024                             ..------------------------------------------------
+T70854                             ..------------------------------------------------
+T70854_revcomp_also_with_long_name cuACCAGGCAGAUUCCUAGGCAUUACUCACCCGUCCGCCGCUGAAUCAAG
+#=GC SS_cons                       ..-<<____>>------->>>>>>>>>>,}}}}}}}}}},,,,,,,,,,{
+#=GC RF                            ..AGCAGccGCGGUAAUACGaaGGGgGCuaGCGuuguuCGGAAUUAcUGG
+
+F62024                             --------------------------------------------------
+T70854                             --------------------------------------------------
+T70854_revcomp_also_with_long_name GAGC-AAGCUCCCGU---CAUCCGCUCGACUUGCAUGUGUUAGGCCUGCC
+#=GC SS_cons                       {{-----{,[[[[-[-[[[,<<<<<<<-<<<<<<<<<<<----<<<<<<<
+#=GC RF                            GCGUAAAGcGcgCGcAggCGGacacuuAaGccggggGugAAAUcCCgGgG
+
+F62024                             --------------------------------------------------
+T70854                             --------------------------------------------------
+T70854_revcomp_also_with_long_name GCCA----------------------------------------------
+#=GC SS_cons                       _____>>>>>>>-->>>>>>>>>-->>>>>>>>>,,,(((((((((--((
+#=GC RF                            cUcAACcCcGGgAcugCccucggaACuggguguCUaGaGuacGgccGAgG
+
+F62024                             --------------------------------------------------
+T70854                             --------------------------------------------------
+T70854_revcomp_also_with_long_name --------------------------------------------------
+#=GC SS_cons                       (((((<<--<<<<<<<<---<<<______>>>------>>>>>>>>-->>
+#=GC RF                            gggGuggAAuuCCgaguGUAGagGUGAAAcuCGUAGAuauucGGagGAac
+
+F62024                             --------------------------------------------------
+T70854                             --------------------------------------------------
+T70854_revcomp_also_with_long_name --------------------------------------------------
+#=GC SS_cons                       ,,,,<--<<____>>>)))))))-)))))-)))),,,]]]]--]]]],,,
+#=GC RF                            AccagUGGCGAAGGCcgCcccCuGggcCgauaCuGAcGcugAgGcgCGAA
+
+F62024                             --------------------------------------------------
+T70854                             --------------------------------------------------
+T70854_revcomp_also_with_long_name --------------------------------------------------
+#=GC SS_cons                       ,<<<<<<---<<---<<<<_________>>>>--->>>>>>>>,,,,,,,
+#=GC RF                            AGCGuGGGgAgCAAACaGGAUUAGAUAcCCuGGUAGuCCaCGCcgUAAAc
+
+F62024                             --------------------------------------------------
+T70854                             --------------------------------------------------
+T70854_revcomp_also_with_long_name --------------------------------------------------
+#=GC SS_cons                       ,,,((((((,,<<<<<<<<<<________>>>>>>>>>>,,,<<____>>
+#=GC RF                            gAUGgcagcUAGCcgucgggcAguuUaaugcucggugGCGuAGCUAAcGC
+
+F62024                             --------------------------------------------------
+T70854                             --------------------------------------------------
+T70854_revcomp_also_with_long_name --------------------------------------------------
+#=GC SS_cons                       ,,,,,))))))}}}},<<<------<<<<____>>>>---->>>,,,,,,
+#=GC RF                            aUuAAgcugcCCGCCUGgGGAGUAcgguCGcAAGauuAAAACuCAAAGGA
+
+F62024                             --------------------------------------------------
+T70854                             --------------------------------------------------
+T70854_revcomp_also_with_long_name --------------------------------------------------
+#=GC SS_cons                       ,,{{{{{-{{{{{{{-{{,,{{{{{{{{{{{{{{{{{,,,,<<<<_____
+#=GC RF                            AUuGaCgGgGgCCCGcaCAAGCGguGgagcauGuGGuUUAAuuCGAaGcA
+
+F62024                             --------------------------------------------------
+T70854                             --------------------------------------------------
+T70854_revcomp_also_with_long_name --------------------------------------------------
+#=GC SS_cons                       ___>>>>,,,,,,,,{{{{{{{,,,,,<<<<<<<<----<<<<<<<____
+#=GC RF                            AcGCGaaGAAccUUACCaGccCUUGAcgugccgGgcgaagccucCgGAGA
+
+F62024                             --------------------------------------------------
+T70854                             --------------------------------------------------
+T70854_revcomp_also_with_long_name --------------------------------------------------
+#=GC SS_cons                       >>>>>>>--------------->>>>>->>>,[[-[[[[--[[[[[[[[[
+#=GC RF                            cGgaggcaUucauUuaGgauggcCcggAcacAGGUGCugcAuGgCuGuCG
+
+F62024                             --------------------------------------------------
+T70854                             --------------------------------------------------
+T70854_revcomp_also_with_long_name --------------------------------------------------
+#=GC SS_cons                       ,,,((((((<<<____>>>,,<<<<______>>>>,,)))))),,,,,((
+#=GC RF                            UcAGCuCGuguCGUGAGauGUuGGGUUAAGUCCCgcAaCGaGCGcAAcCC
+
+F62024                             --------------------------------------------------
+T70854                             --------------------------------------------------
+T70854_revcomp_also_with_long_name --------------------------------------------------
+#=GC SS_cons                       ((,<<<<<<<---<<--<<______>>>>---->>>>>>>,,<<<<<<<<
+#=GC RF                            ucGcCcuuaGUUGCCAgCaUUaAGUuGGGcAcUCuaagGgGACugCCGGu
+
+F62024                             --------------------------------------------------
+T70854                             --------------------------------------------------
+T70854_revcomp_also_with_long_name --------------------------------------------------
+#=GC SS_cons                       _____>>>>->>>>,,,,,)))),,,,]]]]-]]]---]]]]]]]],,,,
+#=GC RF                            GAuAAgCCGAGagGAAGGUggGGAUGACGuCAaGuccUCaugGCCCUUAu
+
+F62024                             --------------------------------------------------
+T70854                             --------------------------------------------------
+T70854_revcomp_also_with_long_name --------------------------------------------------
+#=GC SS_cons                       }}}}}}},,,}}-}}}}}}}}}},,,<<<<<<<-----<<<--<<---<<
+#=GC RF                            GggCuGGGcUaCACaCgugcuaCAAUGgugGguAcAGaGgGuAGCgAggc
+
+F62024                             --------------------------------------------------
+T70854                             --------------------------------------------------
+T70854_revcomp_also_with_long_name --------------------------------------------------
+#=GC SS_cons                       <____>>>--->>---->>>---->>>>>>>,,,,,,<---<<<<<<<<_
+#=GC RF                            cGcGAggcaGAGCuAAUCuCaAAAacCcauCuuAGUuCGGAuuGCaCuCU
+
+F62024                             --------------------------------------------------
+T70854                             --------------------------------------------------
+T70854_revcomp_also_with_long_name --------------------------------------------------
+#=GC SS_cons                       _______>>>>>>>>--->,,,,,}}}}},,,,,<<<<<<<<_______>
+#=GC RF                            GcAAcUcGaGuGCauGAAGUuGGAauCGCUAGUAauCGCgGuUcAGcAUa
+
+F62024                             --------------------------------------------------
+T70854                             --------------------------------------------------
+T70854_revcomp_also_with_long_name --------------------------------------------------
+#=GC SS_cons                       >>>>>>>,,,,,,}}---}}}}}}}}}}-}},,<-<<-<<-<-<<<<<<<
+#=GC RF                            CcGCGguGAAUAcGuUccCGGGcCuuGuACacACcGccCGUCACaCCcug
+
+F62024                             --------------------------------------------------
+T70854                             --------------------------------------------------
+T70854_revcomp_also_with_long_name --------------------------------------------------
+#=GC SS_cons                       <--<<<<<<<<<<<<----<<<<<<____________________>>>>>
+#=GC RF                            GGAgcggggccuaCCaGAAGucgguguGaUAAccgcAAGGAGgcagccga
+
+F62024                             --------------------------------------------------
+T70854                             --------------------------------------------------
+T70854_revcomp_also_with_long_name --------------------------------------------------
+#=GC SS_cons                       >--->>>>>>>>>>>>-->>>>>>>>-->->>-->>-->,<<<<<<<<<<
+#=GC RF                            CcAcGGuaggcuccgcGACuggGGuGAAGUCGUAgCAAGGuaGCCGuaGG
+
+F62024                             --------------------------
+T70854                             --------------------------
+T70854_revcomp_also_with_long_name --------------------------
+#=GC SS_cons                       ____>>>>>>>>>>::::::::::::
+#=GC RF                            GGAACCugCGGCugGAUcAccUccuu
+//

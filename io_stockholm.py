@@ -14,44 +14,54 @@ from sequtil import wrap, removeWhitespace, removeAllButAlpha
 class FastaFormatError(Exception):
     pass
 
-def read( strin, degap=False, style=None):
+def read(input, degap=False, style=None):
     """
-    * strin - one or more fasta format sequences. The first non-whitespace
-    character must be >. 
+    * input - filename or string containing stockholm format sequence alignment
     * degap (bool) - if True, Non-alphanumeric characters are removed
+    * style - specify "upper" or "lower" to force sequences into either 
+    
+    return a list of Seq objects
     """
-    
-    assert strin.startswith('>')
-    flist = strin[1:].split('\n>')
-    
-    seqlist = []
-    for f in flist:
         
-        if f.strip() == '':
+    if len(input) < 50 and os.access(input, os.F_OK):
+        lines = open(input)
+    else:
+        lines = input.splitlines()
+    
+    seqdata = {}
+    names = []
+    for line in lines:        
+        name, seqstr = None, None
+        if not line.strip():
+            continue        
+        elif line.startswith('#=GC'):
+            _, name, seqstr = line.split()
+        elif line.startswith("#") or line.startswith('//'):
             continue
+        else:
+            name, seqstr = line.split()
         
-        try:
-            firstline, rawseq = f.strip().split('\n', 1)
-        except ValueError:              
-            raise FastaFormatError, 'The input fasta sequence appears to be improperly formatted (characters 1-50):\n%s' % `f[:50]`
+        if name:
+            if name not in seqdata:
+                names.append(name)
+            seqdata[name] = seqdata.get(name, '') + seqstr.strip()
+
+    seqlist = []
+    for name in names:
+        seq = seqdata[name]                
         
-        try:
-            name, header = firstline.split(None,1)
-        except ValueError:
-            name, header = firstline.strip(), ''
-                
-        seq = re.sub(r'[^a-zA-Z-]','-',rawseq)
-        
-        if degap:
-            seq = removeAllButAlpha(rawseq)
+        if name != 'SS_cons':
+            seq = re.sub(r'[^a-zA-Z-]','-',seq)
+            
+            if degap:
+                seq = removeAllButAlpha(seq)
 
         if style == 'upper':
             seq = seq.upper()
         elif style == 'lower':
             seq = seq.lower()
                     
-        seqlist.append(Seq(name, seq, header))
+        seqlist.append(Seq(name, seq))
     
     return seqlist
-
 

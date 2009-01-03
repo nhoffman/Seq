@@ -16,20 +16,14 @@ module_name = os.path.split(sys.argv[0])[1].rstrip('.py')
 outputdir = config.outputdir
 datadir = config.datadir 
 
-class TestReadRDPFasta(unittest.TestCase):
+class TestReadStockholm(unittest.TestCase):
     
     def setUp(self):
-        self.fasta1 = open(os.path.join(datadir, '10patients_rdpalign.fasta')).read()
+        self.infile = os.path.join(datadir, '3patients.sto')
+        self.instr = open(os.path.join(datadir, '3patients.sto')).read()
         
-    def test_readfasta10(self):
-        seqs = Seq.io_rdp.read(self.fasta1)        
-        ##self.assertTrue(len(seqs) == 10)
-
-    def test_readfasta11(self):
-        seqs = Seq.io_rdp.read(self.fasta1, degap=True)        
-        ##self.assertTrue(len(seqs) == 10)
-
-    def test_readfasta12(self):
-        seqs = Seq.io_rdp.read(self.fasta1, style='upper')        
-        ##self.assertTrue(len(seqs) == 10)
-                
+    def test1(self):
+        seqs = Seq.io_stockholm.read(self.infile)  
+        print seqs
+#     def test2(self):
+#         seqs = Seq.io_stockholm.read(self.instr)  

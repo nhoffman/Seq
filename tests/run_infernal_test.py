@@ -71,8 +71,9 @@ class Test_parse_cmstats(unittest.TestCase):
     """.strip()
     
     def test1(self):
-        data = Seq.run_infernal.parse_cmstats(self.cmstats)
-        log.info(pprint.pformat(data))
+        align_data = Seq.run_infernal.parse_cmstats(self.cmstats)
+        log.info(pprint.pformat(align_data))
+        self.assertTrue(len(align_data) == 3)  
     
 if Seq.find_exec('cmbuild') is not None:    
     class Test_cmalign(unittest.TestCase):
@@ -88,7 +89,7 @@ if Seq.find_exec('cmbuild') is not None:
                 pass
             
         def test1(self):
-            outfile = Seq.run_infernal.cmalign(
+            outfile, align_data = Seq.run_infernal.cmalign(
                 cmfile = self.cmfile,
                 fastafile = self.fastafile,
                 outfile = self.outfile,
@@ -97,6 +98,7 @@ if Seq.find_exec('cmbuild') is not None:
                 quiet=True
                 )
             self.assertTrue(os.access(outfile, os.F_OK))
+            self.assertTrue(len(align_data) == 3)      
                 
     class Test_cmbuild(unittest.TestCase):
         

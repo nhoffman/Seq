@@ -11,11 +11,13 @@ io_fasta
 io_phylip
 io_uspto
 io_rdp
+import io_stockholm
 sequtil
 run_fasta
 run_needle
 run_clustalw
 run_hmmer
+import run_infernal
 """.split()
 
 import Dictionaries
@@ -26,6 +28,7 @@ import io_fasta
 import io_phylip
 import io_uspto
 import io_rdp
+import io_stockholm
 import sequtil
 import run_fasta
 import run_needle

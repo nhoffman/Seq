@@ -73,8 +73,15 @@ def cmalign(cmfile, fastafile, outfile=None, statsfile=None,
         quiet=quiet,
         dryrun=dryrun,
         **params)
-
-    align_data = parse_cmstats(stdoutdata)
+    
+    if not stderrdata:
+        if not statsfile:
+            statsfile = os.path.splitext(outfile)[0]+'.cmalign'
+        open(statsfile,'w').write(stdoutdata)
+        
+        align_data = parse_cmstats(stdoutdata)
+    else:
+        outfile, align_data = None, None
     
     return outfile, align_data
     
