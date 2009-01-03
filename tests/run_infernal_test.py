@@ -16,9 +16,11 @@ module_name = os.path.split(sys.argv[0])[1].rstrip('.py')
 outputdir = config.outputdir
 datadir = config.datadir 
 
+cmbuild_path = Seq.find_exec('cmbuild')
+
 class TestInfernalInstalled(unittest.TestCase):
     def test1(self):
-        if not Seq.find_exec('cmbuild'):
+        if not cmbuild_path:
             log.error('Infernal software could not be found - skipping tests in this module')
 
 class Test_Run(unittest.TestCase):
@@ -75,7 +77,7 @@ class Test_parse_cmstats(unittest.TestCase):
         log.info(pprint.pformat(align_data))
         self.assertTrue(len(align_data) == 3)  
     
-if Seq.find_exec('cmbuild') is not None:    
+if cmbuild_path is not None:    
     class Test_cmalign(unittest.TestCase):
         
         def setUp(self):

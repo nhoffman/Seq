@@ -15,12 +15,14 @@ module_name = os.path.split(sys.argv[0])[1].rstrip('.py')
 outputdir = config.outputdir
 datadir = config.datadir 
 
+hmmbuild_path = Seq.find_exec('hmmbuild')
+
 class TestHmmerInstalled(unittest.TestCase):
     def test1(self):
-        if not Seq.find_exec('hmmbuild'):
-            log.error('hmm software could not be found - skipping tests in this module')
+        if hmmbuild_path is None:
+            log.error('hmmer software could not be found - skipping tests in this module')
 
-if Seq.find_exec('hmmbuild') is not None:
+if hmmbuild_path is not None:
     class TestRunHmmer(unittest.TestCase):
         
         def setUp(self):

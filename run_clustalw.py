@@ -24,7 +24,10 @@ def check_clustalw():
     
 def run(target_file, clustal_cmd='clustalw', run=True, silent=False, **params):
     """Run clustalw -options for command line parameters"""
-    
+
+    if sequtil.find_exec(clustal_cmd) is None:
+        raise OSError('%s could not be found' % clustal_cmd)
+
     os_type = sequtil.get_os_type()
     log.debug('os type is set as %s' % os_type)
     
