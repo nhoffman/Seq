@@ -26,4 +26,4 @@ class TestReadStockholm(unittest.TestCase):
         seqs = Seq.io_stockholm.read(self.infile)
 
     def test2(self):
-        seqs = Seq.io_stockholm.read(self.instr)  >>>>>>> .r3052
+        seqs = Seq.io_stockholm.read(self.instr)

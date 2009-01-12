@@ -8,7 +8,7 @@ __version__ = "$Id$"
 import re, os, sys
 import warnings
 import logging
-log = logging 
+log = logging
 
 from Seq import Seq
 from sequtil import wrap, removeWhitespace, removeAllButAlpha
@@ -17,29 +17,29 @@ def read(input, degap=False, style=None):
     """
     * input - filename or string containing stockholm format sequence alignment
     * degap (bool) - if True, Non-alphanumeric characters are removed
-    * style - specify "upper" or "lower" to force sequences into either 
-    
+    * style - specify "upper" or "lower" to force sequences into either
+
     return a list of Seq objects
     """
-        
+
     if len(input) < 50 and os.access(input, os.F_OK):
         lines = open(input)
     else:
         lines = input.splitlines()
-    
+
     seqdata = {}
     names = []
-    for line in lines:        
+    for line in lines:
         name, seqstr = None, None
         if not line.strip():
-            continue        
+            continue
         elif line.startswith('#=GC'):
             _, name, seqstr = line.split()
         elif line.startswith("#") or line.startswith('//'):
             continue
         else:
             name, seqstr = line.split()
-        
+
         if name:
             if name not in seqdata:
                 names.append(name)
@@ -47,11 +47,11 @@ def read(input, degap=False, style=None):
 
     seqlist = []
     for name in names:
-        seq = seqdata[name]                
-        
+        seq = seqdata[name]
+
         if name != 'SS_cons':
             seq = re.sub(r'[^a-zA-Z-]','-',seq)
-            
+
             if degap:
                 seq = removeAllButAlpha(seq)
 
@@ -59,10 +59,10 @@ def read(input, degap=False, style=None):
             seq = seq.upper()
         elif style == 'lower':
             seq = seq.lower()
-                    
+
         seqlist.append(Seq(name, seq))
-    
+
     log.info('read %s sequences' % len(seqlist))
-    
+
     return seqlist
 

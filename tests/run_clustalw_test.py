@@ -13,7 +13,7 @@ log = logging
 
 module_name = os.path.split(sys.argv[0])[1].rstrip('.py')
 outputdir = config.outputdir
-datadir = config.datadir 
+datadir = config.datadir
 
 clustalw_path = Seq.find_exec('clustalw')
 
@@ -24,22 +24,22 @@ class TestClustalwInstalled(unittest.TestCase):
 
 if clustalw_path is not None:
     class TestRunClustalw(unittest.TestCase):
-        
+
         def setUp(self):
             self.file1 = os.path.join(datadir, '10patients.fasta')
             self.funcname = '_'.join(self.id().split('.')[-2:])
             self.outfile = os.path.join(outputdir,self.funcname)
-        
+
         def test1(self):
             retval = Seq.run_clustalw.run_clustalw
             print retval
-            
+
         def test2(self):
             # make the alignment
-            
+
             aligned = self.outfile+'.aln'
             silent = True
-            
+
             Seq.run_clustalw.run_clustalw(
                 target_file=self.file1,
                 run=True,
@@ -47,27 +47,27 @@ if clustalw_path is not None:
                 batch=None,
                 outfile=aligned,
                 silent=silent)
-                  
-        # make a tree
-        Seq.run_clustalw.run_clustalw(
-            target_file=aligned,
-            run=True,
-            tree=None,
-            batch=None,
-            outputtree='phylip',
-            tossgaps=None,
-            silent=silent)
 
-        # make a bootstrap tree
-        Seq.run_clustalw.run_clustalw(
-            target_file=aligned,
-            run=True,
-            bootstrap=None,
-            batch=None,
-            outputtree='phylip',
-            tossgaps=None,
-            bootlabels='node',
-            silent=silent)        
+            # make a tree
+            Seq.run_clustalw.run_clustalw(
+                target_file=aligned,
+                run=True,
+                tree=None,
+                batch=None,
+                outputtree='phylip',
+                tossgaps=None,
+                silent=silent)
+
+            # make a bootstrap tree
+            Seq.run_clustalw.run_clustalw(
+                target_file=aligned,
+                run=True,
+                bootstrap=None,
+                batch=None,
+                outputtree='phylip',
+                tossgaps=None,
+                bootlabels='node',
+                silent=silent)
 
 
-                
+
