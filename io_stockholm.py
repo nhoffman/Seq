@@ -13,11 +13,13 @@ log = logging
 from Seq import Seq
 from sequtil import wrap, removeWhitespace, removeAllButAlpha
 
-def read(input, degap=False, style=None):
+def read(input, degap=False, case=None, keep_struct=True, keep_ref=True):
     """
     * input - filename or string containing stockholm format sequence alignment
     * degap (bool) - if True, Non-alphanumeric characters are removed
-    * style - specify "upper" or "lower" to force sequences into either
+    * case - specify "upper" or "lower" to force sequences into either
+    * keep_struct - keep structural model (#=GC SS_cons element)
+    * keep_cons - keep reference sequence (#=GC RF element)
 
     return a list of Seq objects
     """
@@ -49,20 +51,24 @@ def read(input, degap=False, style=None):
     for name in names:
         seq = seqdata[name]
 
-        if name != 'SS_cons':
+        if name == 'SS_cons':
+            if not keep_struct:
+                continue
+        elif name == 'RF' and not keep_ref:
+            continue
+        else:
             seq = re.sub(r'[^a-zA-Z-]','-',seq)
-
             if degap:
                 seq = removeAllButAlpha(seq)
-
-        if style == 'upper':
+            
+        if case == 'upper':
             seq = seq.upper()
-        elif style == 'lower':
+        elif case == 'lower':
             seq = seq.lower()
 
         seqlist.append(Seq(name, seq))
 
-    log.info('read %s sequences' % len(seqlist))
+    log.info('writing %s of %s sequences' % (len(seqlist), len(names)))
 
     return seqlist
 

@@ -27,3 +27,16 @@ class TestReadStockholm(unittest.TestCase):
 
     def test2(self):
         seqs = Seq.io_stockholm.read(self.instr)
+        self.assertTrue(len(seqs)==5)
+        
+    def test3(self):
+        seqs = Seq.io_stockholm.read(self.instr, keep_struct=False)
+        self.assertTrue(len(seqs)==4)
+
+    def test4(self):
+        seqs = Seq.io_stockholm.read(self.instr, keep_ref=False)
+        self.assertTrue(len(seqs)==4)
+        
+    def test5(self):
+        seqs = Seq.io_stockholm.read(self.instr, keep_struct=False, keep_ref=False)
+        self.assertTrue(len(seqs)==3)
