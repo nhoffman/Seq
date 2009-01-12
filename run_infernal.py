@@ -21,12 +21,19 @@ def getparams(**args):
 # def get_slices(line, slices):
 #     return [line.__getslice__(*slice).strip() for slice in slices]
     
-def parse_cmstats(instr):
-        
+def parse_cmstats(input):
+    
+    if len(input) < 50 and os.access(input, os.F_OK):
+        # assume input is a filename
+        iterover = open(input)
+        # assume input is a string
+    else:
+        iterover = input.splitlines()
+    
     data = []
     headers = None
     slices = None
-    for line in instr.splitlines():
+    for line in iterover:
         if line.startswith('# seq idx'):
             headers = line
         elif line.startswith('# ---') and headers:
@@ -34,7 +41,7 @@ def parse_cmstats(instr):
             get_slices = lambda line: [line.__getslice__(*slice).strip() for slice in slices]
             headers = ['_'.join(h.split()) for h in get_slices(headers)]
         elif line.strip() and not line.startswith('#') and slices:
-            data.append( zip(headers, get_slices(line)) )
+            data.append( dict(zip(headers, get_slices(line))) )
     
     return data
         
@@ -74,7 +81,7 @@ def cmalign(cmfile, fastafile, outfile=None, statsfile=None,
         dryrun=dryrun,
         **params)
     
-    if not stderrdata:
+    if not stderrdata and not dryrun:
         if not statsfile:
             statsfile = os.path.splitext(outfile)[0]+'.cmalign'
         open(statsfile,'w').write(stdoutdata)

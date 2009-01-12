@@ -7,12 +7,11 @@ __version__ = "$Id$"
 
 import re, os, sys
 import warnings
+import logging
+log = logging 
 
 from Seq import Seq
 from sequtil import wrap, removeWhitespace, removeAllButAlpha
-
-class FastaFormatError(Exception):
-    pass
 
 def read(input, degap=False, style=None):
     """
@@ -62,6 +61,8 @@ def read(input, degap=False, style=None):
             seq = seq.lower()
                     
         seqlist.append(Seq(name, seq))
+    
+    log.info('read %s sequences' % len(seqlist))
     
     return seqlist
 
