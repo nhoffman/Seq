@@ -182,54 +182,73 @@ def parseFasta(instr):
 
         header, query, target = block.split('>')
 
+        # process the header info
+        log.debug('header:\n %s', header)
+        d = dict([get_tup(e) for e in header.split(';') if e.strip()])
+        log.debug('dict of header info:\n%s',pprint.pformat(d))
+        
         # get the sequence names
-        qlines = query.split(';')
+        qlines = [e.strip() for e in query.split(';')]
         q_name = qlines.pop(0).split()[0]
 
-        tlines = target.split(';')
+        tlines = [e.strip() for e in target.split(';')]
         t_name = tlines.pop(0).split()[0]
 
         this_key = tuple([q_name, t_name])
-        # should restrict output to top hsp of each sequence pair
-        if outputData.has_key(this_key):
+
+        # restrict output to top hsp of each sequence pair
+        if this_key in outputData:
             continue
 
-        ## process the header info
-        d = dict([get_tup(e) for e in header.split(';') if e.strip()])
+        # process the query
+        log.debug('query:\n %s', query)
+        q_data = {}
+        for line in qlines:
+            if line.startswith('al_display_start'):
+                line, q_al_str = line.split('\n',1)
+                q_data['q_al_str'] = q_al_str.replace('\n','') 
 
-        ## process the query
-        qlines[-1], q_al_str = qlines[-1].strip().split('\n',1)
+            k, v = get_tup(line, 't')
+            q_data[k] = v
 
-        q_data = dict([get_tup(e, 'q') for e in qlines if e.strip()])
-
-        d['q_al_str'] = q_al_str.replace('\n','')
-
+        log.debug('dict of query info:\n%s',pprint.pformat(q_data))
+        
         ## process the target
-        tlines[-1], fa_al_str = tlines[-1].strip().split('\n',1)
-        d['fa_al_str'] = fa_al_str.replace('\n','')
+        log.debug('target:\n %s', target)
 
-        tlines[-2], t_al_str = tlines[-2].strip().split('\n',1)
-        d['t_al_str'] = t_al_str.replace('\n','')
+        t_data = {}
+        for line in tlines:
+            if line.startswith('al_cons'):
+                continue
+            elif line.startswith('al_display_start'):
+                line, t_al_str = line.split('\n',1)
+                t_data['t_al_str'] = t_al_str.replace('\n','')
 
-        t_data = dict([get_tup(e, 't') for e in tlines if e.strip()])
+            k, v = get_tup(line, 't')
+            t_data[k] = v
 
+        log.debug('dict of target info:\n%s',pprint.pformat(t_data))
+            
         ## add data
         d['q_name'] = q_name
         d.update(q_data)
 
         d['t_name'] = t_name
         d.update(t_data)
-
+        
         #add_calculated_values(d)
         assert not outputData.has_key(this_key)
 
+        log.debug('Data from this aligned pair: %s\n' % pprint.pformat(d))
+        
         outputData[this_key] = d
 
 #   log.debug('output data:')
 #   log.debug(pprint.pformat(outputData))
 
+    log.info('%s alignments processed: \n%s' % (len(outputData), pprint.pformat(outputData.keys())))
+        
     return outputData
-
 
 
 def trim_align(seqlist, align_data):
