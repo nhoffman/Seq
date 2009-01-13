@@ -14,7 +14,7 @@ log = logging
 
 module_name = os.path.split(sys.argv[0])[1].rstrip('.py')
 outputdir = config.outputdir
-datadir = config.datadir 
+datadir = config.datadir
 
 cmbuild_path = Seq.find_exec('cmbuild')
 
@@ -24,21 +24,21 @@ class TestInfernalInstalled(unittest.TestCase):
             log.error('Infernal software could not be found - skipping tests in this module')
 
 class Test_Run(unittest.TestCase):
-    
+
     def setUp(self):
         self.funcname = '_'.join(self.id().split('.')[-2:])
         self.outfile = os.path.join(outputdir,self.funcname)
         self.has_space = os.path.join(outputdir,'name with spaces')
         self.no_space = os.path.join(outputdir,'nameWithoutSpaces')
-        
+
         os.system('echo `date` has space > "%s"' % self.has_space)
         os.system('echo `date` no space > "%s"' % self.no_space)
-        
-    def test1(self):        
-        stdout, stderr = Seq.run_infernal._run('ls',        
+
+    def test1(self):
+        stdout, stderr = Seq.run_infernal._run('ls',
             quiet=True)
-    
-    def test2(self):        
+
+    def test2(self):
         stdout, stderr = Seq.run_infernal._run('diff',
             y='',
             args = [self.has_space, self.no_space],
@@ -59,8 +59,8 @@ class Test_parse_cmstats(unittest.TestCase):
 # -------------------------  ---------  ------  ---  -----  ------
 # seed_16s_mini-1              opt acc  global  yes    hmm   1e-07
 #
-#                                     bit scores                           
-#                                 ------------------                       
+#                                     bit scores
+#                                 ------------------
 # seq idx  seq name          len     total    struct  avg prob      elapsed
 # -------  --------------  -----  --------  --------  --------  -----------
         1  F62024            469    374.89    127.81     0.923  00:00:00.31
@@ -71,25 +71,25 @@ class Test_parse_cmstats(unittest.TestCase):
 #
 # CPU time: 1.39u 0.07s 00:00:01.46 Elapsed: 00:00:02
     """.strip()
-    
+
     def test1(self):
         align_data = Seq.run_infernal.parse_cmstats(self.cmstats)
         log.info(pprint.pformat(align_data))
-        self.assertTrue(len(align_data) == 3)  
-    
-if cmbuild_path is not None:    
+        self.assertTrue(len(align_data) == 3)
+
+if cmbuild_path is not None:
     class Test_cmalign(unittest.TestCase):
-        
+
         def setUp(self):
             self.fastafile = os.path.join(datadir, '3patients.fasta')
             self.cmfile = os.path.join(datadir, 'seed_16s_mini.cm')
             self.funcname = '_'.join(self.id().split('.')[-2:])
-            self.outfile = os.path.join(outputdir,self.funcname) + '.sto'                   
+            self.outfile = os.path.join(outputdir,self.funcname) + '.sto'
             try:
                 os.remove(self.outfile)
             except OSError:
                 pass
-            
+
         def test1(self):
             outfile, align_data = Seq.run_infernal.cmalign(
                 cmfile = self.cmfile,
@@ -100,24 +100,24 @@ if cmbuild_path is not None:
                 quiet=True
                 )
             self.assertTrue(os.access(outfile, os.F_OK))
-            self.assertTrue(len(align_data) == 3)      
-                
+            self.assertTrue(len(align_data) == 3)
+
     class Test_cmbuild(unittest.TestCase):
-        
+
         def setUp(self):
             self.stofile = os.path.join(datadir, 'seed_16s_mini.sto')
             self.funcname = '_'.join(self.id().split('.')[-2:])
-            self.outfile = os.path.join(outputdir,self.funcname) + '.cm'                   
+            self.outfile = os.path.join(outputdir,self.funcname) + '.cm'
             try:
                 os.remove(self.outfile)
             except OSError:
                 pass
-        
+
         def test1(self):
             outfile = Seq.run_infernal.cmbuild(
                 infile = self.stofile,
                 outfile = self.outfile,
                 dryrun=False,
-                quiet=True                
+                quiet=True
                 )
-            self.assertTrue(os.access(outfile, os.F_OK))                
+            self.assertTrue(os.access(outfile, os.F_OK))

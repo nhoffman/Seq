@@ -60,7 +60,7 @@ def read(input, degap=False, case=None, keep_struct=True, keep_ref=True):
             seq = re.sub(r'[^a-zA-Z-]','-',seq)
             if degap:
                 seq = removeAllButAlpha(seq)
-            
+
         if case == 'upper':
             seq = seq.upper()
         elif case == 'lower':

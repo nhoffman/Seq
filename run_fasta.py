@@ -173,7 +173,7 @@ def parseFasta(instr):
 
     for i, block in enumerate(datablocks):
 
-        #log.debug('\n%(i)i ------>\n%(block)s\n<------- %(i)i' % locals())
+        log.debug('\n%(i)i ------>\n%(block)s\n<------- %(i)i' % locals())
 
         # consumes the first line
         firstline, block = block.split('\n',1)
