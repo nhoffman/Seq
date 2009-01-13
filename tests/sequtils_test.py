@@ -24,5 +24,6 @@ class TestFunctions(unittest.TestCase):
         path = Seq.find_exec(cmd)
         self.assertTrue(path)
         if path:
-            out = subprocess.call([path], stdout=open(os.devnull))
+            out = subprocess.call([path], stdout=open(os.devnull,'w'))
+            
         self.assertTrue(out == 0)

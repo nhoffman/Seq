@@ -603,9 +603,9 @@ def find_exec(cmd, path=None):
         path = [path]
 
     for pth in path:
-        fasta = os.path.join(pth, cmd)
-        if os.access(fasta, os.X_OK):
-            return fasta
+        executable = os.path.join(pth.strip(), cmd)        
+        if os.access(executable, os.X_OK):
+            return executable
 
     return None
 
