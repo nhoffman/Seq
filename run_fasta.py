@@ -250,7 +250,21 @@ def parseFasta(instr):
         
     return outputData
 
-
+# def tabulate_results(fasta_results, headers=None):
+#     """
+#     Create a taular representation of results of fasta3*
+#     
+#     * fasta_results - output of parseFasta (a dict of dicts keyed by ('qname','tname'))
+#     
+#     Returns a tab-delimited string.
+#     """
+#     
+#     # TODO: implement me
+#     
+#     pass
+    
+    
+    
 def trim_align(seqlist, align_data):
     """Assumes align_data is keyed by seq.getName(). Returns
     a new list of Seq objects, trimmed according to al_start
