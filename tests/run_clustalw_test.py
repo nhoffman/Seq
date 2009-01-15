@@ -31,10 +31,6 @@ if clustalw_path is not None:
             self.outfile = os.path.join(outputdir,self.funcname)
 
         def test1(self):
-            retval = Seq.run_clustalw.run_clustalw
-            print retval
-
-        def test2(self):
             # make the alignment
 
             aligned = self.outfile+'.aln'
