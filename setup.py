@@ -26,8 +26,8 @@ testfiles_dir = os.path.join(site_packages,'Seq','testfiles')
 
 params = {'name':'Seq',
           'version':revision[:-1].split(':')[1].strip(),
-          'packages':['Seq'],
-          'package_dir':{'Seq':'.'},
+          'packages':['Seq','taxonomy'],
+          'package_dir':{'Seq':'.', 'taxonomy':'taxonomy'},
           'data_files':[(data_dir, files_in_data),(testfiles_dir, files_in_testfiles)],
           'scripts':glob.glob('scripts/*.py'),
           'description':'Contains the Seq class and functions for manipulation of biological sequences',
