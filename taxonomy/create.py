@@ -29,7 +29,7 @@ def get_ncbi_tax_data(dest_dir='.', expand=['nodes.dmp','names.dmp','readme.txt'
     fout = os.path.join(dest_dir, os.path.split(url)[-1])
             
     if os.access(fout, os.F_OK) and not new:
-        log.warning('%s exists; not downloading' % fout)
+        log.info('%s exists; not downloading' % fout)
     else:   
         # get the file
         log.warning('downloading %(fout)s to %(dest_dir)s' % locals())
