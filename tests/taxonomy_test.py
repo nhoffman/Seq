@@ -7,6 +7,8 @@ import logging
 import itertools
 import sqlite3 as sqlite
 import shutil
+import time
+import pprint
 
 import config
 import taxonomy
@@ -111,8 +113,10 @@ class TestCreateDatabase(unittest.TestCase):
         con = sqlite.connect(dbname)
         synonyms = con.cursor().execute('select count(*) from names where is_primary = 0').fetchone()[0]        
         self.assertEqual(synonyms, 772)
+
+class Test00CreateFullDatabase(unittest.TestCase):
         
-    def testCreateBacterialTaxonomyDb03(self):
+    def test1(self):
 
         outfiles = taxonomy.get_ncbi_tax_data(dest_dir=outputdir)
         names_data, nodes_data = taxonomy.read_bacterial_taxonomy(primary_only=False, **outfiles)
@@ -132,6 +136,19 @@ class TestCreateDatabase(unittest.TestCase):
             log.info('%s exists, skipping this test' % dbname)
             
 class TestTaxonomyClass(unittest.TestCase):
+
+    taxid1660 = {'class': 'Actinobacteria (class)',
+                 'family': 'Actinomycetaceae',
+                 'genus': 'Actinomyces',
+                 'no_rank': 'cellular organisms',
+                 'order_': 'Actinomycetales',
+                 'parent_id': '1654',
+                 'phylum': 'Actinobacteria',
+                 'species': 'Actinomyces odontolyticus',
+                 'subclass': 'Actinobacteridae',
+                 'suborder': 'Actinomycineae',
+                 'superkingdom': 'Bacteria',
+                 'tax_id': '1660'}
     
     def setUp(self):
         self.funcname = '_'.join(self.id().split('.')[-2:])
@@ -139,10 +156,45 @@ class TestTaxonomyClass(unittest.TestCase):
         self.dbname = os.path.join(outputdir, self.funcname+'.db')
         
     def test1(self):
-        shutil.copyfile(complete_test_db, self.dbname)
+        if not os.access(self.dbname, os.F_OK):
+            shutil.copyfile(complete_test_db, self.dbname)
         tax = taxonomy.Taxonomy(dbname=self.dbname)
         names_cols = tax.column_names(table_name='names')
         self.assertEqual(names_cols, ['tax_id', 'tax_name', 'is_primary'])
         
         nodes_cols = tax.column_names(table_name='nodes')
         self.assertEqual(nodes_cols, ['tax_id', 'parent_id', 'rank', 'embl_code', 'division_id'])        
+
+    def test2(self):
+        if not os.access(self.dbname, os.F_OK):
+            shutil.copyfile(complete_test_db, self.dbname)
+        tax = taxonomy.Taxonomy(dbname=self.dbname)
+        node = tax.get_node('1660')
+        
+        self.assertEqual(node, {'parent_id': '1654', 'tax_name': 'Actinomyces odontolyticus', 'rank': 'species', 'tax_id': '1660'})
+    
+    def test3(self):
+        shutil.copyfile(complete_test_db, self.dbname)
+        tax = taxonomy.Taxonomy(dbname=self.dbname)
+        
+        start = time.time()
+        lineage = tax.get_lineage('1660')
+        end1 = time.time()-start
+        log.info('first request %s secs' % end1)
+                
+        self.assertEqual(lineage, self.taxid1660)
+        
+        start = time.time()
+        lineage = tax.get_lineage('1660')
+        end2 = time.time()-start
+        log.info('second request %s secs' % end2)
+        log.info('speedup = %s' % (end1/end2))
+        self.assertEqual(lineage, self.taxid1660)
+             
+    def test4(self):
+        shutil.copyfile(complete_test_db, self.dbname)
+        tax = taxonomy.Taxonomy(dbname=self.dbname)
+        lineage = tax.get_lineage(1660)
+        self.assertEqual(lineage, self.taxid1660)
+        lineage = tax.get_lineage(1660)
+        self.assertEqual(lineage, self.taxid1660)        

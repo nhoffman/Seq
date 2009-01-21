@@ -157,6 +157,7 @@ values
         cmd, 
         (tuple([row[k] for k in keys]) for row in data)
     )
+        
     con.commit()
 
 def make_names_db(con, data):
@@ -169,9 +170,10 @@ tax_id TEXT,
 tax_name TEXT,
 is_primary INTEGER
 )""")
-    cmds.append("""CREATE INDEX tax_name_i ON names (tax_name)""")
-    cmds.append("""CREATE INDEX tax_id_i ON names (tax_id)""")
-    cmds.append("""CREATE INDEX is_primary_i ON names (is_primary)""")
+    cmds.append("""CREATE INDEX tax_name_i ON names(tax_name)""")
+    cmds.append("""CREATE INDEX tax_id_i ON names(tax_id)""")
+    cmds.append("""CREATE INDEX is_primary_i ON names(is_primary)""")
+    cmds.append("""CREATE INDEX taxid_is_primary ON names(tax_id,is_primary)""")
     
     for cmd in cmds:
         log.info(cmd)
