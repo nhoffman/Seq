@@ -45,7 +45,9 @@ class Taxonomy:
         self.dbname = dbname
         
         self.con = sqlite.connect(dbname)
-        self.con.row_factory = lambda cursor, row: dict((col[0],row[idx]) for idx, col in enumerate(cursor.description))
+        self.con.row_factory = \
+            lambda cursor, row: \
+                dict((col[0],row[idx]) for idx, col in enumerate(cursor.description))
         self.con.text_factory = str
         
         field_defs = ',\n'.join('    %-25s TEXT' % k for k in tax_keys)
@@ -75,19 +77,10 @@ class Taxonomy:
         cur.execute('pragma table_info(%s)' % table_name)
         return [r['name'] for r in cur.fetchall()]
 
-    def get_node(self, tax_id):
-                
-#         cmd = """
-#         select tax_id, parent_id, rank, 
-#         (select tax_name from names 
-#         where tax_id = %(tax_id)s
-#         and is_primary = 1) as tax_name
-#         from nodes 
-#         where tax_id = %(tax_id)s
-#         """ % locals()
-        
+    def _get_node(self, tax_id):
+                        
         cmd = """
-        select nodes.tax_id, parent_id, rank, tax_name
+        select nodes.tax_id, parent_id, rank, tax_name, source_id
         from nodes join names on nodes.tax_id = names.tax_id
         where names.is_primary = 1
         and nodes.tax_id = ?
@@ -100,11 +93,11 @@ class Taxonomy:
         else:
             return None
 
-    def get_lineage(self, tax_id):
+    def _get_lineage(self, tax_id):
         """
         Return a taxonomic lineage, adding absent lineages to table taxonomy.
         """
-        
+                
         tax_id = str(tax_id)
         
         if not tax_id:
@@ -114,16 +107,15 @@ class Taxonomy:
         
         cur.execute('select * from taxonomy where tax_id = ?', (tax_id,))
         result = cur.fetchone()
-        
+                
         if result:
             log.info( 'found %s' % tax_id)
-            return dict([(k,result[k]) for k in ['tax_id','parent_id'] + tax_keys if result[k]]) 
+            lineage = dict([(k,result[k]) for k in ['tax_id','parent_id'] + tax_keys if result[k]]) 
         else:
-            log.info( 'constructing lineage for %s' % tax_id)
             orig_id = tax_id
-            log.debug( '    constructing taxonomy for %s' % tax_id)
+            log.debug( '    constructing lineage for %s' % tax_id)
             
-            node_data = self.get_node(tax_id)
+            node_data = self._get_node(tax_id)
             if node_data:
                 parent_id = node_data['parent_id']
                             
@@ -137,7 +129,7 @@ class Taxonomy:
                 (this_rank, node_data['tax_name']))
         
                 # recursively get higher-level nodes
-                parentdict = self.get_lineage(parent_id)            
+                parentdict = self._get_lineage(parent_id)            
                             
                 taxdict = parentdict.copy()
                 taxdict[this_rank] = node_data['tax_name']
@@ -159,10 +151,46 @@ class Taxonomy:
             (%(fieldstr)s)
             values
             (%(qmarks)s)""" % locals()
-                    
+            
             cur.execute(cmd, tax_data)
+            
             lineage = taxdict
         
-        return lineage        
+        return lineage
+
+    def lineage(self, tax_id):
+        """
+        Return an object of class Lineage for the given tax_id
+        """
+        
+        lineage = self._get_lineage(tax_id)
+        node = self._get_node(tax_id)
+        
+        return Lineage(lineage, node)
+        
+class Lineage(object):
+    
+    tax_keys = tax_keys
+    _attribute_names = set(tax_keys + nodes_keys)
+    
+    def __init__(self, lineage, node):
+        
+        self._data = lineage.copy()
+        self._data.update(node)
+        self.tax_id = self._data['tax_id']
+        self.parent_id = self._data['parent_id']
+        
+    def __getattr__(self, name):
+                
+        if name in self._attribute_names:
+            return self._data.get(name, None)
+        else:
+            raise AttributeError
+    
+    def __getitem__(self, key):
+        return getattr(self, key)
+        
+    def __repr__(self):
+        return '%(rank)s: %(species)s (%(tax_id)s)' % self
         
         

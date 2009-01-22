@@ -126,17 +126,19 @@ def read_bacterial_taxonomy(names, nodes, primary_only=True, **args):
     
 def make_nodes_db(con, data, keys=nodes_keys):
     
-    typedict = {} # specify data type by field name here
-            
-    fields = [(k, typedict.get(k,'TEXT')) for k in keys]
-    fieldcmds = ',\n'.join('    %-25s %s' % t for t in fields)
+    typedict = {'source_id':'INTEGER DEFAULT 0'} # specify data type by field name here
+    
+    fstr = '    %-25s %s'
+    fields = [(k, typedict.get(k,'TEXT')) for k in keys + ['source_id']]
+    fieldcmds = ',\n'.join(fstr % t for t in fields)
     keylist = ', '.join(keys)
     qmarks = ', '.join(['?']*len(keys))
     
     cmd = """
 create table nodes
 (
-%(fieldcmds)s)
+%(fieldcmds)s
+)
 """.strip() % locals()
     log.info(cmd)
     con.execute(cmd)
@@ -157,7 +159,25 @@ values
         cmd, 
         (tuple([row[k] for k in keys]) for row in data)
     )
-        
+    
+    # create table of sources
+    cmd = """
+create table source
+(
+source_id           integer primary key,
+source_name         text
+)
+""".strip() % locals()
+    log.info(cmd)
+    con.execute(cmd)    
+    
+    cmd = """
+insert into source
+    (source_id, source_name)
+values
+    (0, 'NCBI')
+""" 
+    con.execute(cmd)  
     con.commit()
 
 def make_names_db(con, data):

@@ -113,6 +113,10 @@ class TestCreateDatabase(unittest.TestCase):
         con = sqlite.connect(dbname)
         synonyms = con.cursor().execute('select count(*) from names where is_primary = 0').fetchone()[0]        
         self.assertEqual(synonyms, 772)
+        
+        # nodes.source should be zero by default
+        sources = con.cursor().execute('select source_id from nodes').fetchall()
+        self.assertEqual( set(x[0] for x in sources), set([0]) )
 
 class Test00CreateFullDatabase(unittest.TestCase):
         
@@ -156,45 +160,60 @@ class TestTaxonomyClass(unittest.TestCase):
         self.dbname = os.path.join(outputdir, self.funcname+'.db')
         
     def test1(self):
-        if not os.access(self.dbname, os.F_OK):
-            shutil.copyfile(complete_test_db, self.dbname)
-        tax = taxonomy.Taxonomy(dbname=self.dbname)
+        tax = taxonomy.Taxonomy(dbname=complete_test_db)
         names_cols = tax.column_names(table_name='names')
         self.assertEqual(names_cols, ['tax_id', 'tax_name', 'is_primary'])
         
         nodes_cols = tax.column_names(table_name='nodes')
-        self.assertEqual(nodes_cols, ['tax_id', 'parent_id', 'rank', 'embl_code', 'division_id'])        
+        self.assertEqual(nodes_cols, ['tax_id', 'parent_id', 'rank', 'embl_code', 'division_id','source_id'])        
 
     def test2(self):
-        if not os.access(self.dbname, os.F_OK):
-            shutil.copyfile(complete_test_db, self.dbname)
-        tax = taxonomy.Taxonomy(dbname=self.dbname)
+        tax = taxonomy.Taxonomy(dbname=complete_test_db)
         node = tax.get_node('1660')
         
-        self.assertEqual(node, {'parent_id': '1654', 'tax_name': 'Actinomyces odontolyticus', 'rank': 'species', 'tax_id': '1660'})
+        self.assertEqual(node, 
+        {'parent_id': '1654',
+         'rank': 'species',
+         'source_id': 0,
+         'tax_id': '1660',
+         'tax_name': 'Actinomyces odontolyticus'})
     
     def test3(self):
         shutil.copyfile(complete_test_db, self.dbname)
         tax = taxonomy.Taxonomy(dbname=self.dbname)
         
         start = time.time()
-        lineage = tax.get_lineage('1660')
+        lineage = tax._get_lineage('1660')
         end1 = time.time()-start
         log.info('first request %s secs' % end1)
-                
+        
+        pprint.pprint(lineage)
+        
         self.assertEqual(lineage, self.taxid1660)
         
         start = time.time()
-        lineage = tax.get_lineage('1660')
+        lineage = tax._get_lineage('1660')
         end2 = time.time()-start
         log.info('second request %s secs' % end2)
         log.info('speedup = %s' % (end1/end2))
         self.assertEqual(lineage, self.taxid1660)
+        pprint.pprint(lineage)
              
     def test4(self):
         shutil.copyfile(complete_test_db, self.dbname)
         tax = taxonomy.Taxonomy(dbname=self.dbname)
-        lineage = tax.get_lineage(1660)
+        lineage = tax._get_lineage(1660)
         self.assertEqual(lineage, self.taxid1660)
-        lineage = tax.get_lineage(1660)
-        self.assertEqual(lineage, self.taxid1660)        
+        lineage = tax._get_lineage(1660)
+        self.assertEqual(lineage, self.taxid1660)
+        
+    def test5(self):
+        shutil.copyfile(complete_test_db, self.dbname)
+        tax = taxonomy.Taxonomy(dbname=self.dbname)
+        lineage = tax.lineage('1660')
+        
+        print lineage.tax_id
+        print lineage.species
+        print lineage.forma
+        print lineage['species']
+        print lineage 
