@@ -110,20 +110,36 @@ class Taxonomy:
         else:
             return None
     
+    def source_id(self, source_name, add=True):
+        """
+        Return source_id corresponding to source_name. If add=True, 
+        add new source if necessary; otherwise return None if source is
+        unknown.
+        """
+
+        cur = self.con.cursor()
+                        
+        # catch the error instead of using 'or ignore' to prevent incrementing of source_id
+        if add:
+            try:
+                cur.execute('insert into source (source_name) values (?)', (source_name,))
+            except sqlite.IntegrityError:
+                pass
+        
+        cur.execute('select * from source where source_name = ?', (source_name,))
+        
+        try:
+            source_id = cur.fetchone()['source_id']
+        except TypeError:
+            source_id = None
+        
+        return source_id
+    
     def add_node(self, tax_id, tax_name, parent_id, source_name='NCBI', rank=None,
         division_id = '0', embl_code=None):
         
         cur = self.con.cursor()
-                
-        # make sure source is known
-        
-        # catch the error instead of using 'or ignore' to prevent incrementing of source_id
-        try:
-            cur.execute('insert into source (source_name) values (?)', (source_name,))
-        except sqlite.IntegrityError:
-            pass
-        cur.execute('select * from source where source_name = ?', (source_name,))
-        source_id = cur.fetchone()['source_id']
+        source_id = self.source_id(source_name)
                 
         # determine rank of the new node
         parent = self.lineage(parent_id)
@@ -192,14 +208,14 @@ class Taxonomy:
                 else:
                     this_rank = this_rank.replace(' ','_')
                             
-                log.debug("this_rank: %s    node_data['tax_name']: %s" % \
-                (this_rank, node_data['tax_name']))
+                log.debug("this_rank: %s    node_data['tax_id']: %s" % \
+                (this_rank, node_data['tax_id']))
         
                 # recursively get higher-level nodes
                 parentdict = self._get_lineage(parent_id)            
                             
                 taxdict = parentdict.copy()
-                taxdict[this_rank] = node_data['tax_name']
+                taxdict[this_rank] = node_data['tax_id']
             else:
                 taxdict = {}
                 parent_id = orig_id
@@ -222,7 +238,7 @@ class Taxonomy:
             cur.execute(cmd, tax_data)
             
             lineage = taxdict
-        
+                       
         return lineage
 
     def lineage(self, tax_id):
@@ -233,7 +249,19 @@ class Taxonomy:
         lineage = self._get_lineage(tax_id)
         node = self._get_node(tax_id)
         
-        return Lineage(lineage, node)
+        # get names corresponding to tax_ids in lineage
+        cmd = """
+        select tax_name from names 
+        where tax_id = ?
+        and is_primary = 1
+        """
+        namedict = {}
+        for rank in tax_keys:
+            if rank in lineage:
+                tax_id = lineage[rank]
+                namedict[tax_id] = self.con.cursor().execute(cmd, (tax_id,)).fetchone()['tax_name']
+        
+        return Lineage(lineage, node, namedict)
 
         
 class Lineage(object):
@@ -241,10 +269,11 @@ class Lineage(object):
     tax_keys = tax_keys
     _attribute_names = set(tax_keys + nodes_keys + source_keys + ['tax_name'])
     
-    def __init__(self, lineage, node):
+    def __init__(self, lineage, node, namedict):
         
         self._data = lineage.copy()
         self._data.update(node)
+        self._namedict = namedict
         self.tax_id = self._data['tax_id']
         self.parent_id = self._data['parent_id']
         
@@ -264,14 +293,12 @@ class Lineage(object):
     def __str__(self):
         """
         Representation of object using print
-        """
-                    
-        fstr = '%20s - %s'
-        lines = ['%(rank)s: %(tax_name)s (tax_id %(tax_id)s)' % self]
-        lines.append(fstr % ('--- rank','tax_name ---'))
-        lines += [fstr % (k.rstrip('_'),self._data[k]) for k in self.tax_keys if k in self._data]
-        lines.append(fstr % ('--- attribute','value ---'))
-        lines += [fstr % (k,self._data[k]) for k in ['source_name','division_id','embl_code']]
+        """   
+        lines = []
+        lines.append('%20s * %s' % ('--- rank','taxon ---'))
+        lines += [   '%20s - %s (%s)' % (k.rstrip('_'), self._namedict[self._data[k]], self._data[k]) for k in reversed(self.tax_keys) if k in self._data]
+        lines.append('%20s * %s' % ('--- attribute','value ---'))
+        lines += [   '%20s - %s' % (k,self._data[k]) for k in ['source_name','division_id','embl_code']]
         return '\n'.join(lines)
 
     def __repr__(self):

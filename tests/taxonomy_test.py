@@ -141,17 +141,17 @@ class Test00CreateFullDatabase(unittest.TestCase):
             
 class TestTaxonomyClass(unittest.TestCase):
 
-    taxid1660 = {'class': 'Actinobacteria (class)',
-                 'family': 'Actinomycetaceae',
-                 'genus': 'Actinomyces',
-                 'no_rank': 'cellular organisms',
-                 'order_': 'Actinomycetales',
+    taxid1660 = {'class': '1760',
+                 'family': '2049',
+                 'genus': '1654',
+                 'no_rank': '131567',
+                 'order_': '2037',
                  'parent_id': '1654',
-                 'phylum': 'Actinobacteria',
-                 'species': 'Actinomyces odontolyticus',
-                 'subclass': 'Actinobacteridae',
-                 'suborder': 'Actinomycineae',
-                 'superkingdom': 'Bacteria',
+                 'phylum': '201174',
+                 'species': '1660',
+                 'subclass': '85003',
+                 'suborder': '85005',
+                 'superkingdom': '2',
                  'tax_id': '1660'}
     
     def setUp(self):
@@ -170,11 +170,15 @@ class TestTaxonomyClass(unittest.TestCase):
     def test2(self):
         tax = taxonomy.Taxonomy(dbname=complete_test_db)
         node = tax._get_node('1660')
-        
+                
         self.assertEqual(node, 
-        {'parent_id': '1654',
+        {'description': None,
+         'division_id': '0',
+         'embl_code': 'AO',
+         'parent_id': '1654',
          'rank': 'species',
          'source_id': 1,
+         'source_name': 'NCBI',
          'tax_id': '1660',
          'tax_name': 'Actinomyces odontolyticus'})
     
@@ -185,6 +189,7 @@ class TestTaxonomyClass(unittest.TestCase):
         start = time.time()
         lineage = tax._get_lineage('1660')
         end1 = time.time()-start
+        log.debug(pprint.pformat(lineage))
         log.info('first request %s secs' % end1)
         self.assertEqual(lineage, self.taxid1660)
         
@@ -208,6 +213,8 @@ class TestTaxonomyClass(unittest.TestCase):
         shutil.copyfile(complete_test_db, self.dbname)
         tax = taxonomy.Taxonomy(dbname=self.dbname)
         lineage = tax.lineage('1660')
+        log.info('\n'+str(lineage))
+        log.info([lineage])
         self.assertEqual(lineage.tax_id, '1660')
         
     def test6(self):
