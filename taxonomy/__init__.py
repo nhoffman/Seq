@@ -1,8 +1,10 @@
 import sqlite3 as sqlite
+import operator
 from create import *
 
-names_keys = 'tax_id name unique class'.split()
+names_keys = 'tax_id tax_name unique class'.split()
 nodes_keys = 'tax_id parent_id rank embl_code division_id'.split()
+source_keys = 'source_id source_name'.split()
 # cut -f 3 -d '|' nodes.dmp | sort | uniq  
 # see http://biowarehouse.ai.sri.com/repos/enumerations-loader/data/enumeration_inserts.txt
 tax_keys = """
@@ -39,6 +41,20 @@ forma
 
 tax_keys = [k.strip().replace(' ','_') for k in tax_keys.splitlines() if k.strip()]
 
+def insert_cmd(tablename, keys, or_clause=''):
+    
+    vals = ', '.join(':%s'%k for k in keys)
+    keys = ', '.join('`%s`'%k for k in keys)
+    
+    cmd = """
+    insert %(or_clause)s into %(tablename)s
+        (%(keys)s)
+    values
+        (%(vals)s)
+    """ % locals()
+
+    return cmd
+    
 class Taxonomy:
 
     def __init__(self, dbname):
@@ -80,8 +96,9 @@ class Taxonomy:
     def _get_node(self, tax_id):
                         
         cmd = """
-        select nodes.tax_id, parent_id, rank, tax_name, source_id
+        select nodes.*, tax_name, source.*
         from nodes join names on nodes.tax_id = names.tax_id
+        join source on nodes.source_id = source.source_id
         where names.is_primary = 1
         and nodes.tax_id = ?
         """
@@ -92,7 +109,57 @@ class Taxonomy:
             return result
         else:
             return None
+    
+    def add_node(self, tax_id, tax_name, parent_id, source_name='NCBI', rank=None,
+        division_id = '0', embl_code=None):
+        
+        cur = self.con.cursor()
+                
+        # make sure source is known
+        
+        # catch the error instead of using 'or ignore' to prevent incrementing of source_id
+        try:
+            cur.execute('insert into source (source_name) values (?)', (source_name,))
+        except sqlite.IntegrityError:
+            pass
+        cur.execute('select * from source where source_name = ?', (source_name,))
+        source_id = cur.fetchone()['source_id']
+                
+        # determine rank of the new node
+        parent = self.lineage(parent_id)
+        parent_rank_i = tax_keys.index(parent.rank)
+        if rank is None:
+            rank = tax_keys[parent_rank_i + 1]
+        else:
+            try:
+                rank_i = tax.keys.index(rank)
+                assert rank_i > parent_rank_i
+            except AssertionError:
+                raise ValueError('rank of new child (%s) must be higher than rank of parent (%s)',
+                    rank,
+                    parent.rank)
+            except IndexError:
+                raise ValueError('rank "%s" is not known' % rank)
+        
+        # add to nodes table
+        cmd = insert_cmd(tablename='nodes', keys=nodes_keys + ['source_id'], 
+            or_clause='or ignore')
+        log.info(cmd)
+        cur.execute(cmd, locals())
 
+        # is the name already in the names table?
+        cur.execute('select * from names where tax_id = ?', (tax_id,))
+        existing = cur.fetchall()
+        is_primary = not bool(existing)
+                
+        if tax_name not in set([row['tax_name'] for row in existing]):
+            # add to names table        
+            cmd = insert_cmd(tablename='names', keys=['tax_id','tax_name','is_primary'])
+            log.info(cmd)
+            cur.execute(cmd, locals())
+        
+        self.con.commit()
+            
     def _get_lineage(self, tax_id):
         """
         Return a taxonomic lineage, adding absent lineages to table taxonomy.
@@ -167,11 +234,12 @@ class Taxonomy:
         node = self._get_node(tax_id)
         
         return Lineage(lineage, node)
+
         
 class Lineage(object):
     
     tax_keys = tax_keys
-    _attribute_names = set(tax_keys + nodes_keys)
+    _attribute_names = set(tax_keys + nodes_keys + source_keys + ['tax_name'])
     
     def __init__(self, lineage, node):
         
@@ -181,7 +249,10 @@ class Lineage(object):
         self.parent_id = self._data['parent_id']
         
     def __getattr__(self, name):
-                
+        """
+        Access object._data as instance attribute.
+        """
+        
         if name in self._attribute_names:
             return self._data.get(name, None)
         else:
@@ -190,7 +261,25 @@ class Lineage(object):
     def __getitem__(self, key):
         return getattr(self, key)
         
+    def __str__(self):
+        """
+        Representation of object using print
+        """
+                    
+        fstr = '%20s - %s'
+        lines = ['%(rank)s: %(tax_name)s (tax_id %(tax_id)s)' % self]
+        lines.append(fstr % ('--- rank','tax_name ---'))
+        lines += [fstr % (k.rstrip('_'),self._data[k]) for k in self.tax_keys if k in self._data]
+        lines.append(fstr % ('--- attribute','value ---'))
+        lines += [fstr % (k,self._data[k]) for k in ['source_name','division_id','embl_code']]
+        return '\n'.join(lines)
+
     def __repr__(self):
-        return '%(rank)s: %(species)s (%(tax_id)s)' % self
+        """
+        Representation of object using str()
+        """
+        
+        return '<%(rank)s: %(tax_name)s (tax_id %(tax_id)s)>' % self
+
         
         

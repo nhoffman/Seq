@@ -76,7 +76,7 @@ def _is_primary_name(rowdict):
     if rowdict['class'] != 'scientific name':
         return False
 
-    if rowdict['unique'] == '' or rowdict['name'] == rowdict['unique'].split('<')[0].strip():
+    if rowdict['unique'] == '' or rowdict['tax_name'] == rowdict['unique'].split('<')[0].strip():
         return True
 
     return False
@@ -126,7 +126,7 @@ def read_bacterial_taxonomy(names, nodes, primary_only=True, **args):
     
 def make_nodes_db(con, data, keys=nodes_keys):
     
-    typedict = {'source_id':'INTEGER DEFAULT 0'} # specify data type by field name here
+    typedict = {'source_id':'INTEGER DEFAULT 1'} # specify data type by field name here
     
     fstr = '    %-25s %s'
     fields = [(k, typedict.get(k,'TEXT')) for k in keys + ['source_id']]
@@ -143,7 +143,7 @@ create table nodes
     log.info(cmd)
     con.execute(cmd)
     
-    cmd = """CREATE INDEX nodes_id_index ON nodes(tax_id)"""
+    cmd = """CREATE UNIQUE INDEX nodes_taxid_index ON nodes(tax_id)"""
     log.info(cmd)
     con.execute(cmd)
     
@@ -164,8 +164,9 @@ values
     cmd = """
 create table source
 (
-source_id           integer primary key,
-source_name         text
+source_id           integer primary key autoincrement,
+source_name         text unique,
+description         text
 )
 """.strip() % locals()
     log.info(cmd)
@@ -173,9 +174,9 @@ source_name         text
     
     cmd = """
 insert into source
-    (source_id, source_name)
+    (source_name)
 values
-    (0, 'NCBI')
+    ('NCBI')
 """ 
     con.execute(cmd)  
     con.commit()
@@ -187,7 +188,7 @@ def make_names_db(con, data):
 CREATE TABLE names 
 (
 tax_id TEXT,
-tax_name TEXT,
+tax_name TEXT, -- TODO: consider making unique?
 is_primary INTEGER
 )""")
     cmds.append("""CREATE INDEX tax_name_i ON names(tax_name)""")
@@ -209,7 +210,7 @@ values
         
     con.executemany(
         cmd, 
-        ( (row['tax_id'], row['name'], int(_is_primary_name(row))) for row in data )
+        ( (row['tax_id'], row['tax_name'], int(_is_primary_name(row))) for row in data )
     )
     con.commit()
     

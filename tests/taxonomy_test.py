@@ -44,7 +44,7 @@ class TestCreateDatabase(unittest.TestCase):
             condition=None)
         
         firstline = data.next()
-        expect = {'class': 'synonym', 'unique': '', 'name': 'all', 'tax_id': '1'}
+        expect = {'class': 'synonym', 'unique': '', 'tax_name': 'all', 'tax_id': '1'}
         
         log.info('firstline: %s' % `firstline`)
         log.info('expect: %s' % `expect`)
@@ -71,7 +71,7 @@ class TestCreateDatabase(unittest.TestCase):
         names_data, nodes_data = taxonomy.read_bacterial_taxonomy(self.namesfile, self.nodesfile)
                                         
         self.assertEqual(
-            {'class': 'scientific name', 'unique': '', 'name': 'root', 'tax_id': '1'}, 
+            {'class': 'scientific name', 'unique': '', 'tax_name': 'root', 'tax_id': '1'}, 
             names_data.next())
 
         self.assertEqual(
@@ -116,7 +116,7 @@ class TestCreateDatabase(unittest.TestCase):
         
         # nodes.source should be zero by default
         sources = con.cursor().execute('select source_id from nodes').fetchall()
-        self.assertEqual( set(x[0] for x in sources), set([0]) )
+        self.assertEqual( set(x[0] for x in sources), set([1]) )
 
 class Test00CreateFullDatabase(unittest.TestCase):
         
@@ -169,12 +169,12 @@ class TestTaxonomyClass(unittest.TestCase):
 
     def test2(self):
         tax = taxonomy.Taxonomy(dbname=complete_test_db)
-        node = tax.get_node('1660')
+        node = tax._get_node('1660')
         
         self.assertEqual(node, 
         {'parent_id': '1654',
          'rank': 'species',
-         'source_id': 0,
+         'source_id': 1,
          'tax_id': '1660',
          'tax_name': 'Actinomyces odontolyticus'})
     
@@ -186,9 +186,6 @@ class TestTaxonomyClass(unittest.TestCase):
         lineage = tax._get_lineage('1660')
         end1 = time.time()-start
         log.info('first request %s secs' % end1)
-        
-        pprint.pprint(lineage)
-        
         self.assertEqual(lineage, self.taxid1660)
         
         start = time.time()
@@ -197,7 +194,7 @@ class TestTaxonomyClass(unittest.TestCase):
         log.info('second request %s secs' % end2)
         log.info('speedup = %s' % (end1/end2))
         self.assertEqual(lineage, self.taxid1660)
-        pprint.pprint(lineage)
+        
              
     def test4(self):
         shutil.copyfile(complete_test_db, self.dbname)
@@ -211,9 +208,19 @@ class TestTaxonomyClass(unittest.TestCase):
         shutil.copyfile(complete_test_db, self.dbname)
         tax = taxonomy.Taxonomy(dbname=self.dbname)
         lineage = tax.lineage('1660')
+        self.assertEqual(lineage.tax_id, '1660')
         
-        print lineage.tax_id
-        print lineage.species
-        print lineage.forma
-        print lineage['species']
-        print lineage 
+    def test6(self):
+        shutil.copyfile(complete_test_db, self.dbname)
+        tax = taxonomy.Taxonomy(dbname=self.dbname)
+        
+        new_id = '1660_1'
+        tax.add_node(tax_id=new_id, tax_name='Actino, Jr.', parent_id='1660', source_name='FAKE')
+            
+        lineage = tax.lineage(new_id)
+        log.info(lineage)
+        self.assertEqual(lineage.tax_id, new_id)
+        
+        tax.add_node(tax_id=new_id, tax_name='Actino, Jr.', parent_id='1660', source_name='FAKE')
+        tax.add_node(tax_id=new_id, tax_name='Actino, III', parent_id='1660', source_name='ALSOFAKE')
+        
