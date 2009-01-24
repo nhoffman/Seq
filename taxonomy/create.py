@@ -6,7 +6,7 @@ import stat
 import pprint
 import sqlite3 as sqlite
 
-from __init__ import names_keys, nodes_keys
+from __init__ import names_keys, nodes_keys, insert_cmd
 
 log = logging
 
@@ -131,8 +131,6 @@ def make_nodes_db(con, data, keys=nodes_keys):
     fstr = '    %-25s %s'
     fields = [(k, typedict.get(k,'TEXT')) for k in keys + ['source_id']]
     fieldcmds = ',\n'.join(fstr % t for t in fields)
-    keylist = ', '.join(keys)
-    qmarks = ', '.join(['?']*len(keys))
     
     cmd = """
 create table nodes
@@ -146,20 +144,12 @@ create table nodes
     cmd = """CREATE UNIQUE INDEX nodes_taxid_index ON nodes(tax_id)"""
     log.info(cmd)
     con.execute(cmd)
-    
-    cmd = """
-insert into nodes
-    (%(keylist)s)
-values
-    (%(qmarks)s)""".strip() % locals()
-    
+   
+    # insert data
+    cmd = insert_cmd(tablename='nodes', keys=keys)
     log.info(cmd)
-    
-    con.executemany(
-        cmd, 
-        (tuple([row[k] for k in keys]) for row in data)
-    )
-    
+    con.executemany(cmd, data)
+   
     # create table of sources
     cmd = """
 create table source

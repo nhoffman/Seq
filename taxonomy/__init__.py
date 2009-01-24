@@ -20,7 +20,7 @@ class
 subclass
 infraclass
 superorder
-order_
+order
 suborder
 parvorder
 infraorder
@@ -66,16 +66,16 @@ class Taxonomy:
                 dict((col[0],row[idx]) for idx, col in enumerate(cursor.description))
         self.con.text_factory = str
         
-        field_defs = ',\n'.join('    %-25s TEXT' % k for k in tax_keys)
+        field_defs = ',\n'.join('            `%s` TEXT' % k for k in tax_keys)
         
         cmd = """
         create table if not exists taxonomy
         (
-            tax_id       TEXT unique,
-            parent_id    TEXT,
-            %(field_defs)s
+            `tax_id` TEXT unique,
+            `parent_id` TEXT,
+%(field_defs)s
         )""" % locals()
-        
+                
         log.debug(cmd)
         self.con.execute(cmd)
         
@@ -135,15 +135,28 @@ class Taxonomy:
         
         return source_id
     
+    def has_node(self, tax_id):
+        cur = self.con.cursor()
+        cur.execute('select * from nodes where tax_id = ?', (tax_id,))
+        return bool(cur.fetchone())
+        
     def add_node(self, tax_id, tax_name, parent_id, source_name='NCBI', rank=None,
-        division_id = '0', embl_code=None):
+        division_id = '0', embl_code=None, get_lineage=False):
         
         cur = self.con.cursor()
         source_id = self.source_id(source_name)
                 
         # determine rank of the new node
         parent = self.lineage(parent_id)
-        parent_rank_i = tax_keys.index(parent.rank)
+        try:
+            parent_rank_i = tax_keys.index(parent.rank)
+        except ValueError:
+            print tax_keys
+            print parent.rank
+            print(parent)
+            
+            raise
+            
         if rank is None:
             rank = tax_keys[parent_rank_i + 1]
         else:
@@ -175,6 +188,12 @@ class Taxonomy:
             cur.execute(cmd, locals())
         
         self.con.commit()
+        
+        if get_lineage:
+            return self.lineage(tax_id)
+        else:
+            return None
+        
             
     def _get_lineage(self, tax_id):
         """
@@ -201,18 +220,12 @@ class Taxonomy:
             node_data = self._get_node(tax_id)
             if node_data:
                 parent_id = node_data['parent_id']
-                            
-                this_rank = node_data['rank']
-                if this_rank == 'order':
-                    this_rank = 'order_'
-                else:
-                    this_rank = this_rank.replace(' ','_')
-                            
+                this_rank = node_data['rank'].replace(' ','_')                            
                 log.debug("this_rank: %s    node_data['tax_id']: %s" % \
                 (this_rank, node_data['tax_id']))
         
                 # recursively get higher-level nodes
-                parentdict = self._get_lineage(parent_id)            
+                parentdict = self._get_lineage(parent_id)    
                             
                 taxdict = parentdict.copy()
                 taxdict[this_rank] = node_data['tax_id']
@@ -224,18 +237,9 @@ class Taxonomy:
             taxdict['parent_id'] = parent_id
             
             # add this data to the database             
-            fields, tax_data = zip(*taxdict.items())
-                    
-            fieldstr = ', '.join(fields)
-            qmarks = ', '.join(['?']*len(tax_data))
-                    
-            cmd = """
-            insert into taxonomy 
-            (%(fieldstr)s)
-            values
-            (%(qmarks)s)""" % locals()
-            
-            cur.execute(cmd, tax_data)
+            cmd = insert_cmd(tablename='taxonomy', keys=taxdict.keys())
+            log.debug(cmd)
+            cur.execute(cmd, taxdict)
             
             lineage = taxdict
                        

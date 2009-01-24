@@ -145,7 +145,7 @@ class TestTaxonomyClass(unittest.TestCase):
                  'family': '2049',
                  'genus': '1654',
                  'no_rank': '131567',
-                 'order_': '2037',
+                 'order': '2037',
                  'parent_id': '1654',
                  'phylum': '201174',
                  'species': '1660',
@@ -157,18 +157,26 @@ class TestTaxonomyClass(unittest.TestCase):
     def setUp(self):
         self.funcname = '_'.join(self.id().split('.')[-2:])
         self.assertTrue(os.access(complete_test_db, os.F_OK))
-        self.dbname = os.path.join(outputdir, self.funcname+'.db')
         
-    def test1(self):
-        tax = taxonomy.Taxonomy(dbname=complete_test_db)
+        # confirm that backup database does not have taxonomy table
+        con = sqlite.connect(complete_test_db)
+        self.assertTrue( bool(con.cursor().execute('pragma table_info(nodes)').fetchall()) )
+        self.assertTrue( bool(con.cursor().execute('pragma table_info(names)').fetchall()) )
+        self.assertFalse( bool(con.cursor().execute('pragma table_info(taxonomy)').fetchall()) )
+        self.dbname = os.path.join(outputdir, self.funcname+'.db')
+
+    def test10(self):
+        shutil.copyfile(complete_test_db, self.dbname)
+        tax = taxonomy.Taxonomy(dbname=self.dbname)
         names_cols = tax.column_names(table_name='names')
         self.assertEqual(names_cols, ['tax_id', 'tax_name', 'is_primary'])
         
         nodes_cols = tax.column_names(table_name='nodes')
         self.assertEqual(nodes_cols, ['tax_id', 'parent_id', 'rank', 'embl_code', 'division_id','source_id'])        
 
-    def test2(self):
-        tax = taxonomy.Taxonomy(dbname=complete_test_db)
+    def test20(self):
+        shutil.copyfile(complete_test_db, self.dbname)
+        tax = taxonomy.Taxonomy(dbname=self.dbname)
         node = tax._get_node('1660')
                 
         self.assertEqual(node, 
@@ -182,10 +190,21 @@ class TestTaxonomyClass(unittest.TestCase):
          'tax_id': '1660',
          'tax_name': 'Actinomyces odontolyticus'})
     
-    def test3(self):
+    def test21(self):
         shutil.copyfile(complete_test_db, self.dbname)
         tax = taxonomy.Taxonomy(dbname=self.dbname)
+        self.assertTrue(tax.has_node('1660'))
+        self.assertFalse(tax.has_node('1660_a'))
+
+    def test30(self):
+        shutil.copyfile(complete_test_db, self.dbname)
+        tax = taxonomy.Taxonomy(dbname=self.dbname)
+        self.assertTrue( isinstance(tax, taxonomy.Taxonomy) )
         
+    def test35(self):
+        shutil.copyfile(complete_test_db, self.dbname)
+        tax = taxonomy.Taxonomy(dbname=self.dbname)
+                
         start = time.time()
         lineage = tax._get_lineage('1660')
         end1 = time.time()-start
@@ -201,7 +220,7 @@ class TestTaxonomyClass(unittest.TestCase):
         self.assertEqual(lineage, self.taxid1660)
         
              
-    def test4(self):
+    def test40(self):
         shutil.copyfile(complete_test_db, self.dbname)
         tax = taxonomy.Taxonomy(dbname=self.dbname)
         lineage = tax._get_lineage(1660)
@@ -209,7 +228,7 @@ class TestTaxonomyClass(unittest.TestCase):
         lineage = tax._get_lineage(1660)
         self.assertEqual(lineage, self.taxid1660)
         
-    def test5(self):
+    def test50(self):
         shutil.copyfile(complete_test_db, self.dbname)
         tax = taxonomy.Taxonomy(dbname=self.dbname)
         lineage = tax.lineage('1660')
@@ -217,7 +236,7 @@ class TestTaxonomyClass(unittest.TestCase):
         log.info([lineage])
         self.assertEqual(lineage.tax_id, '1660')
         
-    def test6(self):
+    def test60(self):
         shutil.copyfile(complete_test_db, self.dbname)
         tax = taxonomy.Taxonomy(dbname=self.dbname)
         

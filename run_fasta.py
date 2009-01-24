@@ -306,10 +306,9 @@ def show_alignment(row, width=60, align=True):
     """.strip() % row
 
     if align:
-        keys = 'q_al_str fa_al_str t_al_str'.split()
-        for q,a,t in zip(*[Seq.sequtil.wrap(row[k],width,'list') for k in keys]):
+        keys = 'q_al_str t_al_str'.split()
+        for q,t in zip(*[Seq.sequtil.wrap(row[k],width,'list') for k in keys]):
             print q
-            print a
             print t
             print ''
 
