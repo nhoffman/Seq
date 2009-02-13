@@ -19,7 +19,7 @@ def read(input, degap=False, case=None, keep_struct=True, keep_ref=True):
     * degap (bool) - if True, Non-alphanumeric characters are removed
     * case - specify "upper" or "lower" to force sequences into either
     * keep_struct - keep structural model (#=GC SS_cons element)
-    * keep_cons - keep reference sequence (#=GC RF element)
+    * keep_ref - keep reference sequence (#=GC RF element)
 
     return a list of Seq objects
     """

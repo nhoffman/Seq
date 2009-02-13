@@ -65,7 +65,33 @@ def cmbuild(infile, outfile=None, defaults=None, quiet=False, dryrun=False, **pa
 
 def cmalign(cmfile, fastafile, outfile=None, statsfile=None,
     defaults=None, quiet=False, dryrun=False, **params):
-
+    
+    """
+    Align sequences in fastafile against profile defined in cmfile. 
+        
+    required arguments
+    ------------------
+    
+    * cmfile - alignment profile, eg, output of cmbuild
+    * fastafile - file containing sequences in fasta format
+    
+    optional arguments 
+    ------------------    
+    
+    * outfile - name of output alignment (Stockholm format); uses 
+      name of fasta file if None
+    * statsfile - optional filename for alignment statistics
+    * defaults, quiet, dryrun, params - see help(Seq.run_infernal._run)
+    
+    output
+    ------
+    
+    returns a two-tuple: (outfile, align_data)
+    
+    * outfile - name of output file containing the alignment
+    * align_data - output of Seq.run_infernal.parse_cmstats
+    """
+    
     cmfile = os.path.abspath(cmfile)
     fastafile = os.path.abspath(fastafile)
 
@@ -134,12 +160,16 @@ def _run(runcmd, args=None, defaults=None, quiet=False, dryrun=False, **params):
         arguments.extend(args)
 
     log.info(arguments)
-
+    log.info(' '.join(arguments))
+    
     if dryrun:
         return None, None
     else:
         stdoutdata, stderrdata = subprocess.Popen(arguments, stdout=subprocess.PIPE).communicate()
-
+        if stderrdata:
+            log.error(stderrdata)
+        
+        log.info(stdoutdata[:500])
         if not quiet:
             print stdoutdata
 

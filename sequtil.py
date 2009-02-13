@@ -431,19 +431,22 @@ def reformat_alignment(seqlist,
                        simchar='.',
                        number_by='consensus',
                        countGaps=False,
-                       leadingZeros=True):
+                       leadingZeros=True,
+                       case=None):
 
     """
     Reformat an alignment of sequences for display.
-    diff - may take the following values:
-        'consensus' - (default) each position in each sequence compared to
-        corresponding position in consensus and replaced with simchar
-        [seq_name] - compare each sequence to sequence with name = seq_name
-        None - make no character replacements
-    number_by - sequence according to which numbering should be calculated
-    countGaps - do not exclude gaps in tabulation of columns to display
-    leadingZeros - include leading zeros in position numbers displayed on top line
-        when exclude_invariant==True.
+    * diff - may take the following values:
+      - 'consensus' - (default) each position in each sequence compared to
+         corresponding position in consensus and replaced with simchar
+      - [seq_name] - compare each sequence to sequence with name = seq_name
+      - None - make no character replacements
+    * number_by - sequence according to which numbering should be calculated
+    * countGaps - do not exclude gaps in tabulation of columns to display
+    * leadingZeros - include leading zeros in position numbers displayed on top line
+      when exclude_invariant==True.
+    * case - None (to change to input), 'upper' (force all to uppercase), 
+      'lower' (force all to lowercase)
     """
 
     min_name_width = 10
@@ -459,7 +462,14 @@ def reformat_alignment(seqlist,
 
     consensus_str = ''.join([consensus(d, countGaps=False) for d in tabulated])
     cons_seq = Seq.Seq('CONSENSUS', consensus_str)
-
+    
+    if case == 'upper':
+        for seq in seqlist:
+            seq.seq = seq.seq.upper()
+    elif case == 'lower':
+        for seq in seqlist:
+            seq.seq = seq.seq.lower()
+    
     if diff == 'consensus':
         for seq in seqlist:
             seq.seq = seqdiff(seq, consensus_str, simchar)

@@ -55,7 +55,11 @@ def insert_cmd(tablename, keys, or_clause=''):
 
     return cmd
 
-class Taxonomy:
+class Taxonomy(object):
+
+    """
+    Class providing an interface to a database containing a taxonomy. 
+    """
 
     def __init__(self, dbname):
         self.dbname = dbname
@@ -173,7 +177,7 @@ class Taxonomy:
         # add to nodes table
         cmd = insert_cmd(tablename='nodes', keys=nodes_keys + ['source_id'],
             or_clause='or ignore')
-        log.info(cmd)
+        log.debug(cmd)
         cur.execute(cmd, locals())
 
         # is the name already in the names table?
@@ -184,7 +188,7 @@ class Taxonomy:
         if tax_name not in set([row['tax_name'] for row in existing]):
             # add to names table
             cmd = insert_cmd(tablename='names', keys=['tax_id','tax_name','is_primary'])
-            log.info(cmd)
+            log.debug(cmd)
             cur.execute(cmd, locals())
 
         self.con.commit()
@@ -211,11 +215,11 @@ class Taxonomy:
         result = cur.fetchone()
 
         if result:
-            log.info( 'found %s' % tax_id)
+            log.debug( 'found %s' % tax_id)
             lineage = dict([(k,result[k]) for k in ['tax_id','parent_id'] + tax_keys if result[k]])
         else:
             orig_id = tax_id
-            log.debug( '    constructing lineage for %s' % tax_id)
+            log.info( 'constructing lineage for %s' % tax_id)
 
             node_data = self._get_node(tax_id)
             if node_data:
@@ -269,7 +273,12 @@ class Taxonomy:
 
 
 class Lineage(object):
-
+    
+    """
+    Container class for a taxonomic lineage. Constructor is meant 
+    to be called by the Taxonomy class.
+    """
+    
     tax_keys = tax_keys
     _attribute_names = set(tax_keys + nodes_keys + source_keys + ['tax_name'])
 
