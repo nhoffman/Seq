@@ -4,8 +4,12 @@ I/O for fasta sequence format.
 
 __version__ = "$Id$"
 
-import re, os, sys
+import re
+import os
+import sys
 import warnings
+import logging
+log = logging
 
 from Seq import Seq
 from sequtil import wrap, removeWhitespace, removeAllButAlpha
@@ -26,14 +30,10 @@ def read( strin, degap=False, style=None, preprocess=None):
 
     gt_count = strin.count('>')
     flist = strin.strip().split('>')
-    # the folowing may come at the expense of a performance hit:
-    # flist = re.split(r'^\s*>', strin.strip(), re.MULTILINE)
-
+    flist.pop(0) # first element is necessarily empty
+            
     seqlist = []
     for f in flist:
-
-        if f.strip() == '':
-            continue
 
         try:
             firstline, rawseq = f.strip().split('\n', 1)
@@ -73,7 +73,16 @@ def readFasta(strin, *args):
 
 def write( seq_or_list, linelength=60, hea=True ):
     """Returns a fasta-formatted string given a single Seq object or
-    list of objects. String always ends with a single trailing newline."""
+    list of objects. String always ends with a single trailing newline.
+    
+    arguments
+    ---------
+    
+    * seq_or_list - a single Seq object or list of objects
+    * linelength - number of characters per line of sequence or
+      None for no wrapping.
+    * hea - write contents of hea attribute 
+    """
 
     if type(seq_or_list) != type([]):
         seq_or_list = [seq_or_list]
@@ -86,11 +95,15 @@ def writeFasta( seq_or_list, *args ):
 
 def _write_fasta( seq, linelength, hea ):
 
-    output = ['>']
-    output.append( seq.name )
+    output = ['>', seq.name]
+
     if hea and seq.hea:
         output.append( ' ' + seq.hea)
+    
     output.append('\n')
-    output.append( wrap(seq.seq, linelength) )
+    if linelength:
+        output.append( wrap(seq.seq, linelength) )
+    else:
+        output.append( seq.seq + '\n')
 
     return ''.join(output)
