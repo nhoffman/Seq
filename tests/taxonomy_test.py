@@ -169,7 +169,7 @@ class TestTaxonomyClass(unittest.TestCase):
         self.assertTrue( bool(con.cursor().execute('pragma table_info(names)').fetchall()) )
         self.assertFalse( bool(con.cursor().execute('pragma table_info(taxonomy)').fetchall()) )
         self.dbname = os.path.join(outputdir, self.funcname+'.db')
-
+        
     def test10(self):
         shutil.copyfile(complete_test_db, self.dbname)
         tax = taxonomy.Taxonomy(dbname=self.dbname)
@@ -254,3 +254,17 @@ class TestTaxonomyClass(unittest.TestCase):
 
         tax.add_node(tax_id=new_id, tax_name='Actino, Jr.', parent_id='1660', source_name='FAKE')
         tax.add_node(tax_id=new_id, tax_name='Actino, III', parent_id='1660', source_name='ALSOFAKE')
+
+    def test70(self):
+        shutil.copyfile(complete_test_db, self.dbname)
+        tax = taxonomy.Taxonomy(dbname=self.dbname)
+        parent_id = '186802'
+        
+        new_id = '186802_1'
+        tax.add_node(tax_id=new_id, tax_name='Child of Clostridiales', 
+        parent_id=parent_id, rank='species', source_name='FAKE')
+        
+        lineage = tax.lineage(new_id)
+        log.info('\n'+str(lineage))
+        
+        

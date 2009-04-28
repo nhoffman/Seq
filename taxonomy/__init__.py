@@ -165,7 +165,7 @@ class Taxonomy(object):
             rank = tax_keys[parent_rank_i + 1]
         else:
             try:
-                rank_i = tax.keys.index(rank)
+                rank_i = tax_keys.index(rank)
                 assert rank_i > parent_rank_i
             except AssertionError:
                 raise ValueError('rank of new child (%s) must be higher than rank of parent (%s)',
