@@ -8,19 +8,23 @@ __version__ = "$Id$"
 import re, os, sys
 import warnings
 import logging
+from collections import defaultdict
+
 log = logging
 
 from Seq import Seq
 from sequtil import wrap, removeWhitespace, removeAllButAlpha
 
-def read(input, degap=False, case=None, keep_struct=True, keep_ref=True):
+def read(input, degap=False, case=None, keep_struct=True, keep_ref=True, check_duplicates=True):
     """
     * input - filename or string containing stockholm format sequence alignment
     * degap (bool) - if True, Non-alphanumeric characters are removed
     * case - specify "upper" or "lower" to force sequences into either
     * keep_struct - keep structural model (#=GC SS_cons element)
     * keep_ref - keep reference sequence (#=GC RF element)
-
+    
+    Raise a ValueError if sequence names are not unique.
+    
     return a list of Seq objects
     """
 
@@ -31,6 +35,7 @@ def read(input, degap=False, case=None, keep_struct=True, keep_ref=True):
 
     seqdata = {}
     names = []
+    linecounts = defaultdict(int)
     for line in lines:
         name, seqstr = None, None
         if not line.strip():
@@ -43,10 +48,26 @@ def read(input, degap=False, case=None, keep_struct=True, keep_ref=True):
             name, seqstr = line.split()
 
         if name:
+            linecounts[name] += 1
             if name not in seqdata:
                 names.append(name)
             seqdata[name] = seqdata.get(name, '') + seqstr.strip()
-
+    
+    lcset = set(linecounts.values())
+    
+    # all names should have the same number of lines
+    if len(lcset) > 1:
+        log.error('The following sequence names are not unique:')
+        expected = min(lcset)
+        not_unique = []
+        for name, count in linecounts.items():
+            if count != expected:
+                log.error('%s appears %s times' % (name, count/expected))
+                not_unique.append(name)
+        msg = 'The following sequence names are not unique: %s' % \
+            ','.join(not_unique)
+        raise ValueError(msg)
+    
     seqlist = []
     for name in names:
         seq = seqdata[name]
@@ -69,6 +90,6 @@ def read(input, degap=False, case=None, keep_struct=True, keep_ref=True):
         seqlist.append(Seq(name, seq))
 
     log.info('writing %s of %s sequences' % (len(seqlist), len(names)))
-
+        
     return seqlist
 
