@@ -16,7 +16,7 @@ module_name = os.path.split(sys.argv[0])[1].rstrip('.py')
 outputdir = config.outputdir
 datadir = config.datadir
 
-class TestReadStockholm(unittest.TestCase):
+class TestReadStockholm1(unittest.TestCase):
 
     def setUp(self):
         self.infile = os.path.join(datadir, '3patients.sto')
@@ -40,3 +40,29 @@ class TestReadStockholm(unittest.TestCase):
     def test5(self):
         seqs = Seq.io_stockholm.read(self.instr, keep_struct=False, keep_ref=False)
         self.assertTrue(len(seqs)==3)
+
+class TestReadStockholm2(unittest.TestCase):
+
+    def setUp(self):
+        self.infile = os.path.join(datadir, 'seed_16s_mini.sto')
+        self.instr = open(os.path.join(datadir, 'seed_16s_mini.sto')).read()
+
+    def test1(self):
+        seqs = Seq.io_stockholm.read(self.infile)
+
+    def test2(self):
+        seqs = Seq.io_stockholm.read(self.instr)
+        self.assertTrue(len(seqs)==10)
+
+    def test3(self):
+        seqs = Seq.io_stockholm.read(self.instr, keep_struct=False)
+        self.assertTrue(len(seqs)==9)
+
+    def test4(self):
+        seqs = Seq.io_stockholm.read(self.instr, keep_ref=False)    
+        self.assertTrue(len(seqs)==10)
+
+    def test5(self):
+        seqs = Seq.io_stockholm.read(self.instr, keep_struct=False, keep_ref=False)
+        self.assertTrue(len(seqs)==9)
+        
