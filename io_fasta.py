@@ -31,7 +31,7 @@ def read( strin, degap=False, style=None, preprocess=None):
     gt_count = strin.count('>')
     flist = strin.strip().split('>')
     flist.pop(0) # first element is necessarily empty
-            
+
     seqlist = []
     for f in flist:
 
@@ -74,14 +74,14 @@ def readFasta(strin, *args):
 def write( seq_or_list, linelength=60, hea=True ):
     """Returns a fasta-formatted string given a single Seq object or
     list of objects. String always ends with a single trailing newline.
-    
+
     arguments
     ---------
-    
+
     * seq_or_list - a single Seq object or list of objects
     * linelength - number of characters per line of sequence or
       None for no wrapping.
-    * hea - write contents of hea attribute 
+    * hea - write contents of hea attribute
     """
 
     if type(seq_or_list) != type([]):
@@ -99,7 +99,7 @@ def _write_fasta( seq, linelength, hea ):
 
     if hea and seq.hea:
         output.append( ' ' + seq.hea)
-    
+
     output.append('\n')
     if linelength:
         output.append( wrap(seq.seq, linelength) )

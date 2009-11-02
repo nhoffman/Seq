@@ -9,6 +9,7 @@ import time
 from itertools import izip, chain, repeat, islice, takewhile
 import cProfile
 import pstats
+import operator
 
 import Seq
 
@@ -65,11 +66,12 @@ def flatten(d):
    
 #### the real work is done in coalesce and merge
 
-def coalesce(strings, idx=None, log=log):
+def coalesce(strings, idx=None, comp='contains', log=log):
 
     """
     Groups a collection of strings by identifying the longest string
-    representing each nested set of substrings.
+    representing each nested set of substrings (if comp='contains') or
+    into sets of identical strings (if comp='eq')
 
     Input
     =====
@@ -104,6 +106,10 @@ def coalesce(strings, idx=None, log=log):
     #d = collections.defaultdict(list, ((i,list()) for i in idx))   
     d = dict((i,list()) for i in idx)
     
+    # operator.eq(a,b) <==> a == b
+    # operator.contains(a,b) <==> b in a
+    compfun = getattr(operator, comp)
+    
     cycle = 0
     while len(idx) > 0:
         parent_i = idx.pop(0)
@@ -114,7 +120,8 @@ def coalesce(strings, idx=None, log=log):
                 (cycle, len(idx), len(strings[parent_i])))
 
         for i, child_i in enumerate(idx):
-            if strings[child_i] in parent_str:
+            # if strings[child_i] in parent_str:
+            if compfun(parent_str,strings[child_i]):
                 # assert child_i == idx.pop(i)
                 d[parent_i].append(idx.pop(i))
                 del d[child_i]
@@ -138,7 +145,7 @@ def coalesce(strings, idx=None, log=log):
 
     return d
 
-def merge(strings, d1, d2=None):
+def merge(strings, d1, d2=None, comp='contains'):
 
     """
     Merge two dictionaries mapping superstrings to substrings.
@@ -148,6 +155,7 @@ def merge(strings, d1, d2=None):
     
      * strings - a tuple of N strings
      * d1, d2 - output of coalesce()
+     * comp - type of string comparison, passed to coalesce ("contains" or "eq")
 
     Output
     ======
@@ -160,7 +168,7 @@ def merge(strings, d1, d2=None):
         log.warning('d2 not provided, returning d1')
         return d1
         
-    d = coalesce(strings, idx=d1.keys()+d2.keys())
+    d = coalesce(strings, idx=d1.keys()+d2.keys(), comp=comp)
             
     for i, dvals in d.items():   
         if dvals:
@@ -196,18 +204,28 @@ def main():
     infile=None,
     verbose=0,
     nchunks=4,
-    chunksize=None
+    chunksize=None,
+    compare_type='contains',
+    outfile='findDuplicates.txt'
     )
 
     parser.add_option("-f", "--fasta-file", dest="infile",
         help='Input file containing sequences in fasta format',
         metavar='FILE')
+
+    parser.add_option("-o", "--outfile", dest="outfile",
+        help='Output file',
+        metavar='FILE')
+    
+    parser.add_option('-n','--nchunks', dest='nchunks', metavar='INT', type='int', help='Number of partitions.')
+    parser.add_option('-c','--chunksize', dest='chunksize', metavar='INT', type='int', help='Number of strings in each partition (overrides --nchunks).')
+    parser.add_option('-t','--compare-type',dest='compare_type',metavar='VAL',type='choice',choices=['eq','contains'],
+                      help='Type of comparison: "contains" or "eq"')
+
     parser.add_option("-v", "--verbose",
         action="count", dest="verbose",
         help="increase verbosity of screen output (eg, -v is verbose, -vv is more so)")
-    parser.add_option('-n','--nchunks', dest='nchunks', metavar='INT', type='int', help='Number of partitions.')
-    parser.add_option('-c','--chunksize', dest='chunksize', metavar='INT', type='int', help='Number of strings in each partition (overrides --nchunks).')
-
+    
     options, args = parser.parse_args()
 
     loglevel = {0:logging.WARNING,
@@ -226,6 +244,8 @@ def main():
     logging.basicConfig(file=sys.stdout,
         format=logformat,
         level=loglevel)
+
+    comp = options.compare_type
     
     seqs = Seq.io_fasta.read(open(options.infile).read())
     
@@ -245,13 +265,13 @@ def main():
     ### the important stuff happens from here...
     chunks = grouper(n=chunksize, iterable=xrange(nstrings), pad=False)    
     # TODO: parallelize me
-    coalesced = [coalesce(strings, c) for c in chunks]
+    coalesced = [coalesce(strings, c, comp=comp) for c in chunks]
     
     cycle = 1
     while len(coalesced) > 1:
         log.warning('merge cycle %s, %s chunks' % (cycle,len(coalesced)))
         # TODO: parallelize me
-        coalesced = [merge(strings, d1, d2) for d1,d2 in grouper(n=2, iterable=coalesced)]
+        coalesced = [merge(strings, d1, d2, comp=comp) for d1,d2 in grouper(n=2, iterable=coalesced)]
         cycle += 1
     
     d = coalesced[0]
@@ -261,7 +281,13 @@ def main():
     
     log.warning('Input data can be represented by %s superstrings (%.2f%% of the input number)' % (len(d), 100*(len(d)/float(nstrings))))  
     log.warning('grand total is %.2f secs' % (time.time()-start))
-    
+
+    fout = open(options.outfile,'w')
+    for parent, children in sorted(d.items()):
+        s = seqs[parent]
+        s.hea = ' '.join(seqs[c].name for c in children)
+        fout.write(Seq.io_fasta.write(seqs[parent], hea=True))
+    fout.close()
 
 if __name__ == '__main__':
     main()
