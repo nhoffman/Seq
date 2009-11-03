@@ -6,50 +6,46 @@ __version__ = "$Id$"
 
 import re, os, sys
 from Seq import Seq
-from sequtil import breakLines
+import textwrap
+import itertools
 
-okchar = re.compile(r"[\n\ _\-ACGTN\d]")
-def _seqToPhylip( seq, name=None):
-    """Writes a string in sequential phylip format from a sequence object, seq.
-    name is used instead of seq.getName() if supplied.
+def _toPhylip(seq, width=None, name=None):
+    """Writes a string in sequential phylip format from a sequence
+    object, seq.  name is used instead of seq.getName() if supplied.
     Mercilessly truncates names to 10 characters."""
 
-    if name == None:
+    if name is None:
         name = seq.name
 
-    str = '%-10s%s' % (name[:10], seq.seq)
+    output = '%-10s%s' % (name[:10], seq.seq)
 
-    output = breakLines(str, 60)
-
+    if width:
+        output = textwrap.fill(output, width)
+        
     return output
 
-def write( seqList ):
-    """Creates a string representing a sequential phylip2 format sequence
-    alignment from a list of sequences. If renum=1, sequentially
-    renames sequences s1, s2 ... sN (useful for long names)."""
+def read(*args, **kwargs):
+    """
+    Not implemented yet
+    """
+    raise AttributeError('io_phylip.read() is not implemented yet.')
+    
+def write(seqs, width=60, renum=False):
+    """Creates a string representing a sequential phylip2 format
+    sequence alignment from a list of sequences. If renum is True,
+    sequentially renames sequences s1, s2 ... sN (useful for long
+    names)."""
 
-    output = []
     # species, characters
-    output.append( '%s %s' % (len(seqList), len(seqList[0])) )
+    output = ['%s %s' % (len(seqs), len(seqs[0]))]
 
-    for seq in seqList:
-        output.append(_seqToPhylip(seq))
-    output.append('\n')
-
-    return '\n'.join(output)
-
-def test():
-    """Test routines in this module"""
-    import glob, io_fasta
-
-    #infiles = glob.glob('testfiles/*.fasta')
-    infiles = glob.glob('/Users/nhoffman/blast2tree/Seq3/testfiles/*.fasta')
-
-    for filename in infiles:
-        instr = open(filename).read()
-        seqlist = io_fasta.readFasta(instr)
-        print write( seqlist )
-
+    if renum:
+        counter = itertools.count(1)
+        output.extend(_toPhylip(s, width, 's%s'%counter.next()) for s in seqs)
+    else:    
+        output.extend(_toPhylip(s, width) for s in seqs)
+    
+    return '\n'.join(output) + '\n'
 
 if __name__ == '__main__':
     test()

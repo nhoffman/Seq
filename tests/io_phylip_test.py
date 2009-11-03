@@ -19,10 +19,18 @@ class TestWritePhylip(unittest.TestCase):
 
     def setUp(self):
         self.file1 = open(os.path.join(datadir, 'oscillo_F41669_top20.aln')).read()
-
+        self.seqs = Seq.io_clustal.read(self.file1)
+        
     def test1(self):
-        seqs = Seq.io_clustal.readAlnStr(self.file1)
-        s = Seq.io_phylip.write(seqs)
-
+        s = Seq.io_phylip.write(self.seqs)
+        log.info(s[:1000])
+        
+    def test2(self):
+        s = Seq.io_phylip.write(self.seqs, width=None)
+        log.info(s[:1000])
+        
+    def test3(self):
+        s = Seq.io_phylip.write(self.seqs, renum=True)
+        log.info(s[:1000])
 
 

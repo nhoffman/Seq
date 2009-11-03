@@ -445,7 +445,7 @@ def reformat_alignment(seqlist,
     * countGaps - do not exclude gaps in tabulation of columns to display
     * leadingZeros - include leading zeros in position numbers displayed on top line
       when exclude_invariant==True.
-    * case - None (to change to input), 'upper' (force all to uppercase), 
+    * case - None (to change to input), 'upper' (force all to uppercase),
       'lower' (force all to lowercase)
     """
 
@@ -462,14 +462,14 @@ def reformat_alignment(seqlist,
 
     consensus_str = ''.join([consensus(d, countGaps=False) for d in tabulated])
     cons_seq = Seq.Seq('CONSENSUS', consensus_str)
-    
+
     if case == 'upper':
         for seq in seqlist:
             seq.seq = seq.seq.upper()
     elif case == 'lower':
         for seq in seqlist:
             seq.seq = seq.seq.lower()
-    
+
     if diff == 'consensus':
         for seq in seqlist:
             seq.seq = seqdiff(seq, consensus_str, simchar)
@@ -613,7 +613,7 @@ def find_exec(cmd, path=None):
         path = [path]
 
     for pth in path:
-        executable = os.path.join(pth.strip(), cmd)        
+        executable = os.path.join(pth.strip(), cmd)
         if os.access(executable, os.X_OK):
             return executable
 
