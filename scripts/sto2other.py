@@ -19,8 +19,10 @@ Infernal cmalign) and prints fasta-format sequences to stdout."""
     keep_ref=False,
     case='upper',
     format='fasta',
-    renum=False)
+    renum=None)
 
+    parser.add_option("-f","--infile", dest='infile', metavar='FILE',
+                     help='Input file')
     parser.add_option("-s", "--keep-struct", dest="keep_struct",
         help="keep structural model (SS_cons)", action='store_true')
     parser.add_option("-r", "--keep-ref", dest="keep_ref",
@@ -30,19 +32,16 @@ Infernal cmalign) and prints fasta-format sequences to stdout."""
                       help="change case of sequence text to upper case ('upper') lower case ('lower') or leave unchanged ('input')")
     parser.add_option("-F","--format", dest="format", type="choice", choices=["fasta","phylip"],
                       metavar=[],help="Choose FORMAT for output file.")
-    parser.add_option("-n","--numbers", dest="renum", action="store_true",
-                      help="Replace names with s1, s2, s3...sN (phylip format only).")
-
+    parser.add_option("-n","--numbers", dest="renum", metavar='FILE',
+                      help="Replace names in output with s1, s2, s3...sN and write mapping of names to FILE (phylip format only).")
+    
+    # TODO: add width argument, pass to io_fasta, io_phylip
     
     options, args = parser.parse_args()
 
-    try:
-        infile = args[0]
-    except IndexError:
-        print dir(parser)
-        parser.print_usage()
-        sys.exit()
 
+    infile = options.infile
+    
     if options.case == 'input':
         style=None
     else:
@@ -56,7 +55,17 @@ Infernal cmalign) and prints fasta-format sequences to stdout."""
     if options.format == 'fasta':
         output = Seq.io_fasta.write(seqs)
     elif options.format == 'phylip':
-        output = Seq.io_phylip.write(seqs, width=None, renum=options.renum)
+        if options.renum:
+            renumfile = open(options.renum,'w')
+            renamer = Seq.io_phylip.renumber()
+            for seq in seqs:
+                renumfile.write('\t'.join([renamer.next(),seq.name])+'\n')
+            renumfile.close()
+            renum = True
+        else:
+            renum = False
+
+        output = Seq.io_phylip.write(seqs, width=None, renum=renum)
 
     sys.stdout.write(output)
 
