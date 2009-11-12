@@ -29,6 +29,15 @@ def read(*args, **kwargs):
     Not implemented yet
     """
     raise AttributeError('io_phylip.read() is not implemented yet.')
+
+def renumber():
+    """
+    Return a generator used to substitute s1, s2, ... sN for names.
+    """
+
+    counter = itertools.count(1)
+    while True:
+        yield 's%s'%counter.next()
     
 def write(seqs, width=60, renum=False):
     """Creates a string representing a sequential phylip2 format
@@ -40,8 +49,8 @@ def write(seqs, width=60, renum=False):
     output = ['%s %s' % (len(seqs), len(seqs[0]))]
 
     if renum:
-        counter = itertools.count(1)
-        output.extend(_toPhylip(s, width, 's%s'%counter.next()) for s in seqs)
+        renamer = renumber()        
+        output.extend(_toPhylip(s, width, renamer.next()) for s in seqs)
     else:    
         output.extend(_toPhylip(s, width) for s in seqs)
     

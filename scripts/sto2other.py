@@ -34,6 +34,8 @@ Infernal cmalign) and prints fasta-format sequences to stdout."""
                       metavar=[],help="Choose FORMAT for output file.")
     parser.add_option("-n","--numbers", dest="renum", metavar='FILE',
                       help="Replace names in output with s1, s2, s3...sN and write mapping of names to FILE (phylip format only).")
+    parser.add_option('-R','--seq-range',dest='seq_range',metavar='x,y',
+                      help='Restrict output to sequences in range x,y inclusive (1-index).')
     
     # TODO: add width argument, pass to io_fasta, io_phylip
     
@@ -52,6 +54,11 @@ Infernal cmalign) and prints fasta-format sequences to stdout."""
                                  keep_struct=options.keep_struct,
                                  keep_ref=options.keep_ref)
 
+    # restrict to sequences in range if specified
+    if options.seq_range:
+        start,stop=options.seq_range.split(',')
+        seqs = [seqs[i] for i in xrange(int(start)-1,int(stop))]
+    
     if options.format == 'fasta':
         output = Seq.io_fasta.write(seqs)
     elif options.format == 'phylip':

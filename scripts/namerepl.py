@@ -26,7 +26,7 @@ Replace strings (eg, sequence names) in a file based on the provided mapping.
                      help='File providing the mapping for string replacement.')
     parser.add_option("-o","--outfile", dest='outfile', metavar='FILE',
                      help='Output file (writes to stdout if not provided)')
-        
+
     options, args = parser.parse_args()
 
     infile = options.infile
@@ -36,7 +36,7 @@ Replace strings (eg, sequence names) in a file based on the provided mapping.
         fout = open(options.outfile,'w')
     else:
         fout = sys.stdout
-    
+
     mapping = dict([line.split() for line in open(mapfile) if line.strip()])
 
     replaced = re.sub(r'\bs\d+\b',
@@ -44,6 +44,8 @@ Replace strings (eg, sequence names) in a file based on the provided mapping.
                       open(infile).read())
 
     fout.write(replaced)
-    
+
 if __name__ == '__main__':
     main()
+
+    
