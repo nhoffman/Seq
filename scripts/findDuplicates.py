@@ -192,7 +192,7 @@ def merge(strings, d1, d2=None, comp='contains'):
     return d
 
 def rlist(d, seqs, fout):
-    
+
     """write an R-format list of character vectors"""
 
     fout.write('duplicates <- list(')
@@ -200,7 +200,7 @@ def rlist(d, seqs, fout):
     parent, children = items.next()
     fout.write('\n   c(%s)' %
                (','.join('"%s"'%seqs[i].name for i in [parent]+children)))
-    
+
     for parent, children in items:
         fout.write(',\n   c(%s)' %
                    (','.join('"%s"'%seqs[i].name for i in [parent]+children)))
@@ -211,8 +211,11 @@ def rlist(d, seqs, fout):
 def main():
 
     usage = """%prog [options]
-            Read sequences in fasta format and identify a single sequence to
-            represent each set of substrings or identical sequences."""
+
+Read sequences in fasta format and identify a single sequence to
+represent each set of substrings or identical sequences.
+
+findDuplicates -h prints options"""
 
     parser = OptionParser(usage=usage, version="$Id: dan.py 3035 2008-12-19 23:30:39Z nhoffman $")
 
@@ -238,11 +241,11 @@ def main():
         help='Output file containing an R-language list of character vectors',
         metavar='FILE')
 
-    
+
     parser.add_option('-n','--nchunks', dest='nchunks', metavar='INT', type='int', help='Number of partitions.')
     parser.add_option('-c','--chunksize', dest='chunksize', metavar='INT', type='int', help='Number of strings in each partition (overrides --nchunks).')
     parser.add_option('-t','--compare-type',dest='compare_type',metavar='VAL',type='choice',choices=['eq','contains'],
-                      help='Type of comparison: "contains" or "eq"')
+                      help='Type of comparison: "contains" (the default; finds longest sequences containing sets of substrings) or "eq" (selects single representatives from groups of identical sequences).')
 
     parser.add_option("-v", "--verbose",
         action="count", dest="verbose",
@@ -314,10 +317,10 @@ def main():
         fout.close()
 
     if options.r_file:
-        fout = open(options.r_file,'w')    
-        rlist(d, seqs, fout)     
+        fout = open(options.r_file,'w')
+        rlist(d, seqs, fout)
         fout.close()
-    
+
 if __name__ == '__main__':
     main()
 
