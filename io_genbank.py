@@ -21,26 +21,26 @@ from sequtil import wrap, removeWhitespace, removeAllButAlpha
 
 class gbSeq(Seq):
     """
-    Provides some convenience attributes for accessing data in 
+    Provides some convenience attributes for accessing data in
     Seq.data
     """
-    
+
     def __init__(self, *args, **kwargs):
         super(gbSeq, self).__init__(*args, **kwargs)
         self.locus = self.data['LOCUS'][0]
         self.taxid = self.data['FEATURES'][1]['source'][1]['db_xref'][0].split(':')[1]
         self.organism = self.data['FEATURES'][1]['source'][1]['organism'][0]
-        
+
 def read(input, name_key='ACCESSION', keep_origin=False):
     """
     * input - filename or a string containing Genbank format sequence records
     * name_key - key identifying element in data to use as a sequence name
     * keep_origin - if True, retains 'ORIGIN' element in data (the raw sequence string)
 
-    return a generator of gbSeq objects, with sequence name set 
-    according to 'name_key'. The data attribute of each seq object contains 
+    return a generator of gbSeq objects, with sequence name set
+    according to 'name_key'. The data attribute of each seq object contains
     all of the data from the genbank record within nested dicts and tuples::
-    
+
      {'ACCESSION': ('AB512777', {}),
       'AUTHORS': ('Watanabe,K., Chao,S.-H., Sasamoto,M., Kudo,Y. and Fujimoto,J.',
                   {}),
@@ -69,17 +69,17 @@ def read(input, name_key='ACCESSION', keep_origin=False):
       'SOURCE': ('Lactobacillus hammesii', {}),
       'TITLE': ('Novel Lactobacillus species isolated from stinky tofu brine', {}),
       'TITLE-1': ('Direct Submission', {}),
-      'VERSION': ('AB512777.1  GI:258612363', {})}    
+      'VERSION': ('AB512777.1  GI:258612363', {})}
     """
-    
+
     seqdelim = r'//'
     leadingblank = ' '*10
-    
+
     if len(input) < 50 and os.access(input, os.F_OK):
         lines = open(input)
     else:
         lines = input.splitlines()
-    
+
     record = []
     addto = None
     for line in lines:
@@ -90,14 +90,14 @@ def read(input, name_key='ACCESSION', keep_origin=False):
         if line.startswith(leadingblank):
             line = line.strip()
             if line.startswith(r'/'):
-                k,v = line[1:].split('=')
+                k,v = line[1:].split('=',1)
                 addto.append([k,v.strip('"')])
             else:
                 addto.append(line)
         else:
             try:
                 key, val = line.split(None,1)
-            except ValueError:        
+            except ValueError:
                 key, val = line, ''
 
             if line.strip() == seqdelim:
@@ -105,41 +105,41 @@ def read(input, name_key='ACCESSION', keep_origin=False):
                 seqstr = removeAllButAlpha(d['ORIGIN'][0])
                 if not keep_origin:
                     del d['ORIGIN']
-                yield gbSeq(name=d[name_key][0], 
+                yield gbSeq(name=d[name_key][0],
                          seq=seqstr,
                          data=d)
-                
+
                 record = []
-                
+
             if key.isupper():
                 record.append([])
                 addto = record[-1]
             elif key[0].islower():
                 record[-1].append([])
                 addto = record[-1][-1]
-            
+
             addto.extend([key, val])
-            
+
 def _as_dict(record):
     keycount = defaultdict(int)
     d = {}
     for x in record:
         k = x[0]
         vals = x[1:]
-       
+
         # recursively convert lists of lists to dicts keyed by first element of each
         val = (' '.join([e for e in vals if isinstance(e,str)]),
             _as_dict([e for e in vals if isinstance(e,list)]))
-                
-        if k in keycount:            
+
+        if k in keycount:
             d['%s-%s' % (k,keycount[k])] = val
-        else:            
+        else:
             d[k] = val
-        keycount[k] += 1    
-            
+        keycount[k] += 1
+
     return d
 
 
-    
+
 
 
