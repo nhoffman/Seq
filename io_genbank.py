@@ -19,12 +19,57 @@ log = logging
 from Seq import Seq
 from sequtil import wrap, removeWhitespace, removeAllButAlpha
 
-def read(input, name='ACCESSION'):
+class gbSeq(Seq):
     """
-    * input - filename or a string containing stockholm format sequence alignment
-    * case - specify "upper" or "lower" to force sequences into either
+    Provides some convenience attributes for accessing data in 
+    Seq.data
+    """
+    
+    def __init__(self, *args, **kwargs):
+        super(gbSeq, self).__init__(*args, **kwargs)
+        self.locus = self.data['LOCUS'][0]
+        self.taxid = self.data['FEATURES'][1]['source'][1]['db_xref'][0].split(':')[1]
+        self.organism = self.data['FEATURES'][1]['source'][1]['organism'][0]
+        
+def read(input, name_key='ACCESSION', keep_origin=False):
+    """
+    * input - filename or a string containing Genbank format sequence records
+    * name_key - key identifying element in data to use as a sequence name
+    * keep_origin - if True, retains 'ORIGIN' element in data (the raw sequence string)
 
-    return a generator of Seq objects, with sequence name set according to 'name'
+    return a generator of gbSeq objects, with sequence name set 
+    according to 'name_key'. The data attribute of each seq object contains 
+    all of the data from the genbank record within nested dicts and tuples::
+    
+     {'ACCESSION': ('AB512777', {}),
+      'AUTHORS': ('Watanabe,K., Chao,S.-H., Sasamoto,M., Kudo,Y. and Fujimoto,J.',
+                  {}),
+      'AUTHORS-1': ('Watanabe,K., Chao,S.-H. and Fujimoto,J.', {}),
+      'DEFINITION': ('Lactobacillus hammesii gene for 16S rRNA, partial sequence, strain: YIT 12110.',
+                     {}),
+      'FEATURES': ('Location/Qualifiers',
+                   {'rRNA': ('<1..>1553', {'product': ('16S ribosomal RNA', {})}),
+                    'source': ('1..1553',
+                               {'db_xref': ('taxon:267633', {}),
+                                'mol_type': ('genomic DNA', {}),
+                                'note': ('type strain of Lactobacillus hammesii',
+                                         {}),
+                                'organism': ('Lactobacillus hammesii', {}),
+                                'strain': ('YIT 12110', {})})}),
+      'JOURNAL': ('Unpublished', {}),
+      'JOURNAL-1': ('Submitted (15-JUL-2009) Contact:Koichi Watanabe Yakult Central Institute for Microbiological Research, Culture Collection and Microbial Systematics; 1796 Yaho, Kunitachi, Tokyo 186-8650, Japan',
+                    {}),
+      'KEYWORDS': ('.', {}),
+      'LOCUS': ('AB512777                1553 bp    DNA     linear   BCT 17-SEP-2009',
+                {}),
+      'ORGANISM': ('Lactobacillus hammesii Bacteria; Firmicutes; Lactobacillales; Lactobacillaceae; Lactobacillus.',
+                   {}),
+      'REFERENCE': ('1', {}),
+      'REFERENCE-1': ('2  (bases 1 to 1553)', {}),
+      'SOURCE': ('Lactobacillus hammesii', {}),
+      'TITLE': ('Novel Lactobacillus species isolated from stinky tofu brine', {}),
+      'TITLE-1': ('Direct Submission', {}),
+      'VERSION': ('AB512777.1  GI:258612363', {})}    
     """
     
     seqdelim = r'//'
@@ -56,8 +101,14 @@ def read(input, name='ACCESSION'):
                 key, val = line, ''
 
             if line.strip() == seqdelim:
-                thisdict = _as_dict(record)
-                yield _as_seq(thisdict, name)
+                d = _as_dict(record)
+                seqstr = removeAllButAlpha(d['ORIGIN'][0])
+                if not keep_origin:
+                    del d['ORIGIN']
+                yield gbSeq(name=d[name_key][0], 
+                         seq=seqstr,
+                         data=d)
+                
                 record = []
                 
             if key.isupper():
@@ -88,12 +139,7 @@ def _as_dict(record):
             
     return d
 
-def _as_seq(d, nametag):
-    name = d[nametag][0]
-    seq = removeAllButAlpha(d['ORIGIN'][0])
-   
-    return Seq(name, seq, data=d)
-    
+
     
 
 
