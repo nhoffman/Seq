@@ -16,8 +16,7 @@ class Seq(object):
         name      name of sequene
         seq       sequence
         [hea]     header information
-        [data]    a dict containing arbitrary data; initialized to
-                  contain the 'hea' key
+        [data]    a dict containing arbitrary data
 
         !!!!! ALL INDEXING IN THIS CLASS IS 0-BASED - EXCEPT getSeq1() !!!!!
         """
@@ -30,9 +29,11 @@ class Seq(object):
         else:
             self.hea = ''
         
-        if not data:
-            self.data = dict(hea=self.hea)
-        
+        if data:
+            self.data = data
+        else:
+            self.data = {}
+            
         self.keys = ['name','seq','hea']
 
         for k,v in kwargs.items():

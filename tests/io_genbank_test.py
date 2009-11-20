@@ -25,7 +25,7 @@ class TestReadGenbank(unittest.TestCase):
     def test1(self):
         seqs = Seq.io_genbank.read(self.infile)
         for seq in seqs:
-            print `seq`
+            print seq.name, seq.data['FEATURES'][1]['source'][1]['db_xref'][0]
 
 
 
