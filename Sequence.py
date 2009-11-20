@@ -29,7 +29,10 @@ class Seq(object):
             self.hea = hea
         else:
             self.hea = ''
-
+        
+        if not data:
+            self.data = dict(hea=self.hea)
+        
         self.keys = ['name','seq','hea']
 
         for k,v in kwargs.items():

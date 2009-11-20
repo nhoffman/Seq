@@ -29,6 +29,7 @@ import io_phylip
 import io_uspto
 import io_rdp
 import io_stockholm
+import io_genbank
 import sequtil
 import run_fasta
 import run_needle

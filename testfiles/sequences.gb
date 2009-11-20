@@ -1,0 +1,1425 @@
+LOCUS       AB512777                1553 bp    DNA     linear   BCT 17-SEP-2009
+DEFINITION  Lactobacillus hammesii gene for 16S rRNA, partial sequence, strain:
+            YIT 12110.
+ACCESSION   AB512777
+VERSION     AB512777.1  GI:258612363
+KEYWORDS    .
+SOURCE      Lactobacillus hammesii
+  ORGANISM  Lactobacillus hammesii
+            Bacteria; Firmicutes; Lactobacillales; Lactobacillaceae;
+            Lactobacillus.
+REFERENCE   1
+  AUTHORS   Watanabe,K., Chao,S.-H., Sasamoto,M., Kudo,Y. and Fujimoto,J.
+  TITLE     Novel Lactobacillus species isolated from stinky tofu brine
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 1553)
+  AUTHORS   Watanabe,K., Chao,S.-H. and Fujimoto,J.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (15-JUL-2009) Contact:Koichi Watanabe Yakult Central
+            Institute for Microbiological Research, Culture Collection and
+            Microbial Systematics; 1796 Yaho, Kunitachi, Tokyo 186-8650, Japan
+FEATURES             Location/Qualifiers
+     source          1..1553
+                     /organism="Lactobacillus hammesii"
+                     /mol_type="genomic DNA"
+                     /strain="YIT 12110"
+                     /db_xref="taxon:267633"
+                     /note="type strain of Lactobacillus hammesii"
+     rRNA            <1..>1553
+                     /product="16S ribosomal RNA"
+ORIGIN      
+        1 gtttgatcat ggctcaggac gaacgctggc ggcatgccta atacatgcaa gtcgaacgag
+       61 cttccgttga atgacgtgct tgcactgatt tcaacattga agcgagtggc gaactggtga
+      121 gtaacacgtg ggtaacttgc ccagaagcag gggataacac ttggaaacag gtgctaatac
+      181 cgtataacaa cagaaaccgc atggtttctg tttgaaaggt ggtttcggct atcacttctg
+      241 gatggacccg cggcgtatta gttagttggt gaggtaaagg cccaccaaga caatgatacg
+      301 tagccgacct gagagggtaa tcggccacat tgggactgag acacggccca aactcctacg
+      361 ggaggcagca gtagggaatc ttccacaatg gacgaaagtc tgatggagca atgccgcgtg
+      421 agtgaagaag ggtttcggct cgtaaaactc tgttgttaaa gaagaacact tctgagagta
+      481 actgttcaga agttgacggt atttaaccag aaagccacgg ctaactacgt gccagcagcc
+      541 gcggtaatac gtaggtggca agcgttgtcc ggatttattg ggcgtaaagc gagcgcaggc
+      601 ggtttcttaa gtctgatgtg aaagccttcg gcttaaccgg agaagtgcat cggaaactgg
+      661 gagacttgag tgcagaagag gacagtggaa ctccatgtgt agcggtggaa tgcgtagata
+      721 tatggaagaa caccagtggc gaaggcggct gtctagtctg taactgacgc tgaggctcga
+      781 aagcatgggt agcaaacagg attagatacc ctggtagtcc atgccgtaaa cgatgagtgc
+      841 taggtgttgg agggtttccg cccttcagtg ccgcagctaa cgcattaagc actccgcctg
+      901 gggagtacga ccgcaaggtt gaaactcaaa ggaattgacg ggggcccgca caagcggtgg
+      961 agcatgtggt ttaattcgaa gctacgcgaa gaaccttacc aggtcttgac atcttctgcc
+     1021 aatcttagag ataagacgtt cccttcgggg acagaatgac aggtggtgca tggttgtcgt
+     1081 cagctcgtgt cgtgagatgt tgggttaagt cccgcaacga gcgcaaccct tattatcagt
+     1141 tgccagcatt aagttgggca ctctggtgag actgccggtg acaaaccgga ggaaggtggg
+     1201 gatgacgtca aatcatcatg ccccttatga cctgggctac acacgtgcta caatggacgg
+     1261 tacaacgagt cgcgaagtcg tgaggccaag ctaatctctt aaagccgttc tcagttcgga
+     1321 ttgtaggctg caactcgcct acatgaagtt ggaatcgcta gtaatcgcgg atcagcatgc
+     1381 cgcggtgaat acgttcccgg gccttgtaca caccgcccgt cacaccatga gagtttgtaa
+     1441 cacccaaagc cggtgagata accttcggga gtcagccgtc taaggtggga cagatgatta
+     1501 gggtgaagtc gtaacaaggt agccgtagga gaacctgcgg ctggatcacc tcc
+//
+
+LOCUS       FN395009                 958 bp    DNA     linear   BCT 23-MAY-2009
+DEFINITION  Lactobacillus hammesii tuf gene for enlongation factor Tu, type
+            strain LMG 23074T.
+ACCESSION   FN395009
+VERSION     FN395009.1  GI:238015783
+KEYWORDS    .
+SOURCE      Lactobacillus hammesii
+  ORGANISM  Lactobacillus hammesii
+            Bacteria; Firmicutes; Lactobacillales; Lactobacillaceae;
+            Lactobacillus.
+REFERENCE   1
+  AUTHORS   Ehrmann,M.A.
+  TITLE     Lactobacillus paucivorans sp. nov., isolated from german lager beer
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 958)
+  AUTHORS   Ehrmann,M.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (20-MAY-2009) Technische Universitaet Muenchen, Lst. fuer
+            Technische Mikrobiologie, Weihenstephaner Steig 16, 85350 Freising,
+            GERMANY
+FEATURES             Location/Qualifiers
+     source          1..958
+                     /organism="Lactobacillus hammesii"
+                     /mol_type="genomic DNA"
+                     /strain="type strain: LMG 23074"
+                     /db_xref="taxon:267633"
+     gene            <1..>958
+                     /gene="tuf"
+     CDS             <1..>958
+                     /gene="tuf"
+                     /codon_start=2
+                     /transl_table=11
+                     /product="enlongation factor Tu"
+                     /protein_id="CAZ04882.1"
+                     /db_xref="GI:238015784"
+                     /translation="TTLTAAITKVLADKGLAKAEDYADIDAAPEERERGITINTAHVE
+                     YETEKRHYAHIDAPGHADYIKNMITGAAQMDGAILVVAATDGPMPQTREHILLARQVG
+                     VNYIVVFLNKTDLVDDDELVDLVEMEVRELLSEYDYPGDDIPVVRGSALKALEGDEEQ
+                     TKVILHLMDIVDDYIPTPERENDKPFLMPVEDVFTITGRGTVASGRIDRGMVKVGDEV
+                     EIVGLHDDVLKTTVTGLEMFRKTLDLGEAGDNVGALLRGINREQVVRGQVLAKPGSIQ
+                     THKQFKGEVYILSKEEGGRHTPFFSNYRPQFYFHTTDITGVIE"
+ORIGIN      
+        1 aacgacgtta actgctgcaa tcactaaggt acttgctgac aaaggtttag caaaggccga
+       61 agattacgct gatatcgatg ctgctccaga agaacgtgaa cgtggtatca cgatcaacac
+      121 tgcccacgtt gaatacgaaa ctgaaaagcg tcactatgcg catatcgatg ccccaggaca
+      181 tgctgactac atcaagaaca tgatcactgg tgctgcccaa atggacggtg ctatcttggt
+      241 tgttgccgct actgatggcc ctatgccaca aacgcgtgaa cacattttgc ttgctcgcca
+      301 agttggtgtt aactacatcg ttgtcttctt aaacaagacc gacttagttg atgacgacga
+      361 attggtcgac ttagttgaaa tggaagttcg tgaactgttg tccgaatacg attaccctgg
+      421 tgatgatatt cctgttgttc gtggttccgc tttgaaggct cttgaaggcg acgaagaaca
+      481 aactaaggtt atccttcact tgatggatat cgttgatgac tacatcccaa ctccagaacg
+      541 tgaaaacgac aagcctttct tgatgcctgt tgaagacgtc ttcacgatca ctggtcgtgg
+      601 gactgttgct tccggtcgta tcgaccgtgg gatggttaag gttggtgacg aagttgaaat
+      661 cgttggttta catgacgacg tattgaagac gaccgttact ggtcttgaaa tgttccgtaa
+      721 gacgttggac cttggtgaag ccggggataa cgttggtgcc ttacttcgtg ggattaaccg
+      781 tgaacaagtt gttcgtggcc aagttcttgc aaagccaggt tcgatccaaa cccacaagca
+      841 gttcaagggt gaagtctaca tcttgagcaa agaagaaggt ggccgtcata cgccattctt
+      901 ctcaaactac cgtccacaat tctacttcca caccactgat atcactggtg ttatcgaa
+//
+
+LOCUS       AM263512                 684 bp    DNA     linear   BCT 25-FEB-2009
+DEFINITION  Lactobacillus hammesii rpoA gene for RNA polymerase alpha subunit,
+            type strain LMG 23074.
+ACCESSION   AM263512
+VERSION     AM263512.1  GI:119663519
+KEYWORDS    RNA polymerase alpha subunit; rpoA gene.
+SOURCE      Lactobacillus hammesii
+  ORGANISM  Lactobacillus hammesii
+            Bacteria; Firmicutes; Lactobacillales; Lactobacillaceae;
+            Lactobacillus.
+REFERENCE   1
+  AUTHORS   Naser,S.M., Dawyndt,P., Hoste,B., Gevers,D., Vandemeulebroecke,K.,
+            Cleenwerck,I., Vancanneyt,M. and Swings,J.
+  TITLE     Identification of lactobacilli by pheS and rpoA gene sequence
+            analyses
+  JOURNAL   Int. J. Syst. Evol. Microbiol. 57 (PT 12), 2777-2789 (2007)
+   PUBMED   18048724
+REFERENCE   2  (bases 1 to 684)
+  AUTHORS   Naser,S.M.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (19-MAY-2006) Naser S.M., Laboratory of Microbiology,
+            Ghent University, K. L. Ledeganckstraat 35, Gent 9000, Belgium
+FEATURES             Location/Qualifiers
+     source          1..684
+                     /organism="Lactobacillus hammesii"
+                     /mol_type="genomic DNA"
+                     /strain="type strain: LMG 23074"
+                     /db_xref="taxon:267633"
+     gene            <1..>684
+                     /gene="rpoA"
+     CDS             <1..>684
+                     /gene="rpoA"
+                     /codon_start=2
+                     /transl_table=11
+                     /product="RNA polymerase alpha subunit"
+                     /protein_id="CAK22331.1"
+                     /db_xref="GI:119663520"
+                     /db_xref="GOA:A1IW57"
+                     /db_xref="InterPro:IPR011773"
+                     /db_xref="UniProtKB/TrEMBL:A1IW57"
+                     /translation="FVVEPLERGYGTTLGNSLRRILLSSLPGAAVTSIQIDGVLHEFS
+                     TVEGVVEDVTQIILNVKKIALKLNGSDDQEETMEINVKGPAQITAGDIVAGADVDVLN
+                     PDLYIATVADGATFHMRMTADKGRGYVSADEHKAQNTEMPIGVLAVDSIYTPIERVNY
+                     QVENARVGQRADYDKLTLDVWTNGSINPSEAIALAAKILTEHLAMFVDLTDEAKNAEI
+                     MVEKEETHK"
+ORIGIN      
+        1 gtttgttgtt gagccgttgg aacgtggata cggaacaacg cttggtaact ccttacggcg
+       61 gatcttgctt tcatcattac ctggtgcagc tgttaccagc attcaaatcg acggggtttt
+      121 acatgaattt tcaacggttg aaggggtagt tgaagacgtc acgcagatca tcttaaatgt
+      181 taagaagatc gcgctgaagc ttaacggttc cgacgatcaa gaagaaacca tggaaatcaa
+      241 cgttaaggga ccagcacaaa tcactgccgg tgatattgtt gcgggtgctg acgttgatgt
+      301 cttaaaccca gatctgtaca ttgctacggt tgccgatggg gcaacgttcc atatgcggat
+      361 gactgcggat aagggccgtg gctatgtttc tgctgacgag cataaagctc agaacacaga
+      421 aatgccaatc ggtgttttag ctgttgattc catttacacc ccaatcgaac gggttaacta
+      481 ccaagtagag aatgcacggg ttggccaacg ggctgactac gataaattga ccctggatgt
+      541 ttggacaaac ggttcaatta atccaagcga agccattgca ttggctgcca agatcttaac
+      601 cgaacatctg gctatgtttg tcgacttgac cgacgaagct aagaatgcgg aaatcatggt
+      661 tgaaaaagaa gaaacgcata agga
+//
+
+LOCUS       AM263503                 441 bp    DNA     linear   BCT 25-FEB-2009
+DEFINITION  Lactobacillus hammesii pheS gene for phenylalanyl-tRNA synthase
+            alpha subunit, type strain LMG 23074.
+ACCESSION   AM263503
+VERSION     AM263503.1  GI:119663501
+KEYWORDS    phenylalanyl-tRNA synthase alpha subunit; pheS gene.
+SOURCE      Lactobacillus hammesii
+  ORGANISM  Lactobacillus hammesii
+            Bacteria; Firmicutes; Lactobacillales; Lactobacillaceae;
+            Lactobacillus.
+REFERENCE   1
+  AUTHORS   Naser,S.M., Dawyndt,P., Hoste,B., Gevers,D., Vandemeulebroecke,K.,
+            Cleenwerck,I., Vancanneyt,M. and Swings,J.
+  TITLE     Identification of lactobacilli by pheS and rpoA gene sequence
+            analyses
+  JOURNAL   Int. J. Syst. Evol. Microbiol. 57 (PT 12), 2777-2789 (2007)
+   PUBMED   18048724
+REFERENCE   2  (bases 1 to 441)
+  AUTHORS   Naser,S.M.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (19-MAY-2006) Naser S.M., Laboratory of Microbiology,
+            Ghent University, K. L. Ledeganckstraat 35, Gent 9000, Belgium
+FEATURES             Location/Qualifiers
+     source          1..441
+                     /organism="Lactobacillus hammesii"
+                     /mol_type="genomic DNA"
+                     /strain="type strain: LMG 23074"
+                     /db_xref="taxon:267633"
+     gene            <1..>441
+                     /gene="pheS"
+     CDS             <1..>441
+                     /gene="pheS"
+                     /codon_start=3
+                     /transl_table=11
+                     /product="phenylalanyl-tRNA synthase alpha subunit"
+                     /protein_id="CAK22322.1"
+                     /db_xref="GI:119663502"
+                     /db_xref="GOA:A1IW48"
+                     /db_xref="InterPro:IPR018157"
+                     /db_xref="UniProtKB/TrEMBL:A1IW48"
+                     /translation="DTFYITKEILMRTQTSPMQARTLEKHDFSKGPLKMISPGVVYRR
+                     DTDDPTHSHQFHQVEGLVIDKHITMADLKGTLQVLAHELFGDKFDVRLRPSYFPFTEP
+                     SVEADITCFNCGGKGCKVCKNTGWIEVLGAGMVHPNVLKMAGVD"
+ORIGIN      
+        1 aagatacctt ctacatcacg aaggaaattc tgatgcggac gcagacgtca ccgatgcagg
+       61 cacgaacgct ggaaaagcat gatttcagca agggcccatt aaagatgatt tcacccggtg
+      121 tcgtttaccg gcgtgacacc gacgacccca cacactctca ccaattccat caggttgaag
+      181 gtttagtgat tgacaagcac atcacgatgg ctgacttaaa ggggacactg caagtcttag
+      241 ctcacgaatt gttcggagac aagttcgatg ttcggttacg gccaagctac ttcccattta
+      301 ccgaaccttc cgttgaagcc gatattacct gcttcaactg tggcggtaag ggctgcaagg
+      361 tctgcaagaa cacggggtgg atcgaagttc tgggtgccgg tatggtacac ccgaacgtcc
+      421 tgaagatggc cggtgtggat c
+//
+
+LOCUS       AM087767                 356 bp    DNA     linear   BCT 25-FEB-2009
+DEFINITION  Lactobacillus hammesii pheS gene for phenylalanyl-tRNA synthase
+            alpha subunit, type strain LMG 23074T.
+ACCESSION   AM087767
+VERSION     AM087767.1  GI:119662264
+KEYWORDS    phenylalanyl-tRNA synthase alpha subunit; pheS gene.
+SOURCE      Lactobacillus hammesii
+  ORGANISM  Lactobacillus hammesii
+            Bacteria; Firmicutes; Lactobacillales; Lactobacillaceae;
+            Lactobacillus.
+REFERENCE   1
+  AUTHORS   Naser,S.M., Dawyndt,P., Hoste,B., Gevers,D., Vandemeulebroecke,K.,
+            Cleenwerck,I., Vancanneyt,M. and Swings,J.
+  TITLE     Identification of lactobacilli by pheS and rpoA gene sequence
+            analyses
+  JOURNAL   Int. J. Syst. Evol. Microbiol. 57 (PT 12), 2777-2789 (2007)
+   PUBMED   18048724
+REFERENCE   2  (bases 1 to 356)
+  AUTHORS   Naser,S.M.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (29-SEP-2005) Naser S.M., Laboratory of Microbiology,
+            Ghent University, K. L. Ledeganckstraat 35, Gent 9000, Belgium
+FEATURES             Location/Qualifiers
+     source          1..356
+                     /organism="Lactobacillus hammesii"
+                     /mol_type="genomic DNA"
+                     /strain="type strain: LMG 23074"
+                     /db_xref="taxon:267633"
+     gene            <1..>356
+                     /gene="pheS"
+     CDS             <1..>356
+                     /gene="pheS"
+                     /EC_number="6.1.1.20"
+                     /codon_start=3
+                     /transl_table=11
+                     /product="phenylalanyl-tRNA synthase alpha subunit"
+                     /protein_id="CAJ33119.1"
+                     /db_xref="GI:119662265"
+                     /db_xref="GOA:A1IUV0"
+                     /db_xref="InterPro:IPR018157"
+                     /db_xref="UniProtKB/TrEMBL:A1IUV0"
+                     /translation="TQTSPMQARTLEKHDFSKGPLKMISPGVVYRRDTDDPTHSHQFH
+                     QVEGLVIDKHITMADLKGTLQVLAHELFGDKFDVRLRPSYFPFTEPSVEADITCFNCG
+                     GKGCKVCKNTGWIEVL"
+ORIGIN      
+        1 ggacgcagac gtcaccgatg caggcacgaa cgctggaaaa gcatgatttc agcaagggcc
+       61 cattaaagat gatttcaccc ggtgtcgttt accggcgtga caccgacgac cccacacact
+      121 ctcaccaatt ccatcaggtt gaaggtttag tgattgacaa gcacatcacg atggctgact
+      181 taaaggggac actgcaagtc ttagctcacg aattgttcgg agacaagttc gatgttcggt
+      241 tacggccaag ctacttccca tttaccgaac cttccgttga agccgatatt acctgcttca
+      301 actgtggcgg taagggctgc aaggtctgca agaacacggg gtggatcgaa gttctg
+//
+
+LOCUS       EU161595                 795 bp    DNA     linear   BCT 30-SEP-2008
+DEFINITION  Lactobacillus hammesii strain CIP 108387 16S-23S ribosomal RNA
+            intergenic spacer and 23S ribosomal RNA gene, partial sequence.
+ACCESSION   EU161595
+VERSION     EU161595.1  GI:190360906
+KEYWORDS    .
+SOURCE      Lactobacillus hammesii
+  ORGANISM  Lactobacillus hammesii
+            Bacteria; Firmicutes; Lactobacillales; Lactobacillaceae;
+            Lactobacillus.
+REFERENCE   1  (bases 1 to 795)
+  AUTHORS   Coton,M., Berthier,F. and Coton,E.
+  TITLE     Rapid identification of the three major species of dairy obligate
+            heterofermenters Lactobacillus brevis, Lactobacillus fermentum and
+            Lactobacillus parabuchneri by species-specific duplex PCR
+  JOURNAL   FEMS Microbiol. Lett. 284 (2), 150-157 (2008)
+   PUBMED   18510560
+REFERENCE   2  (bases 1 to 795)
+  AUTHORS   Coton,M. and Coton,E.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (18-SEP-2007) R&D, ADRIA Normandie, Bd du 13 juin 1944,
+            Villers-Bocage 14310, France
+FEATURES             Location/Qualifiers
+     source          1..795
+                     /organism="Lactobacillus hammesii"
+                     /mol_type="genomic DNA"
+                     /strain="CIP 108387"
+                     /db_xref="taxon:267633"
+     misc_RNA        <1..>795
+                     /note="contains 16S-23S ribosomal RNA intergenic spacer
+                     and 23S ribosomal RNA"
+ORIGIN      
+        1 tttagagcgc acgcctgata agcgtgaggt cgatggttcg agtccattta tgcccattga
+       61 ccgcaaggtc atcattttgg ggaattagct cagatgggag agcacctgct ttgcaagcag
+      121 ggggtcagcg gttcgatccc gctattctcc attggtgcga aagcatcaag gaatttgttc
+      181 tttgaaaact agatattatc aattattttc ctttaattat taagataatt aaaccgagaa
+      241 acaactgcgt atttttgagt tttttaatta gtttatatcg ctaatactca attaatcagc
+      301 gattacgaag taatcgttag gttaagttat gaagggcgca tggtggatgc cttggtacta
+      361 ggagccgatg aaggacggga ctaacaccga tatgcttcgg ggagctgtac gtaagctttg
+      421 atccggagat ttccgaatgg ggaaacccaa ttactttaat cagtaattac aactcaggga
+      481 atacatactt gagttgaggc agacgcgggg aactgaaaca tctaagtacc cgcaggaata
+      541 gaaagaaaaa tcgattccct aagtagcggc gagcgaacgg ggaatagccc aaacccaaag
+      601 agcttgctct ttggggttgt aggactgaac atttgagtta ccaaagtcaa tgataatcga
+      661 agagtctggg aaggctcggc atagagggtg atacccccgt agatgaaatc gttgaccctc
+      721 agttcagtat cctgagtacg gccacacacg tgaaacgtgg tcggaatccg ggaggaccat
+      781 ctcccaaggc taaat
+//
+
+LOCUS       AJ632219                1549 bp    DNA     linear   BCT 22-JUL-2008
+DEFINITION  Lactobacillus hammesii partial 16S rRNA gene, strain TMW 1.1236.
+ACCESSION   AJ632219
+VERSION     AJ632219.1  GI:54792383
+KEYWORDS    16S ribosomal RNA; 16S rRNA gene.
+SOURCE      Lactobacillus hammesii
+  ORGANISM  Lactobacillus hammesii
+            Bacteria; Firmicutes; Lactobacillales; Lactobacillaceae;
+            Lactobacillus.
+REFERENCE   1
+  AUTHORS   Valcheva,R., Korakli,M., Onno,B., Prevost,H., Ivanova,I.,
+            Ehrmann,M.A., Dousset,X., Ganzle,M.G. and Vogel,R.F.
+  TITLE     Lactobacillus hammesii sp. nov., isolated from French sourdough
+  JOURNAL   Int. J. Syst. Evol. Microbiol. 55 (PT 2), 763-767 (2005)
+   PUBMED   15774659
+REFERENCE   2  (bases 1 to 1549)
+  AUTHORS   Ehrmann,M.A.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (16-MAR-2004) Ehrmann M., Lst. fuer Technische
+            Mikrobiologie, Technische Universitaet Muenchen, Weihenstephaner
+            Steig 16, 85350 Freising, GERMANY
+FEATURES             Location/Qualifiers
+     source          1..1549
+                     /organism="Lactobacillus hammesii"
+                     /mol_type="genomic DNA"
+                     /strain="type strain: TMW 1.1236"
+                     /db_xref="taxon:267633"
+     gene            <1..>1549
+                     /gene="16S rRNA"
+     rRNA            <1..>1549
+                     /gene="16S rRNA"
+                     /product="16S ribosomal RNA"
+ORIGIN      
+        1 tggctcagga cgaacgctgg cggcatgcct aatacatgca agtcgaacga gcttccgttg
+       61 aatgacgtgc ttgcactgat ttcaacattg aagcgagtgg cgaactggtg agtaacacgt
+      121 gggtaacttg cccagaagca ggggataaca cttggaaaca ggtgctaata ccgtataaca
+      181 acagaaaccg catggtttct gtttgaaagg tggtttcggc tatcacttct ggatggaccc
+      241 gcggcgtatt agttagttgg tgaggtaaag gcccaccaag acaatgatac gtagccgacc
+      301 tgagagggta atcggccaca ttgggactga gacacggccc aaactcctac gggaggcagc
+      361 agtagggaat cttccacaat ggacgaaagt ctgatggagc aatgccgcgt gagtgaagaa
+      421 gggtttcggc tcgtaaaact ctgttgttaa agaagaacac ttctgagagt aactgttcag
+      481 aagttgacgg tatttaacca gaaagccacg gctaactacg tgccagcagc cgcggtaata
+      541 cgtaggtggc aagcgttgtc cggatttatt gggcgtaaag cgagcgcagg cggtttctta
+      601 agtctgatgt gaaagccttc ggcttaaccg gagaagtgca tcggaaactg ggagacttga
+      661 gtgcagaaga ggacagtgga actccatgtg tagcggtgga atgcgtagat atatggaaga
+      721 acaccagtgg cgaaggcggc tgtctagtct gtaactgacg ctgaggctcg aaagcatggg
+      781 tagcaaacag gattagatac cctggtagtc catgccgtaa acgatgagtg ctaggtgttg
+      841 gagggtttcc gcccttcagt gccgcagcta acgcattaag cactccgcct ggggagtacg
+      901 accgcaaggt tgaaactcaa aggaattgac gggggcccgc acaagcggtg gagcatgtgg
+      961 tttaattcga agctacgcga agaaccttac caggtcttga catcttctgc caatcttaga
+     1021 gataagacgt tcccttcggg gacagaatga caggtggtgc atggttgtcg tcagctcgtg
+     1081 tcgtgagatg ttgggttaag tcccgcaacg agcgcaaccc ttattatcag ttgccagcat
+     1141 taagttgggc actctggtga gactgccggt gacaaaccgg aggaaggtgg ggatgacgtc
+     1201 aaatcatcat gccccttatg acctgggcta cacacgtgct acaatggacg gtacaacgag
+     1261 tcgcgaagtc gtgaggccaa gctaatctct taaagccgtt ctcagttcgg attgtaggct
+     1321 gcaactcgcc tacatgaagt tggaatcgct agtaatcgcg gatcagcatg ccgcggtgaa
+     1381 tacgttcccg ggccttgtac acaccgcccg tcacaccatg agagtttgta acacccaaag
+     1441 ccggtgagat aaccttcggg agtcagccgt ctaaggtggg acagatgatt agggtgaagt
+     1501 cgtaacaagg tagccgtagg agaacctgcg gctggatcac ctctttctg
+//
+
+LOCUS       AY839309                 216 bp    DNA     linear   BCT 02-MAY-2008
+DEFINITION  Lactobacillus hammesii strain Lp38 16S-23S ribosomal RNA small
+            intergenic spacer, complete sequence.
+ACCESSION   AY839309
+VERSION     AY839309.1  GI:56788711
+KEYWORDS    .
+SOURCE      Lactobacillus hammesii
+  ORGANISM  Lactobacillus hammesii
+            Bacteria; Firmicutes; Lactobacillales; Lactobacillaceae;
+            Lactobacillus.
+REFERENCE   1  (bases 1 to 216)
+  AUTHORS   Ferchichi,M., Valcheva,R., Prevost,H., Onno,B. and Dousset,X.
+  TITLE     Rapid identification of Lactobacillus nantensis, Lactobacillus
+            spicheri and Lactobacillus hammesii species using species-specific
+            primers
+  JOURNAL   Int. J. Food Microbiol. 123 (3), 269-276 (2008)
+   PUBMED   18378031
+REFERENCE   2  (bases 1 to 216)
+  AUTHORS   Ferchichi,M., Rachman,C., Valcheva,R., Onno,B., Prevost,H. and
+            Dousset,X.
+  TITLE     Identification of Lactobacillus nantensis, Lactobacillus spicheri
+            and Lactobacillus hammesii species by restriction fragment length
+            polymorphism of the 16S-23S rRNA gene intergenic spacer region and
+            species-specific PCR primers
+  JOURNAL   Unpublished
+REFERENCE   3  (bases 1 to 216)
+  AUTHORS   Ferchichi,M., Onno,B., Prevost,H. and Dousset,X.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (25-NOV-2004) Laboratoire de Microbiologie Alimentaire et
+            Industrielle, ENITIAA, rue de la Geraudiere, Nantes 44322, France
+FEATURES             Location/Qualifiers
+     source          1..216
+                     /organism="Lactobacillus hammesii"
+                     /mol_type="genomic DNA"
+                     /strain="Lp38"
+                     /db_xref="taxon:267633"
+                     /note="type strain of Lactobacillus hammesii"
+     misc_RNA        1..216
+                     /product="16S-23S ribosomal RNA small intergenic spacer"
+ORIGIN      
+        1 ctaaggaata tacggaggct acacatactt tgtcgaaaca atggtcagtt ttgagaggtc
+       61 tactctcaaa cttgttcttt gaaaactaga tattatcaat tattttcctt taattattaa
+      121 gataattaaa ccgagaaaca actgcgtact tttgagtttt ttaattagtt tatatcgcta
+      181 atactcaatt aatcagcgat tacgaagtaa tcgtta
+//
+
+LOCUS       AY839308                 434 bp    DNA     linear   BCT 02-MAY-2008
+DEFINITION  Lactobacillus hammesii strain Lp38 16S-23S ribosomal RNA large
+            intergenic spacer, tRNA-Ile, and tRNA-Ala genes, complete sequence.
+ACCESSION   AY839308
+VERSION     AY839308.1  GI:56788710
+KEYWORDS    .
+SOURCE      Lactobacillus hammesii
+  ORGANISM  Lactobacillus hammesii
+            Bacteria; Firmicutes; Lactobacillales; Lactobacillaceae;
+            Lactobacillus.
+REFERENCE   1  (bases 1 to 434)
+  AUTHORS   Ferchichi,M., Valcheva,R., Prevost,H., Onno,B. and Dousset,X.
+  TITLE     Rapid identification of Lactobacillus nantensis, Lactobacillus
+            spicheri and Lactobacillus hammesii species using species-specific
+            primers
+  JOURNAL   Int. J. Food Microbiol. 123 (3), 269-276 (2008)
+   PUBMED   18378031
+REFERENCE   2  (bases 1 to 434)
+  AUTHORS   Ferchichi,M., Rachman,C., Valcheva,R., Onno,B., Prevost,H. and
+            Dousset,X.
+  TITLE     Identification of Lactobacillus nantensis, Lactobacillus spicheri
+            and Lactobacillus hammesii species by restriction fragment length
+            polymorphism of the 16S-23S rRNA gene intergenic spacer region and
+            species-specific PCR primers
+  JOURNAL   Unpublished
+REFERENCE   3  (bases 1 to 434)
+  AUTHORS   Ferchichi,M., Onno,B., Prevost,H. and Dousset,X.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (25-NOV-2004) Laboratoire de Microbiologie Alimentaire et
+            Industrielle, ENITIAA, rue de la Geraudiere, Nantes 44322, France
+FEATURES             Location/Qualifiers
+     source          1..434
+                     /organism="Lactobacillus hammesii"
+                     /mol_type="genomic DNA"
+                     /strain="Lp38"
+                     /db_xref="taxon:267633"
+                     /note="type strain of Lactobacillus hammesii"
+     misc_RNA        1..434
+                     /product="16S-23S ribosomal RNA large intergenic spacer"
+     tRNA            97..171
+                     /product="tRNA-Ile"
+     tRNA            194..266
+                     /product="tRNA-Ala"
+ORIGIN      
+        1 ctaaggaata tacggaggct acacatactt tgtcgaaaca atggtcagtt ttgaggggtc
+       61 taccctcata attatatgat tttactaaat gattttgggc gtatagctca gctggtttag
+      121 agcgcacgcc tgataagcgt gaggtcgatg gttcgagtcc atttatgccc attgaccgca
+      181 aggtcatcat tttggggaat tagctcagat gggagagcac ctgctttgca agcagggggt
+      241 cagcggttcg atcccgctat tctccattgg tgcgaaagca tcaaggaatt tgttctttga
+      301 aaactagata ttatcaatta ttttccttta attattaaga taattaaacc gagaaacaac
+      361 tgcgtatttt tgagcttttt aattagttta tatcgctaat actcaattaa tcagcgatta
+      421 cgaagtaatc gtta
+//
+
+LOCUS       AM901541                 392 bp    DNA     linear   BCT 11-APR-2008
+DEFINITION  Lactobacillus hammesii partial pheS gene for phenylalanyl-tRNA
+            synthase, strain R-34347.
+ACCESSION   AM901541
+VERSION     AM901541.1  GI:162852666
+KEYWORDS    phenylalanyl tRNA synthase; pheS gene.
+SOURCE      Lactobacillus hammesii
+  ORGANISM  Lactobacillus hammesii
+            Bacteria; Firmicutes; Lactobacillales; Lactobacillaceae;
+            Lactobacillus.
+REFERENCE   1
+  AUTHORS   Scheirlinck,I., Van der Meulen,R., Van Schoor,A., Vancanneyt,M., De
+            Vuyst,L., Vandamme,P. and Huys,G.
+  TITLE     Taxonomic structure and stability of the bacterial community in
+            belgian sourdough ecosystems as assessed by culture and population
+            fingerprinting
+  JOURNAL   Appl. Environ. Microbiol. 74 (8), 2414-2423 (2008)
+   PUBMED   18310426
+REFERENCE   2  (bases 1 to 392)
+  AUTHORS   Scheirlinck,I.P.D.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (15-OCT-2007) Scheirlinck I.P.D., Biochemistry,
+            Physiology & Microbiology, University Ghent, K.L. Ledeganckstraat
+            35, 9000, BELGIUM
+FEATURES             Location/Qualifiers
+     source          1..392
+                     /organism="Lactobacillus hammesii"
+                     /mol_type="genomic DNA"
+                     /strain="R-34347"
+                     /isolation_source="sourdough"
+                     /db_xref="taxon:267633"
+                     /country="Belgium"
+     gene            <1..>392
+                     /gene="pheS"
+     CDS             <1..>392
+                     /gene="pheS"
+                     /codon_start=3
+                     /transl_table=11
+                     /product="phenylalanyl-tRNA synthase"
+                     /protein_id="CAP16254.1"
+                     /db_xref="GI:162852667"
+                     /db_xref="GOA:A7WNX1"
+                     /db_xref="InterPro:IPR002319"
+                     /db_xref="UniProtKB/TrEMBL:A7WNX1"
+                     /translation="DTFYITKEILMRTQTSPMQARTLEKHDFSKGPLKMISPGVVYRR
+                     DTDDPTHSHQFHQVEGLVIDKHITMADLKGTLQVLAHELFGDKFDVRLRPSYFPFTEP
+                     SVEADITCFNCGGKGCKVCKNTGWIEVL"
+ORIGIN      
+        1 aagatacctt ctacatcacg aaggaaattc tgatgcggac gcagacgtca ccgatgcagg
+       61 cacgaacgct ggaaaagcat gatttcagca agggcccatt aaagatgatt tcacccggtg
+      121 tcgtttaccg gcgtgacacc gacgacccca cacactctca ccaattccat caggttgaag
+      181 gtttagtgat tgacaagcac atcacgatgg ctgacttaaa ggggacactg caagtcttag
+      241 ctcacgaatt gttcggagac aagttcgatg ttcggttacg gccaagctac ttcccattta
+      301 ccgaaccttc cgttgaagcc gatattacct gcttcaactg tggcggtaag ggctgcaagg
+      361 tctgcaagaa cacggggtgg atcgaagttc tg
+//
+
+LOCUS       AM901535                 392 bp    DNA     linear   BCT 11-APR-2008
+DEFINITION  Lactobacillus hammesii partial pheS gene for phenylalanyl-tRNA
+            synthase, strain R-27971.
+ACCESSION   AM901535
+VERSION     AM901535.1  GI:162852642
+KEYWORDS    phenylalanyl tRNA synthase; pheS gene.
+SOURCE      Lactobacillus hammesii
+  ORGANISM  Lactobacillus hammesii
+            Bacteria; Firmicutes; Lactobacillales; Lactobacillaceae;
+            Lactobacillus.
+REFERENCE   1
+  AUTHORS   Scheirlinck,I., Van der Meulen,R., Van Schoor,A., Vancanneyt,M., De
+            Vuyst,L., Vandamme,P. and Huys,G.
+  TITLE     Taxonomic structure and stability of the bacterial community in
+            belgian sourdough ecosystems as assessed by culture and population
+            fingerprinting
+  JOURNAL   Appl. Environ. Microbiol. 74 (8), 2414-2423 (2008)
+   PUBMED   18310426
+REFERENCE   2  (bases 1 to 392)
+  AUTHORS   Scheirlinck,I.P.D.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (15-OCT-2007) Scheirlinck I.P.D., Biochemistry,
+            Physiology & Microbiology, University Ghent, K.L. Ledeganckstraat
+            35, 9000, BELGIUM
+FEATURES             Location/Qualifiers
+     source          1..392
+                     /organism="Lactobacillus hammesii"
+                     /mol_type="genomic DNA"
+                     /strain="R-27971"
+                     /isolation_source="sourdough"
+                     /db_xref="taxon:267633"
+                     /country="Belgium"
+     gene            <1..>392
+                     /gene="pheS"
+     CDS             <1..>392
+                     /gene="pheS"
+                     /codon_start=3
+                     /transl_table=11
+                     /product="phenylalanyl-tRNA synthase"
+                     /protein_id="CAP16248.1"
+                     /db_xref="GI:162852643"
+                     /db_xref="GOA:A7WNX1"
+                     /db_xref="InterPro:IPR002319"
+                     /db_xref="UniProtKB/TrEMBL:A7WNX1"
+                     /translation="DTFYITKEILMRTQTSPMQARTLEKHDFSKGPLKMISPGVVYRR
+                     DTDDPTHSHQFHQVEGLVIDKHITMADLKGTLQVLAHELFGDKFDVRLRPSYFPFTEP
+                     SVEADITCFNCGGKGCKVCKNTGWIEVL"
+ORIGIN      
+        1 aagatacctt ctacatcacg aaggaaattc tgatgcggac gcagacgtca ccgatgcagg
+       61 cacgaacgct ggaaaagcat gatttcagca agggcccatt aaagatgatt tcacccggtg
+      121 tcgtttaccg gcgtgacacc gacgacccca cacactctca ccaattccat caggttgaag
+      181 gtttagtgat tgacaagcac atcacgatgg ctgacttaaa ggggacactg caagtcttag
+      241 ctcacgaatt gttcggagac aagttcgatg ttcggttacg gccaagctac ttcccattta
+      301 ccgaaccttc cgttgaagcc gatattacct gcttcaactg tggcggtaag ggctgcaagg
+      361 tctgcaagaa cacggggtgg atcgaagttc tg
+//
+
+LOCUS       AM901531                 392 bp    DNA     linear   BCT 11-APR-2008
+DEFINITION  Lactobacillus hammesii partial pheS gene for phenylalanyl-tRNA
+            synthase, strain R-34339.
+ACCESSION   AM901531
+VERSION     AM901531.1  GI:162852625
+KEYWORDS    phenylalanyl tRNA synthase; pheS gene.
+SOURCE      Lactobacillus hammesii
+  ORGANISM  Lactobacillus hammesii
+            Bacteria; Firmicutes; Lactobacillales; Lactobacillaceae;
+            Lactobacillus.
+REFERENCE   1
+  AUTHORS   Scheirlinck,I., Van der Meulen,R., Van Schoor,A., Vancanneyt,M., De
+            Vuyst,L., Vandamme,P. and Huys,G.
+  TITLE     Taxonomic structure and stability of the bacterial community in
+            belgian sourdough ecosystems as assessed by culture and population
+            fingerprinting
+  JOURNAL   Appl. Environ. Microbiol. 74 (8), 2414-2423 (2008)
+   PUBMED   18310426
+REFERENCE   2  (bases 1 to 392)
+  AUTHORS   Scheirlinck,I.P.D.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (15-OCT-2007) Scheirlinck I.P.D., Biochemistry,
+            Physiology & Microbiology, University Ghent, K.L. Ledeganckstraat
+            35, 9000, BELGIUM
+FEATURES             Location/Qualifiers
+     source          1..392
+                     /organism="Lactobacillus hammesii"
+                     /mol_type="genomic DNA"
+                     /strain="R-34339"
+                     /isolation_source="sourdough"
+                     /db_xref="taxon:267633"
+                     /country="Belgium"
+     gene            <1..>392
+                     /gene="pheS"
+     CDS             <1..>392
+                     /gene="pheS"
+                     /codon_start=3
+                     /transl_table=11
+                     /product="phenylalanyl-tRNA synthase"
+                     /protein_id="CAP16244.1"
+                     /db_xref="GI:162852626"
+                     /db_xref="GOA:A7WNX1"
+                     /db_xref="InterPro:IPR002319"
+                     /db_xref="UniProtKB/TrEMBL:A7WNX1"
+                     /translation="DTFYITKEILMRTQTSPMQARTLEKHDFSKGPLKMISPGVVYRR
+                     DTDDPTHSHQFHQVEGLVIDKHITMADLKGTLQVLAHELFGDKFDVRLRPSYFPFTEP
+                     SVEADITCFNCGGKGCKVCKNTGWIEVL"
+ORIGIN      
+        1 aagatacctt ctacatcacg aaggaaattc tgatgcggac gcagacgtca ccgatgcagg
+       61 cacgaacgct ggaaaagcat gatttcagca agggcccatt aaagatgatt tcacccggtg
+      121 tcgtttaccg gcgtgacacc gacgacccca cacactctca ccaattccat caggttgaag
+      181 gtttagtgat tgacaagcac atcacgatgg ctgacttaaa ggggacactg caagtcttag
+      241 ctcacgaatt gttcggagac aagttcgatg ttcggttacg gccaagctac ttcccattta
+      301 ccgaaccttc cgttgaagcc gatattacct gcttcaactg tggcggtaag ggctgcaagg
+      361 tctgcaagaa cacggggtgg atcgaagttc tg
+//
+
+LOCUS       AM901524                 392 bp    DNA     linear   BCT 11-APR-2008
+DEFINITION  Lactobacillus hammesii partial pheS gene for phenylalanyl-tRNA
+            synthase, strain R-34332.
+ACCESSION   AM901524
+VERSION     AM901524.1  GI:162852583
+KEYWORDS    phenylalanyl tRNA synthase; pheS gene.
+SOURCE      Lactobacillus hammesii
+  ORGANISM  Lactobacillus hammesii
+            Bacteria; Firmicutes; Lactobacillales; Lactobacillaceae;
+            Lactobacillus.
+REFERENCE   1
+  AUTHORS   Scheirlinck,I., Van der Meulen,R., Van Schoor,A., Vancanneyt,M., De
+            Vuyst,L., Vandamme,P. and Huys,G.
+  TITLE     Taxonomic structure and stability of the bacterial community in
+            belgian sourdough ecosystems as assessed by culture and population
+            fingerprinting
+  JOURNAL   Appl. Environ. Microbiol. 74 (8), 2414-2423 (2008)
+   PUBMED   18310426
+REFERENCE   2  (bases 1 to 392)
+  AUTHORS   Scheirlinck,I.P.D.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (15-OCT-2007) Scheirlinck I.P.D., Biochemistry,
+            Physiology & Microbiology, University Ghent, K.L. Ledeganckstraat
+            35, 9000, BELGIUM
+FEATURES             Location/Qualifiers
+     source          1..392
+                     /organism="Lactobacillus hammesii"
+                     /mol_type="genomic DNA"
+                     /strain="R-34332"
+                     /isolation_source="sourdough"
+                     /db_xref="taxon:267633"
+                     /country="Belgium"
+     gene            <1..>392
+                     /gene="pheS"
+     CDS             <1..>392
+                     /gene="pheS"
+                     /codon_start=3
+                     /transl_table=11
+                     /product="phenylalanyl-tRNA synthase"
+                     /protein_id="CAP16237.1"
+                     /db_xref="GI:162852584"
+                     /db_xref="GOA:A7WNX1"
+                     /db_xref="InterPro:IPR002319"
+                     /db_xref="UniProtKB/TrEMBL:A7WNX1"
+                     /translation="DTFYITKEILMRTQTSPMQARTLEKHDFSKGPLKMISPGVVYRR
+                     DTDDPTHSHQFHQVEGLVIDKHITMADLKGTLQVLAHELFGDKFDVRLRPSYFPFTEP
+                     SVEADITCFNCGGKGCKVCKNTGWIEVL"
+ORIGIN      
+        1 aagatacctt ctacatcacg aaggaaattc tgatgcggac gcagacgtca ccgatgcagg
+       61 cacgaacgct ggaaaagcat gatttcagca agggcccatt aaagatgatt tcacccggtg
+      121 tcgtttaccg gcgtgacacc gacgacccca cacactctca ccaattccat caggttgaag
+      181 gtttagtgat tgacaagcac atcacgatgg ctgacttaaa ggggacactg caagtcttag
+      241 ctcacgaatt gttcggagac aagttcgatg ttcggttacg gccaagctac ttcccattta
+      301 ccgaaccttc cgttgaagcc gatattacct gcttcaactg tggcggtaag ggctgcaagg
+      361 tctgcaagaa cacggggtgg atcgaagttc tg
+//
+
+LOCUS       AM901519                 392 bp    DNA     linear   BCT 11-APR-2008
+DEFINITION  Lactobacillus hammesii partial pheS gene for phenylalanyl-tRNA
+            synthase, strain R-34333.
+ACCESSION   AM901519
+VERSION     AM901519.1  GI:162849826
+KEYWORDS    phenylalanyl tRNA synthase; pheS gene.
+SOURCE      Lactobacillus hammesii
+  ORGANISM  Lactobacillus hammesii
+            Bacteria; Firmicutes; Lactobacillales; Lactobacillaceae;
+            Lactobacillus.
+REFERENCE   1
+  AUTHORS   Scheirlinck,I., Van der Meulen,R., Van Schoor,A., Vancanneyt,M., De
+            Vuyst,L., Vandamme,P. and Huys,G.
+  TITLE     Taxonomic structure and stability of the bacterial community in
+            belgian sourdough ecosystems as assessed by culture and population
+            fingerprinting
+  JOURNAL   Appl. Environ. Microbiol. 74 (8), 2414-2423 (2008)
+   PUBMED   18310426
+REFERENCE   2  (bases 1 to 392)
+  AUTHORS   Scheirlinck,I.P.D.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (15-OCT-2007) Scheirlinck I.P.D., Biochemistry,
+            Physiology & Microbiology, University Ghent, K.L. Ledeganckstraat
+            35, 9000, BELGIUM
+FEATURES             Location/Qualifiers
+     source          1..392
+                     /organism="Lactobacillus hammesii"
+                     /mol_type="genomic DNA"
+                     /strain="R-34333"
+                     /isolation_source="sourdough"
+                     /db_xref="taxon:267633"
+                     /country="Belgium"
+     gene            <1..>392
+                     /gene="pheS"
+     CDS             <1..>392
+                     /gene="pheS"
+                     /codon_start=3
+                     /transl_table=11
+                     /product="phenylalanyl-tRNA synthase"
+                     /protein_id="CAP16232.1"
+                     /db_xref="GI:162849827"
+                     /db_xref="GOA:A7WNX1"
+                     /db_xref="InterPro:IPR002319"
+                     /db_xref="UniProtKB/TrEMBL:A7WNX1"
+                     /translation="DTFYITKEILMRTQTSPMQARTLEKHDFSKGPLKMISPGVVYRR
+                     DTDDPTHSHQFHQVEGLVIDKHITMADLKGTLQVLAHELFGDKFDVRLRPSYFPFTEP
+                     SVEADITCFNCGGKGCKVCKNTGWIEVL"
+ORIGIN      
+        1 aagatacctt ctacatcacg aaggaaattc tgatgcggac gcagacgtca ccgatgcagg
+       61 cacgaacgct ggaaaagcat gatttcagca agggcccatt aaagatgatt tcacccggtg
+      121 tcgtttaccg gcgtgacacc gacgacccca cacactctca ccaattccat caggttgaag
+      181 gtttagtgat tgacaagcac atcacgatgg ctgacttaaa ggggacactg caagtcttag
+      241 ctcacgaatt gttcggagac aagttcgatg ttcggttacg gccaagctac ttcccattta
+      301 ccgaaccttc cgttgaagcc gatattacct gcttcaactg tggcggtaag ggctgcaagg
+      361 tctgcaagaa cacggggtgg atcgaagttc tg
+//
+
+LOCUS       AM901516                 392 bp    DNA     linear   BCT 11-APR-2008
+DEFINITION  Lactobacillus hammesii partial pheS gene for phenylalanyl-tRNA
+            synthase, strain R-34324.
+ACCESSION   AM901516
+VERSION     AM901516.1  GI:162849816
+KEYWORDS    phenylalanyl tRNA synthase; pheS gene.
+SOURCE      Lactobacillus hammesii
+  ORGANISM  Lactobacillus hammesii
+            Bacteria; Firmicutes; Lactobacillales; Lactobacillaceae;
+            Lactobacillus.
+REFERENCE   1
+  AUTHORS   Scheirlinck,I., Van der Meulen,R., Van Schoor,A., Vancanneyt,M., De
+            Vuyst,L., Vandamme,P. and Huys,G.
+  TITLE     Taxonomic structure and stability of the bacterial community in
+            belgian sourdough ecosystems as assessed by culture and population
+            fingerprinting
+  JOURNAL   Appl. Environ. Microbiol. 74 (8), 2414-2423 (2008)
+   PUBMED   18310426
+REFERENCE   2  (bases 1 to 392)
+  AUTHORS   Scheirlinck,I.P.D.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (15-OCT-2007) Scheirlinck I.P.D., Biochemistry,
+            Physiology & Microbiology, University Ghent, K.L. Ledeganckstraat
+            35, 9000, BELGIUM
+FEATURES             Location/Qualifiers
+     source          1..392
+                     /organism="Lactobacillus hammesii"
+                     /mol_type="genomic DNA"
+                     /strain="R-34324"
+                     /isolation_source="sourdough"
+                     /db_xref="taxon:267633"
+                     /country="Belgium"
+     gene            <1..>392
+                     /gene="pheS"
+     CDS             <1..>392
+                     /gene="pheS"
+                     /codon_start=3
+                     /transl_table=11
+                     /product="phenylalanyl-tRNA synthase"
+                     /protein_id="CAP16229.1"
+                     /db_xref="GI:162849817"
+                     /db_xref="GOA:A7WNX1"
+                     /db_xref="InterPro:IPR002319"
+                     /db_xref="UniProtKB/TrEMBL:A7WNX1"
+                     /translation="DTFYITKEILMRTQTSPMQARTLEKHDFSKGPLKMISPGVVYRR
+                     DTDDPTHSHQFHQVEGLVIDKHITMADLKGTLQVLAHELFGDKFDVRLRPSYFPFTEP
+                     SVEADITCFNCGGKGCKVCKNTGWIEVL"
+ORIGIN      
+        1 aagatacctt ctacatcacg aaggaaattc tgatgcggac gcagacgtca ccgatgcagg
+       61 cacgaacgct ggaaaagcat gatttcagca agggcccatt aaagatgatt tcacccggtg
+      121 tcgtttaccg gcgtgacacc gacgacccca cacactctca ccaattccat caggttgaag
+      181 gtttagtgat tgacaagcac atcacgatgg ctgacttaaa ggggacactg caagtcttag
+      241 ctcacgaatt gttcggagac aagttcgatg ttcggttacg gccaagctac ttcccattta
+      301 ccgaaccttc cgttgaagcc gatattacct gcttcaactg tggcggtaag ggctgcaagg
+      361 tctgcaagaa cacggggtgg atcgaagttc tg
+//
+
+LOCUS       AM901513                 392 bp    DNA     linear   BCT 11-APR-2008
+DEFINITION  Lactobacillus hammesii partial pheS gene for phenylalanyl-tRNA
+            synthase, strain R-34323.
+ACCESSION   AM901513
+VERSION     AM901513.1  GI:162849803
+KEYWORDS    phenylalanyl tRNA synthase; pheS gene.
+SOURCE      Lactobacillus hammesii
+  ORGANISM  Lactobacillus hammesii
+            Bacteria; Firmicutes; Lactobacillales; Lactobacillaceae;
+            Lactobacillus.
+REFERENCE   1
+  AUTHORS   Scheirlinck,I., Van der Meulen,R., Van Schoor,A., Vancanneyt,M., De
+            Vuyst,L., Vandamme,P. and Huys,G.
+  TITLE     Taxonomic structure and stability of the bacterial community in
+            belgian sourdough ecosystems as assessed by culture and population
+            fingerprinting
+  JOURNAL   Appl. Environ. Microbiol. 74 (8), 2414-2423 (2008)
+   PUBMED   18310426
+REFERENCE   2  (bases 1 to 392)
+  AUTHORS   Scheirlinck,I.P.D.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (15-OCT-2007) Scheirlinck I.P.D., Biochemistry,
+            Physiology & Microbiology, University Ghent, K.L. Ledeganckstraat
+            35, 9000, BELGIUM
+FEATURES             Location/Qualifiers
+     source          1..392
+                     /organism="Lactobacillus hammesii"
+                     /mol_type="genomic DNA"
+                     /strain="R-34323"
+                     /isolation_source="sourdough"
+                     /db_xref="taxon:267633"
+                     /country="Belgium"
+     gene            <1..>392
+                     /gene="pheS"
+     CDS             <1..>392
+                     /gene="pheS"
+                     /codon_start=3
+                     /transl_table=11
+                     /product="phenylalanyl-tRNA synthase"
+                     /protein_id="CAP16226.1"
+                     /db_xref="GI:162849804"
+                     /db_xref="GOA:A7WNX1"
+                     /db_xref="InterPro:IPR002319"
+                     /db_xref="UniProtKB/TrEMBL:A7WNX1"
+                     /translation="DTFYITKEILMRTQTSPMQARTLEKHDFSKGPLKMISPGVVYRR
+                     DTDDPTHSHQFHQVEGLVIDKHITMADLKGTLQVLAHELFGDKFDVRLRPSYFPFTEP
+                     SVEADITCFNCGGKGCKVCKNTGWIEVL"
+ORIGIN      
+        1 aagatacctt ctacatcacg aaggaaattc tgatgcggac gcagacgtca ccgatgcagg
+       61 cacgaacgct ggaaaagcat gatttcagca agggcccatt aaagatgatt tcacccggtg
+      121 tcgtttaccg gcgtgacacc gacgacccca cacactctca ccaattccat caggttgaag
+      181 gtttagtgat tgacaagcac atcacgatgg ctgacttaaa ggggacactg caagtcttag
+      241 ctcacgaatt gttcggagac aagttcgatg ttcggttacg gccaagctac ttcccattta
+      301 ccgaaccttc cgttgaagcc gatattacct gcttcaactg tggcggtaag ggctgcaagg
+      361 tctgcaagaa cacggggtgg atcgaagttc tg
+//
+
+LOCUS       AM901507                 392 bp    DNA     linear   BCT 11-APR-2008
+DEFINITION  Lactobacillus hammesii partial pheS gene for phenylalanyl-tRNA
+            synthase, strain R-33882.
+ACCESSION   AM901507
+VERSION     AM901507.1  GI:162849777
+KEYWORDS    phenylalanyl tRNA synthase; pheS gene.
+SOURCE      Lactobacillus hammesii
+  ORGANISM  Lactobacillus hammesii
+            Bacteria; Firmicutes; Lactobacillales; Lactobacillaceae;
+            Lactobacillus.
+REFERENCE   1
+  AUTHORS   Scheirlinck,I., Van der Meulen,R., Van Schoor,A., Vancanneyt,M., De
+            Vuyst,L., Vandamme,P. and Huys,G.
+  TITLE     Taxonomic structure and stability of the bacterial community in
+            belgian sourdough ecosystems as assessed by culture and population
+            fingerprinting
+  JOURNAL   Appl. Environ. Microbiol. 74 (8), 2414-2423 (2008)
+   PUBMED   18310426
+REFERENCE   2  (bases 1 to 392)
+  AUTHORS   Scheirlinck,I.P.D.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (15-OCT-2007) Scheirlinck I.P.D., Biochemistry,
+            Physiology & Microbiology, University Ghent, K.L. Ledeganckstraat
+            35, 9000, BELGIUM
+FEATURES             Location/Qualifiers
+     source          1..392
+                     /organism="Lactobacillus hammesii"
+                     /mol_type="genomic DNA"
+                     /strain="R-33882"
+                     /isolation_source="sourdough"
+                     /db_xref="taxon:267633"
+                     /country="Belgium"
+     gene            <1..>392
+                     /gene="pheS"
+     CDS             <1..>392
+                     /gene="pheS"
+                     /codon_start=3
+                     /transl_table=11
+                     /product="phenylalanyl-tRNA synthase"
+                     /protein_id="CAP16220.1"
+                     /db_xref="GI:162849778"
+                     /db_xref="UniProtKB/TrEMBL:A9JP66"
+                     /translation="DTFYITKEIMMRTQXSPMQARTLEKHDFSKGPLKMISPGVVYRR
+                     DTDDPTHSHQXXGXEGLVIDKXITMADLKGTLQVLAHELFGDKFDVRLRPSYFPFTEP
+                     SVEADITCFNCGGKGCKVCKNTGXXEVL"
+ORIGIN      
+        1 aagatacctt ctacatcacg aaggaaatta tgatgcggac gcagangtcc ccgatgcagg
+       61 cacgaacgct ggaaaagcat gatttcagca agggcccatt aaagatgatt tcacccggtg
+      121 tcgtttaccg gcgtgacacc gacgacccca cacactctca ccaattnnnt ggggntgaag
+      181 gtttagtgat tgacaagnac atcacgatgg ctgacttaaa ggggacactg caagtcttag
+      241 ctcacgaatt gttcggagac aagttcgatg ttcggttacg gccaagctac ttcccattta
+      301 ccgaaccttc cgttgaagcc gatattacct gcttcaactg tggcggtaag ggctgcaagg
+      361 tctgcaagaa cacggggngg atngaagttc tg
+//
+
+LOCUS       AM745730                 311 bp    DNA     linear   BCT 26-MAR-2008
+DEFINITION  Lactobacillus hammesii partial PheS gene for phenylalanyl-tRNA
+            synthase, isolate R-30193.
+ACCESSION   AM745730
+VERSION     AM745730.1  GI:156712467
+KEYWORDS    phenylalanyl-tRNA synthase; PheS gene.
+SOURCE      Lactobacillus hammesii
+  ORGANISM  Lactobacillus hammesii
+            Bacteria; Firmicutes; Lactobacillales; Lactobacillaceae;
+            Lactobacillus.
+REFERENCE   1
+  AUTHORS   Scheirlinck,I., Van der Meulen,R., Van Schoor,A., Vancanneyt,M., De
+            Vuyst,L., Vandamme,P. and Huys,G.
+  TITLE     Influence of geographical origin and flour type on diversity of
+            lactic acid bacteria in traditional Belgian sourdoughs
+  JOURNAL   Appl. Environ. Microbiol. 73 (19), 6262-6269 (2007)
+   PUBMED   17675431
+REFERENCE   2  (bases 1 to 311)
+  AUTHORS   Scheirlinck,I.P.D.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (31-MAY-2007) Scheirlinck I.P.D., Biochemistry,
+            Physiology & Microbiology, University Ghent, K.L. Ledeganckstraat
+            35, 9000, BELGIUM
+FEATURES             Location/Qualifiers
+     source          1..311
+                     /organism="Lactobacillus hammesii"
+                     /mol_type="genomic DNA"
+                     /isolate="R-30193"
+                     /db_xref="taxon:267633"
+                     /identified_by="Ilse Scheirlinck"
+     gene            <1..>311
+                     /gene="PheS"
+     CDS             <1..>311
+                     /gene="PheS"
+                     /codon_start=3
+                     /transl_table=11
+                     /product="phenylalanyl-tRNA synthase"
+                     /protein_id="CAO00725.1"
+                     /db_xref="GI:156712468"
+                     /db_xref="GOA:A7WP50"
+                     /db_xref="InterPro:IPR002319"
+                     /db_xref="UniProtKB/TrEMBL:A7WP50"
+                     /translation="TQTSPMQARTLEKHDFSKGPLKMISPGVVYRRDTDDPTHSHQFH
+                     QVEGLVIDKHITMADLKGTLQVLAHELFGDKFDVRLRPSYFPFTEPSVEADITCFNCG
+                     G"
+ORIGIN      
+        1 ggacgcagac gtcaccgatg caggcacgaa cgctggaaaa gcatgatttc agcaagggcc
+       61 cattaaagat gatttcaccc ggtgtcgttt accggcgtga caccgacgac cccacacact
+      121 ctcaccaatt ccatcaggtt gaaggtttag tgattgacaa gcacatcacg atggctgact
+      181 taaaggggac actgcaagtc ttagctcacg aattgttcgg agacaagttc gatgttcggt
+      241 tacggccaag ctacttccca tttaccgaac cttccgttga agccgatatt acctgcttca
+      301 actgtggcgg t
+//
+
+LOCUS       AM745729                 392 bp    DNA     linear   BCT 26-MAR-2008
+DEFINITION  Lactobacillus hammesii partial PheS gene for phenylalanyl-tRNA
+            synthase, isolate R-30191.
+ACCESSION   AM745729
+VERSION     AM745729.1  GI:156712465
+KEYWORDS    phenylalanyl-tRNA synthase; PheS gene.
+SOURCE      Lactobacillus hammesii
+  ORGANISM  Lactobacillus hammesii
+            Bacteria; Firmicutes; Lactobacillales; Lactobacillaceae;
+            Lactobacillus.
+REFERENCE   1
+  AUTHORS   Scheirlinck,I., Van der Meulen,R., Van Schoor,A., Vancanneyt,M., De
+            Vuyst,L., Vandamme,P. and Huys,G.
+  TITLE     Influence of geographical origin and flour type on diversity of
+            lactic acid bacteria in traditional Belgian sourdoughs
+  JOURNAL   Appl. Environ. Microbiol. 73 (19), 6262-6269 (2007)
+   PUBMED   17675431
+REFERENCE   2  (bases 1 to 392)
+  AUTHORS   Scheirlinck,I.P.D.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (31-MAY-2007) Scheirlinck I.P.D., Biochemistry,
+            Physiology & Microbiology, University Ghent, K.L. Ledeganckstraat
+            35, 9000, BELGIUM
+FEATURES             Location/Qualifiers
+     source          1..392
+                     /organism="Lactobacillus hammesii"
+                     /mol_type="genomic DNA"
+                     /isolate="R-30191"
+                     /db_xref="taxon:267633"
+                     /identified_by="Ilse Scheirlinck"
+     gene            <1..>392
+                     /gene="PheS"
+     CDS             <1..>392
+                     /gene="PheS"
+                     /codon_start=3
+                     /transl_table=11
+                     /product="phenylalanyl-tRNA synthase"
+                     /protein_id="CAO00724.1"
+                     /db_xref="GI:156712466"
+                     /db_xref="GOA:A7WNX1"
+                     /db_xref="InterPro:IPR002319"
+                     /db_xref="UniProtKB/TrEMBL:A7WNX1"
+                     /translation="DTFYITKEILMRTQTSPMQARTLEKHDFSKGPLKMISPGVVYRR
+                     DTDDPTHSHQFHQVEGLVIDKHITMADLKGTLQVLAHELFGDKFDVRLRPSYFPFTEP
+                     SVEADITCFNCGGKGCKVCKNTGWIEVL"
+ORIGIN      
+        1 aagatacctt ctacatcacg aaggaaattc tgatgcggac gcagacgtca ccgatgcagg
+       61 cacgaacgct ggaaaagcat gatttcagca agggcccatt aaagatgatt tcacccggtg
+      121 tcgtttaccg gcgtgacacc gacgacccca cacactctca ccaattccat caggttgaag
+      181 gtttagtgat tgacaagcac atcacgatgg ctgacttaaa ggggacactg caagtcttag
+      241 ctcacgaatt gttcggagac aagttcgatg ttcggttacg gccaagctac ttcccattta
+      301 ccgaaccttc cgttgaagcc gatattacct gcttcaactg tggcggtaag ggctgcaagg
+      361 tctgcaagaa cacggggtgg atcgaagttc tg
+//
+
+LOCUS       AM745727                 392 bp    DNA     linear   BCT 26-MAR-2008
+DEFINITION  Lactobacillus hammesii partial PheS gene for phenylalanyl-tRNA
+            synthase, isolate R-30168.
+ACCESSION   AM745727
+VERSION     AM745727.1  GI:156712461
+KEYWORDS    phenylalanyl-tRNA synthase; PheS gene.
+SOURCE      Lactobacillus hammesii
+  ORGANISM  Lactobacillus hammesii
+            Bacteria; Firmicutes; Lactobacillales; Lactobacillaceae;
+            Lactobacillus.
+REFERENCE   1
+  AUTHORS   Scheirlinck,I., Van der Meulen,R., Van Schoor,A., Vancanneyt,M., De
+            Vuyst,L., Vandamme,P. and Huys,G.
+  TITLE     Influence of geographical origin and flour type on diversity of
+            lactic acid bacteria in traditional Belgian sourdoughs
+  JOURNAL   Appl. Environ. Microbiol. 73 (19), 6262-6269 (2007)
+   PUBMED   17675431
+REFERENCE   2  (bases 1 to 392)
+  AUTHORS   Scheirlinck,I.P.D.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (31-MAY-2007) Scheirlinck I.P.D., Biochemistry,
+            Physiology & Microbiology, University Ghent, K.L. Ledeganckstraat
+            35, 9000, BELGIUM
+FEATURES             Location/Qualifiers
+     source          1..392
+                     /organism="Lactobacillus hammesii"
+                     /mol_type="genomic DNA"
+                     /isolate="R-30168"
+                     /db_xref="taxon:267633"
+                     /identified_by="Ilse Scheirlinck"
+     gene            <1..>392
+                     /gene="PheS"
+     CDS             <1..>392
+                     /gene="PheS"
+                     /codon_start=3
+                     /transl_table=11
+                     /product="phenylalanyl-tRNA synthase"
+                     /protein_id="CAO00722.1"
+                     /db_xref="GI:156712462"
+                     /db_xref="GOA:A7WNX1"
+                     /db_xref="InterPro:IPR002319"
+                     /db_xref="UniProtKB/TrEMBL:A7WNX1"
+                     /translation="DTFYITKEILMRTQTSPMQARTLEKHDFSKGPLKMISPGVVYRR
+                     DTDDPTHSHQFHQVEGLVIDKHITMADLKGTLQVLAHELFGDKFDVRLRPSYFPFTEP
+                     SVEADITCFNCGGKGCKVCKNTGWIEVL"
+ORIGIN      
+        1 aagatacctt ctacatcacg aaggaaattc tgatgcggac gcagacgtca ccgatgcagg
+       61 cacgaacgct ggaaaagcat gatttcagca agggcccatt aaagatgatt tcacccggtg
+      121 tcgtttaccg gcgtgacacc gacgacccca cacactctca ccaattccat caggttgaag
+      181 gtttagtgat tgacaagcac atcacgatgg ctgacttaaa ggggacactg caagtcttag
+      241 ctcacgaatt gttcggagac aagttcgatg ttcggttacg gccaagctac ttcccattta
+      301 ccgaaccttc cgttgaagcc gatattacct gcttcaactg tggcggtaag ggctgcaagg
+      361 tctgcaagaa cacggggtgg atcgaagttc tg
+//
+
+LOCUS       AM745723                 392 bp    DNA     linear   BCT 26-MAR-2008
+DEFINITION  Lactobacillus hammesii partial PheS gene for phenylalanyl-tRNA
+            synthase, isolate R-30158.
+ACCESSION   AM745723
+VERSION     AM745723.1  GI:156712453
+KEYWORDS    phenylalanyl-tRNA synthase; PheS gene.
+SOURCE      Lactobacillus hammesii
+  ORGANISM  Lactobacillus hammesii
+            Bacteria; Firmicutes; Lactobacillales; Lactobacillaceae;
+            Lactobacillus.
+REFERENCE   1
+  AUTHORS   Scheirlinck,I., Van der Meulen,R., Van Schoor,A., Vancanneyt,M., De
+            Vuyst,L., Vandamme,P. and Huys,G.
+  TITLE     Influence of geographical origin and flour type on diversity of
+            lactic acid bacteria in traditional Belgian sourdoughs
+  JOURNAL   Appl. Environ. Microbiol. 73 (19), 6262-6269 (2007)
+   PUBMED   17675431
+REFERENCE   2  (bases 1 to 392)
+  AUTHORS   Scheirlinck,I.P.D.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (31-MAY-2007) Scheirlinck I.P.D., Biochemistry,
+            Physiology & Microbiology, University Ghent, K.L. Ledeganckstraat
+            35, 9000, BELGIUM
+FEATURES             Location/Qualifiers
+     source          1..392
+                     /organism="Lactobacillus hammesii"
+                     /mol_type="genomic DNA"
+                     /isolate="R-30158"
+                     /db_xref="taxon:267633"
+                     /identified_by="Ilse Scheirlinck"
+     gene            <1..>392
+                     /gene="PheS"
+     CDS             <1..>392
+                     /gene="PheS"
+                     /codon_start=3
+                     /transl_table=11
+                     /product="phenylalanyl-tRNA synthase"
+                     /protein_id="CAO00718.1"
+                     /db_xref="GI:156712454"
+                     /db_xref="GOA:A7WNX1"
+                     /db_xref="InterPro:IPR002319"
+                     /db_xref="UniProtKB/TrEMBL:A7WNX1"
+                     /translation="DTFYITKEILMRTQTSPMQARTLEKHDFSKGPLKMISPGVVYRR
+                     DTDDPTHSHQFHQVEGLVIDKHITMADLKGTLQVLAHELFGDKFDVRLRPSYFPFTEP
+                     SVEADITCFNCGGKGCKVCKNTGWIEVL"
+ORIGIN      
+        1 aagatacctt ctacatcacg aaggaaattc tgatgcggac gcagacgtca ccgatgcagg
+       61 cacgaacgct ggaaaagcat gatttcagca agggcccatt aaagatgatt tcacccggtg
+      121 tcgtttaccg gcgtgacacc gacgacccca cacactctca ccaattccat caggttgaag
+      181 gtttagtgat tgacaagcac atcacgatgg ctgacttaaa ggggacactg caagtcttag
+      241 ctcacgaatt gttcggagac aagttcgatg ttcggttacg gccaagctac ttcccattta
+      301 ccgaaccttc cgttgaagcc gatattacct gcttcaactg tggcggtaag ggctgcaagg
+      361 tctgcaagaa cacggggtgg atcgaagttc tg
+//
+
+LOCUS       AM745717                 392 bp    DNA     linear   BCT 26-MAR-2008
+DEFINITION  Lactobacillus hammesii partial PheS gene for phenylalanyl-tRNA
+            synthase, isolate R-29945.
+ACCESSION   AM745717
+VERSION     AM745717.1  GI:156712441
+KEYWORDS    phenylalanyl-tRNA synthase; PheS gene.
+SOURCE      Lactobacillus hammesii
+  ORGANISM  Lactobacillus hammesii
+            Bacteria; Firmicutes; Lactobacillales; Lactobacillaceae;
+            Lactobacillus.
+REFERENCE   1
+  AUTHORS   Scheirlinck,I., Van der Meulen,R., Van Schoor,A., Vancanneyt,M., De
+            Vuyst,L., Vandamme,P. and Huys,G.
+  TITLE     Influence of geographical origin and flour type on diversity of
+            lactic acid bacteria in traditional Belgian sourdoughs
+  JOURNAL   Appl. Environ. Microbiol. 73 (19), 6262-6269 (2007)
+   PUBMED   17675431
+REFERENCE   2  (bases 1 to 392)
+  AUTHORS   Scheirlinck,I.P.D.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (31-MAY-2007) Scheirlinck I.P.D., Biochemistry,
+            Physiology & Microbiology, University Ghent, K.L. Ledeganckstraat
+            35, 9000, BELGIUM
+FEATURES             Location/Qualifiers
+     source          1..392
+                     /organism="Lactobacillus hammesii"
+                     /mol_type="genomic DNA"
+                     /isolate="R-29945"
+                     /db_xref="taxon:267633"
+                     /identified_by="Ilse Scheirlinck"
+     gene            <1..>392
+                     /gene="PheS"
+     CDS             <1..>392
+                     /gene="PheS"
+                     /codon_start=3
+                     /transl_table=11
+                     /product="phenylalanyl-tRNA synthase"
+                     /protein_id="CAO00712.1"
+                     /db_xref="GI:156712442"
+                     /db_xref="GOA:A7WNX1"
+                     /db_xref="InterPro:IPR002319"
+                     /db_xref="UniProtKB/TrEMBL:A7WNX1"
+                     /translation="DTFYITKEILMRTQTSPMQARTLEKHDFSKGPLKMISPGVVYRR
+                     DTDDPTHSHQFHQVEGLVIDKHITMADLKGTLQVLAHELFGDKFDVRLRPSYFPFTEP
+                     SVEADITCFNCGGKGCKVCKNTGWIEVL"
+ORIGIN      
+        1 aagatacctt ctacatcacg aaggaaattc tgatgcggac gcagacgtca ccgatgcagg
+       61 cacgaacgct ggaaaagcat gatttcagca agggcccatt aaagatgatt tcacccggtg
+      121 tcgtttaccg gcgtgacacc gacgacccca cacactctca ccaattccat caggttgaag
+      181 gtttagtgat tgacaagcac atcacgatgg ctgacttaaa ggggacactg caagtcttag
+      241 ctcacgaatt gttcggagac aagttcgatg ttcggttacg gccaagctac ttcccattta
+      301 ccgaaccttc cgttgaagcc gatattacct gcttcaactg tggcggtaag ggctgcaagg
+      361 tctgcaagaa cacggggtgg atcgaagttc tg
+//
+
+LOCUS       AM745652                 392 bp    DNA     linear   BCT 26-MAR-2008
+DEFINITION  Lactobacillus hammesii partial PheS gene for phenylalanyl-tRNA
+            synthase, isolate R-27971.
+ACCESSION   AM745652
+VERSION     AM745652.1  GI:156712311
+KEYWORDS    phenylalanyl-tRNA synthase; PheS gene.
+SOURCE      Lactobacillus hammesii
+  ORGANISM  Lactobacillus hammesii
+            Bacteria; Firmicutes; Lactobacillales; Lactobacillaceae;
+            Lactobacillus.
+REFERENCE   1
+  AUTHORS   Scheirlinck,I., Van der Meulen,R., Van Schoor,A., Vancanneyt,M., De
+            Vuyst,L., Vandamme,P. and Huys,G.
+  TITLE     Influence of geographical origin and flour type on diversity of
+            lactic acid bacteria in traditional Belgian sourdoughs
+  JOURNAL   Appl. Environ. Microbiol. 73 (19), 6262-6269 (2007)
+   PUBMED   17675431
+REFERENCE   2  (bases 1 to 392)
+  AUTHORS   Scheirlinck,I.P.D.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (31-MAY-2007) Scheirlinck I.P.D., Biochemistry,
+            Physiology & Microbiology, University Ghent, K.L. Ledeganckstraat
+            35, 9000, BELGIUM
+FEATURES             Location/Qualifiers
+     source          1..392
+                     /organism="Lactobacillus hammesii"
+                     /mol_type="genomic DNA"
+                     /isolate="R-27971"
+                     /db_xref="taxon:267633"
+                     /identified_by="Ilse Scheirlinck"
+     gene            <1..>392
+                     /gene="PheS"
+     CDS             <1..>392
+                     /gene="PheS"
+                     /codon_start=3
+                     /transl_table=11
+                     /product="phenylalanyl-tRNA synthase"
+                     /protein_id="CAO00647.1"
+                     /db_xref="GI:156712312"
+                     /db_xref="GOA:A7WNX1"
+                     /db_xref="InterPro:IPR002319"
+                     /db_xref="UniProtKB/TrEMBL:A7WNX1"
+                     /translation="DTFYITKEILMRTQTSPMQARTLEKHDFSKGPLKMISPGVVYRR
+                     DTDDPTHSHQFHQVEGLVIDKHITMADLKGTLQVLAHELFGDKFDVRLRPSYFPFTEP
+                     SVEADITCFNCGGKGCKVCKNTGWIEVL"
+ORIGIN      
+        1 aagatacctt ctacatcacg aaggaaattc tgatgcggac gcagacgtca ccgatgcagg
+       61 cacgaacgct ggaaaagcat gatttcagca agggcccatt aaagatgatt tcacccggtg
+      121 tcgtttaccg gcgtgacacc gacgacccca cacactctca ccaattccat caggttgaag
+      181 gtttagtgat tgacaagcac atcacgatgg ctgacttaaa ggggacactg caagtcttag
+      241 ctcacgaatt gttcggagac aagttcgatg ttcggttacg gccaagctac ttcccattta
+      301 ccgaaccttc cgttgaagcc gatattacct gcttcaactg tggcggtaag ggctgcaagg
+      361 tctgcaagaa cacggggtgg atcgaagttc tg
+//
+
+LOCUS       AM745651                 392 bp    DNA     linear   BCT 26-MAR-2008
+DEFINITION  Lactobacillus hammesii partial PheS gene for phenylalanyl-tRNA
+            synthase, isolate R-27970.
+ACCESSION   AM745651
+VERSION     AM745651.1  GI:156712309
+KEYWORDS    phenylalanyl-tRNA synthase; PheS gene.
+SOURCE      Lactobacillus hammesii
+  ORGANISM  Lactobacillus hammesii
+            Bacteria; Firmicutes; Lactobacillales; Lactobacillaceae;
+            Lactobacillus.
+REFERENCE   1
+  AUTHORS   Scheirlinck,I., Van der Meulen,R., Van Schoor,A., Vancanneyt,M., De
+            Vuyst,L., Vandamme,P. and Huys,G.
+  TITLE     Influence of geographical origin and flour type on diversity of
+            lactic acid bacteria in traditional Belgian sourdoughs
+  JOURNAL   Appl. Environ. Microbiol. 73 (19), 6262-6269 (2007)
+   PUBMED   17675431
+REFERENCE   2  (bases 1 to 392)
+  AUTHORS   Scheirlinck,I.P.D.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (31-MAY-2007) Scheirlinck I.P.D., Biochemistry,
+            Physiology & Microbiology, University Ghent, K.L. Ledeganckstraat
+            35, 9000, BELGIUM
+FEATURES             Location/Qualifiers
+     source          1..392
+                     /organism="Lactobacillus hammesii"
+                     /mol_type="genomic DNA"
+                     /isolate="R-27970"
+                     /db_xref="taxon:267633"
+                     /identified_by="Ilse Scheirlinck"
+     gene            <1..>392
+                     /gene="PheS"
+     CDS             <1..>392
+                     /gene="PheS"
+                     /codon_start=3
+                     /transl_table=11
+                     /product="phenylalanyl-tRNA synthase"
+                     /protein_id="CAO00646.1"
+                     /db_xref="GI:156712310"
+                     /db_xref="GOA:A7WNX1"
+                     /db_xref="InterPro:IPR002319"
+                     /db_xref="UniProtKB/TrEMBL:A7WNX1"
+                     /translation="DTFYITKEILMRTQTSPMQARTLEKHDFSKGPLKMISPGVVYRR
+                     DTDDPTHSHQFHQVEGLVIDKHITMADLKGTLQVLAHELFGDKFDVRLRPSYFPFTEP
+                     SVEADITCFNCGGKGCKVCKNTGWIEVL"
+ORIGIN      
+        1 aagatacctt ctacatcacg aaggaaattc tgatgcggac gcagacgtca ccgatgcagg
+       61 cacgaacgct ggaaaagcat gatttcagca agggcccatt aaagatgatt tcacccggtg
+      121 tcgtttaccg gcgtgacacc gacgacccca cacactctca ccaattccat caggttgaag
+      181 gtttagtgat tgacaagcac atcacgatgg ctgacttaaa ggggacactg caagtcttag
+      241 ctcacgaatt gttcggagac aagttcgatg ttcggttacg gccaagctac ttcccattta
+      301 ccgaaccttc cgttgaagcc gatattacct gcttcaactg tggcggtaag ggctgcaagg
+      361 tctgcaagaa cacggggtgg atcgaagttc tg
+//
+
+LOCUS       EF423908                 798 bp    DNA     linear   BCT 04-MAR-2007
+DEFINITION  Lactobacillus hammesii clone B34 16S ribosomal RNA gene, partial
+            sequence.
+ACCESSION   EF423908
+VERSION     EF423908.1  GI:126257075
+KEYWORDS    .
+SOURCE      Lactobacillus hammesii
+  ORGANISM  Lactobacillus hammesii
+            Bacteria; Firmicutes; Lactobacillales; Lactobacillaceae;
+            Lactobacillus.
+REFERENCE   1  (bases 1 to 798)
+  AUTHORS   Yan,P.-M., Xue,W.-T. and Zhang,H.
+  TITLE     Bacterial diversity of paocai, the traditional Chinese fermented
+            vegetable, as determined by 16S rDNA sequence analysis
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 798)
+  AUTHORS   Yan,P.-M., Xue,W.-T. and Zhang,H.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (02-FEB-2007) College of Food Science and Nutritional
+            Engineering, China Agricultural University, 17 QingHua East Road,
+            HaiDian District, Beijing 100083, China
+FEATURES             Location/Qualifiers
+     source          1..798
+                     /organism="Lactobacillus hammesii"
+                     /mol_type="genomic DNA"
+                     /isolation_source="paocai; fermented vegetable"
+                     /db_xref="taxon:267633"
+                     /clone="B34"
+     rRNA            <1..>798
+                     /product="16S ribosomal RNA"
+ORIGIN      
+        1 ctgtaactga cgctgagact cgaaagcatg ggtagcaaac aggattagat accctggtag
+       61 tgcatgccgt aaacgatgag tgctaggtgt tggagggttt ccgcccttca gtgccgcagc
+      121 taacgcatta agcactccgc ctggggagta cgaccgcaag gttgaaactc aaaggaattg
+      181 acgggggccc gcacaagcgg tggagcatgt ggtttaattc gaagctacgc gaagaacctt
+      241 accaggtctt gacatcttct gccaatccta gagataggac gttcccttcg gggacagaat
+      301 gacaggtggt gcatggttgt cgtcagctcg tgtcgtgaga tgttgggtta agtcccgcaa
+      361 cgagcgcaac ccttattatc agttgccagc attcagttgg gcactctggt gagactgccg
+      421 gtgacaaacc ggaggaaggt ggggatgacg tcaaatcatc atgcccctta tgacctgggc
+      481 tacacacgtg ctacaatgga cggtacaacg agtcgcgaag tcgtgaggcc aagctaatct
+      541 cttaaagccg ttctcagttc ggattgtagg ctgcaactcg cctacatgaa gttggaatcg
+      601 ctagtaatcg cggatcagca tgccgcggtg aatacgttcc cgggccttgt acacaccgcc
+      661 cgtcacacca tgagagtttg taacacccaa agtcggtgag gtaacctttt ggagccaacc
+      721 gcctaaggtg ggacagatga ttagggtgaa gtcgtaacaa ggtagccgta ggagaacctg
+      781 cggctggatc acctcctt
+//
+
+LOCUS       DQ471934                 710 bp    DNA     linear   BCT 01-OCT-2006
+DEFINITION  Lactobacillus hammesii strain GO-S16 16S ribosomal RNA gene,
+            partial sequence.
+ACCESSION   DQ471934
+VERSION     DQ471934.1  GI:93359881
+KEYWORDS    .
+SOURCE      Lactobacillus hammesii
+  ORGANISM  Lactobacillus hammesii
+            Bacteria; Firmicutes; Lactobacillales; Lactobacillaceae;
+            Lactobacillus.
+REFERENCE   1  (bases 1 to 710)
+  AUTHORS   Valcheva,R., Kabadjova,P., Ivanova,I., Prevost,H., Onno,B. and
+            Dousset,X.
+  TITLE     A PCR-based algorithm for identification of sourdough Lactobacillus
+            species
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 710)
+  AUTHORS   Valcheva,R., Kabadjova,P., Ivanova,I., Prevost,H., Onno,B. and
+            Dousset,X.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (03-APR-2006) Department of General and Industrial
+            Microbiology, Sofia University 'St. Kliment Ohridski', 8 Dragan
+            Tzankov Str., Sofia 1164, Bulgaria
+FEATURES             Location/Qualifiers
+     source          1..710
+                     /organism="Lactobacillus hammesii"
+                     /mol_type="genomic DNA"
+                     /strain="GO-S16"
+                     /db_xref="taxon:267633"
+     rRNA            <1..>710
+                     /product="16S ribosomal RNA"
+ORIGIN      
+        1 agagtttgat cctggctcag gacgaacgct ggcggcatgc ctaatacatg caagtcgaac
+       61 gagcttccgt tgaatgacgt gcttgcactg atttcaacaa tgaagcgagt ggcgaactgg
+      121 tgagtaacac gtgggtaact tgcccagaag caggggataa cacttggaaa caggtgctaa
+      181 taccgtataa caacagaaac cgcatggttt ctgtttgaaa ggtggtttcg gctatcactt
+      241 ctggatggac ccgcggcgta ttagttagtt ggtgaggtaa aggcccacca agacaatgat
+      301 acgtagccga cctgagaggg taatcggcca cattgggact gagacacggc ccaaactcct
+      361 acgggaggca gcagtaggga atcttccaca atggacgaaa gtctgatgga gcaatgccgc
+      421 gtgagtgaag aagggtttcg gctcgtaaaa ctctgttgtt aaagaagaac acttctgaga
+      481 gtaactgttc agaagttgac ggtatttaac cagaaagcca cggctaacta cgtgccagca
+      541 gccgcggtaa tacgtaggtg gcaagcgttg tccggattta ttgggcgtaa agcgagcgca
+      601 ggcggtttct taagtctgat gtgaaagcct tcggcttaac cggagaagtg catcggaaac
+      661 tgggagactt gagtgcagaa gaggacagtg gaactccatg tgtagcggtg
+//
+
