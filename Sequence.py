@@ -28,12 +28,12 @@ class Seq(object):
             self.hea = hea
         else:
             self.hea = ''
-        
+
         if data:
             self.data = data
         else:
             self.data = {}
-            
+
         self.keys = ['name','seq','hea']
 
         for k,v in kwargs.items():

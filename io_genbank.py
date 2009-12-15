@@ -6,7 +6,7 @@ extract information from Genbank's XML-format!
 see http://www.ncbi.nlm.nih.gov/projects/collab/FT/
 """
 
-__version__ = "$Id: io_stockholm.py 3189 2009-08-13 23:57:03Z nhoffman $"
+__version__ = "$Id$"
 
 import re, os, sys
 import warnings
@@ -75,18 +75,21 @@ def read(input, name_key='ACCESSION', keep_origin=False):
     seqdelim = r'//'
     leadingblank = ' '*10
 
-    if len(input) < 50 and os.access(input, os.F_OK):
+    if input.find('\n') == -1 and os.access(input, os.F_OK):
         lines = open(input)
     else:
         lines = input.splitlines()
 
     record = []
     addto = None
+
+
+    
     for line in lines:
         line = line.rstrip()
         if not line:
             continue
-        
+
         if line.startswith(leadingblank):
             line = line.strip()
             if line.startswith(r'/'):

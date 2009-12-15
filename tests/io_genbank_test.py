@@ -25,13 +25,13 @@ class TestReadGenbank(unittest.TestCase):
     def test1(self):
         seqs = list(Seq.io_genbank.read(self.infile))
         self.assertTrue(len(seqs)==self.instr.count('LOCUS'))
-        
+
     def test2(self):
         seqs = Seq.io_genbank.read(self.infile)
         for seq in seqs:
             seqlen = int(seq.data['LOCUS'][0].split()[1])
             self.assertTrue(len(seq) == seqlen)
-            
+
 
 
 
