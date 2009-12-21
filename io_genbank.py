@@ -31,15 +31,19 @@ class gbSeq(Seq):
         self.taxid = self.data['FEATURES'][1]['source'][1]['db_xref'][0].split(':')[1]
         self.organism = self.data['FEATURES'][1]['source'][1]['organism'][0]
 
-def read(input, name_key='ACCESSION', keep_origin=False):
+def read(input,
+         namefun=lambda d: d['ACCESSION'][0].split()[0],
+         keep_origin=False):
     """
     * input - filename or a string containing Genbank format sequence records
-    * name_key - key identifying element in data to use as a sequence name
+    * namefun - a function that operates on the dict contained in the data attribute
+      (see below) to generate a string to be used as the sequence name.
     * keep_origin - if True, retains 'ORIGIN' element in data (the raw sequence string)
 
     return a generator of gbSeq objects, with sequence name set
-    according to 'name_key'. The data attribute of each seq object contains
-    all of the data from the genbank record within nested dicts and tuples::
+    according to 'namefun'. The data attribute of each seq object
+    contains all of the data from the genbank record represented as
+    nested dicts and tuples::
 
      {'ACCESSION': ('AB512777', {}),
       'AUTHORS': ('Watanabe,K., Chao,S.-H., Sasamoto,M., Kudo,Y. and Fujimoto,J.',
@@ -108,9 +112,7 @@ def read(input, name_key='ACCESSION', keep_origin=False):
                 seqstr = removeAllButAlpha(d['ORIGIN'][0])
                 if not keep_origin:
                     del d['ORIGIN']
-                yield gbSeq(name=d[name_key][0],
-                         seq=seqstr,
-                         data=d)
+                yield gbSeq(name=namefun(d), seq=seqstr, data=d)
 
                 record = []
 
