@@ -761,7 +761,7 @@ def coalesce(strings, idx=None, comp='contains', log=log):
             log.debug("i=%-5s len(parent)=%3s children:%s" % \
                 (parent_i, len(strings[parent_i]), d.get(parent_i, 'no children')))
 
-    log.warning('Coalesce %s strings to %s in %.2f secs' % (nstrings, len(d), time.time()-start))
+    log.info('Coalesce %s strings to %s in %.2f secs' % (nstrings, len(d), time.time()-start))
 
     if __debug__:
         dFlat = flatten(d)
