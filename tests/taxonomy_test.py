@@ -100,7 +100,7 @@ class TestCreateDatabase(unittest.TestCase):
         ## rank names should not contain whitespace
         self.assertEqual(ranks, [('_'.join(x[0].split()),) for x in ranks])
 
-        
+
     def testCreateBacterialTaxonomyDb02(self):
 
         outfiles = taxonomy.get_ncbi_tax_data(dest_dir=outputdir)
@@ -169,7 +169,7 @@ class TestTaxonomyClass(unittest.TestCase):
         self.assertTrue( bool(con.cursor().execute('pragma table_info(names)').fetchall()) )
         self.assertFalse( bool(con.cursor().execute('pragma table_info(taxonomy)').fetchall()) )
         self.dbname = os.path.join(outputdir, self.funcname+'.db')
-        
+
     def test10(self):
         shutil.copyfile(complete_test_db, self.dbname)
         tax = taxonomy.Taxonomy(dbname=self.dbname)
@@ -241,6 +241,29 @@ class TestTaxonomyClass(unittest.TestCase):
         log.info([lineage])
         self.assertEqual(lineage.tax_id, '1660')
 
+    def test55(self):
+        shutil.copyfile(complete_test_db, self.dbname)
+        tax = taxonomy.Taxonomy(dbname=self.dbname)
+
+        self.assertRaises(ValueError,
+                          tax.lineage,
+                          tax_id='1660', tax_name='Actinomyces odontolyticus')
+
+        self.assertRaises(ValueError,
+                          tax.lineage)
+
+        lineage1 = tax.lineage(tax_id='1660')
+        log.info('\n'+str(lineage1))
+
+        self.assertRaises(ValueError, tax.lineage,
+                          tax_name='Actinomyces weirdii')
+        
+        lineage2 = tax.lineage(tax_name='Actinomyces odontolyticus')        
+        log.info('\n'+str(lineage2))
+
+        self.assertTrue(lineage1 == lineage2)
+        
+        
     def test60(self):
         shutil.copyfile(complete_test_db, self.dbname)
         tax = taxonomy.Taxonomy(dbname=self.dbname)
@@ -259,12 +282,11 @@ class TestTaxonomyClass(unittest.TestCase):
         shutil.copyfile(complete_test_db, self.dbname)
         tax = taxonomy.Taxonomy(dbname=self.dbname)
         parent_id = '186802'
-        
+
         new_id = '186802_1'
-        tax.add_node(tax_id=new_id, tax_name='Child of Clostridiales', 
+        tax.add_node(tax_id=new_id, tax_name='Child of Clostridiales',
         parent_id=parent_id, rank='species', source_name='FAKE')
-        
+
         lineage = tax.lineage(new_id)
         log.info('\n'+str(lineage))
-        
-        
+

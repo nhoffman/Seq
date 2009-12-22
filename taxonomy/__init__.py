@@ -58,7 +58,7 @@ def insert_cmd(tablename, keys, or_clause=''):
 class Taxonomy(object):
 
     """
-    Class providing an interface to a database containing a taxonomy. 
+    Class providing an interface to a database containing a taxonomy.
     """
 
     def __init__(self, dbname):
@@ -249,11 +249,30 @@ class Taxonomy(object):
 
         return lineage
 
-    def lineage(self, tax_id):
+    def _get_tax_id(self, tax_name):
+
+        cur = self.con.cursor()
+
+        cur.execute('select tax_id from names where tax_name = ?', (tax_name,))
+        result = cur.fetchone()
+
+        return result and result.get('tax_id') or None
+        
+    def lineage(self, tax_id=None, tax_name=None):
         """
         Return an object of class Lineage for the given tax_id
+        or tax_name
         """
 
+        if not operator.xor(bool(tax_id),bool(tax_name)):
+            raise ValueError('Exactly one of tax_id and tax_name must have a value.')
+
+        if tax_name:
+            tax_id = self._get_tax_id(tax_name)
+
+            if not tax_id:
+                raise ValueError('No lineage available for tax_name "%s"' % tax_name)
+            
         lineage = self._get_lineage(tax_id)
         node = self._get_node(tax_id)
 
@@ -273,12 +292,12 @@ class Taxonomy(object):
 
 
 class Lineage(object):
-    
+
     """
-    Container class for a taxonomic lineage. Constructor is meant 
+    Container class for a taxonomic lineage. Constructor is meant
     to be called by the Taxonomy class.
     """
-    
+
     tax_keys = tax_keys
     _attribute_names = set(tax_keys + nodes_keys + source_keys + ['tax_name'])
 
@@ -303,6 +322,14 @@ class Lineage(object):
     def __getitem__(self, key):
         return getattr(self, key)
 
+    def __eq__(self, other):
+        """
+        Compares equality of self._data to support == operator
+        """
+
+        return self._data == other._data
+        
+    
     def __str__(self):
         """
         Representation of object using print
@@ -321,4 +348,9 @@ class Lineage(object):
 
         return '<%(rank)s: %(tax_name)s (tax_id %(tax_id)s)>' % self
 
+    def get_name(self, rank):
+        """
+        Return tax_name corresponding to tax_id at rank
+        """
 
+        return self._namedict.get(self[rank])
