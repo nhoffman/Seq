@@ -27,10 +27,21 @@ class gbSeq(Seq):
 
     def __init__(self, *args, **kwargs):
         super(gbSeq, self).__init__(*args, **kwargs)
-        self.locus = self.data['LOCUS'][0]
-        self.taxid = self.data['FEATURES'][1]['source'][1]['db_xref'][0].split(':')[1]
-        self.organism = self.data['FEATURES'][1]['source'][1]['organism'][0]
 
+        self.locus = self.data.get('LOCUS',(None,))[0]
+        # self.locus = self.data.get['LOCUS'][0]
+
+        try:
+            self.taxid = self.data['FEATURES'][1]['source'][1]['db_xref'][0].split(':')[1]
+        except (KeyError,IndexError):
+            self.taxid = None
+                
+        try:
+            self.organism = self.data['FEATURES'][1]['source'][1]['organism'][0]
+        except (KeyError,IndexError):
+            self.organism = None
+
+            
 def read(input,
          namefun=lambda d: d['ACCESSION'][0].split()[0],
          keep_origin=False):
@@ -87,16 +98,14 @@ def read(input,
     record = []
     addto = None
 
-
-    
-    for line in lines:
+    for i,line in enumerate(lines):
         line = line.rstrip()
         if not line:
             continue
 
         if line.startswith(leadingblank):
             line = line.strip()
-            if line.startswith(r'/'):
+            if line.startswith(r'/') and '="' in line:
                 k,v = line[1:].split('=',1)
                 addto.append([k,v.strip('"')])
             else:
