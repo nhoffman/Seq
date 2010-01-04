@@ -1,0 +1,53 @@
+LOCUS       X76177                  1440 bp    DNA     linear   BCT 30-JUL-1994
+DEFINITION  Enterococcus sp. (LMG12316) 16S rRNA gene.
+ACCESSION   X76177
+VERSION     X76177.1  GI:517387
+KEYWORDS    16S ribosomal RNA.
+SOURCE      Enterococcus sp.
+  ORGANISM  Enterococcus sp.
+            Bacteria; Firmicutes; Lactobacillales; Enterococcaceae;
+            Enterococcus.
+REFERENCE   1  (bases 1 to 1440)
+  AUTHORS   Cai,J. and Collins,M.D.
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 1440)
+  AUTHORS   Cai,J.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (19-NOV-1993) J. Cai, AFRC, Institute Food Research,
+            Reading Laboratory, Earley Gate, Whiteknights Road, Reading, RG6
+            2EF, UK
+FEATURES             Location/Qualifiers
+     source          1..1440
+                     /organism="Enterococcus sp."
+                     /mol_type="genomic DNA"
+                     /strain="LMG12316"
+                     /db_xref="taxon:35783"
+                     /germline
+     rRNA            <1..>1440
+                     /product="16S ribosomal RNA"
+ORIGIN      
+        1 ggagcttgct ccaccggaaa aagaggagtg gcgaacgggt gagtaacacg tgggtaacct
+       61 gcccatcaga aggggataac acttggaaac aggtgctaat accgtataac aatcgacacc
+      121 gcatggtgtt gatttgaaag gcgctttcgg gtgtcgctga tggatggacc cgcggtgcat
+      181 tagctagttg gtgaggtaac ggctcaccaa ggccacgatg catagccgac ctgagagggt
+      241 gatcggccac actgggactg agacacggcc cagactccta cgggaggcag cagtagggaa
+      301 tcttcggcaa tggacgaaag tctgaccgag caacgccgcg tgagtgaaga aggttttcgg
+      361 atcgtaaaac tctgttgtta gagaagaaca agagtganga gtaactgttc actccttgac
+      421 ggtatctaac cagaaagcca cggctaacta cgtgccagca gccgcggtaa tacgtaggtg
+      481 gcaagcgttg tccggattta ttgggcgtaa agcgagcgca ggcgtttctt aagtctgatg
+      541 tgaaagcccc cggctcaacc gggagggtca ttggaaactg ggagacttga gtgcagaaga
+      601 ggagagtgga attccatgtg tagcggtgaa aatgcgtaga tatatggagg aacaccagtg
+      661 gcgaaggcgg ctctctggtc tgtaactgac gctgaggctc gaaagcgtgg ggagcaaaca
+      721 ggattagata ccctggtagt ccacgccgta aacgatgagt gctaagtgtt ggagggtttc
+      781 cgcccttcag tgctgcagca aacgcattaa gcactccgcc tggggagtac gaccgcaagg
+      841 ttgaaagtca aaggaattga cgggggcccg cacaagcggt ggagcatgtg gtttaattcg
+      901 aagcaacgcg aagaacctta ccaggtcttg acatcctttg accactctag agatagagct
+      961 tccttcgggg gcaaagtgac aggtggtgca tggttgtcgt cagctcgtgt cgtgagatgt
+     1021 tgggttaagt cccgcaacga gcgcaaccct tattgttagt tgccatcatt tagttgggca
+     1081 ctctagcgag actgccggtg acaaaccgga ggaaggtggg gatgacgtca aatcatcatg
+     1141 ccccttatgn nnngggctac acacgtgcta caatgggaag tacaacgagt tgcgaagtcg
+     1201 cgaggctaag ctaatctctt aaagcttctc tcagttcgga ttgtaggctg caactcgcct
+     1261 acatgaagcc ggaatcgcta gtaatcgcgg atcagcacgc cgcggtgaat acgttcccgg
+     1321 gccttgtaca caccgcccgt cacaccacga gagtttgtaa cacccgaagt cggtgaggta
+     1381 acctttatgg agccagccgc ctaaggtggg atagatgatt ggggtgaagt cgtaacaagg
+//

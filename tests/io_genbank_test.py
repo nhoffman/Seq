@@ -16,23 +16,24 @@ module_name = os.path.split(sys.argv[0])[1].rstrip('.py')
 outputdir = config.outputdir
 datadir = config.datadir
 
-class TestReadGenbank(unittest.TestCase):
+class TestReadGenbank1(unittest.TestCase):
 
+    testfile = 'sequences.gb'
+    
     def setUp(self):
-        self.infile = os.path.join(datadir, 'sequences.gb')
-        self.instr = open(os.path.join(datadir, 'sequences.gb')).read()
-
+        self.infile = os.path.join(datadir, self.testfile)
+        self.instr = open(os.path.join(datadir, self.testfile)).read()
+        
     def test1(self):
         seqs = list(Seq.io_genbank.read(self.infile))
         self.assertTrue(len(seqs)==self.instr.count('LOCUS'))
-
+        
     def test2(self):
         seqs = Seq.io_genbank.read(self.infile)
         for seq in seqs:
             seqlen = int(seq.data['LOCUS'][0].split()[1])
             self.assertTrue(len(seq) == seqlen)
-
-
-
-
-
+            self.assertTrue(seq.taxid is not None and seq.taxid.isdigit())
+            
+class TestReadGenbank2(TestReadGenbank1):
+    testfile = 'sequences2.gb'

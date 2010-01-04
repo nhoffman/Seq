@@ -105,9 +105,13 @@ def read(input,
 
         if line.startswith(leadingblank):
             line = line.strip()
-            if line.startswith(r'/') and '="' in line:
-                k,v = line[1:].split('=',1)
-                addto.append([k,v.strip('"')])
+            if line.startswith(r'/'):
+                if '="' in line:
+                    k,v = line[1:].split('=',1)
+                    v = v.strip('" ')
+                else:
+                    k,v = line[1:].strip(), ''
+                addto.append([k,v])
             else:
                 addto.append(line)
         else:
