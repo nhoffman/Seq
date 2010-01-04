@@ -199,7 +199,7 @@ class Taxonomy(object):
             return None
 
 
-    def _get_lineage(self, tax_id):
+    def _get_lineage(self, tax_id, top_level=True):
         """
         Return a taxonomic lineage, adding absent lineages to table taxonomy.
         """
@@ -229,7 +229,7 @@ class Taxonomy(object):
                 (this_rank, node_data['tax_id']))
 
                 # recursively get higher-level nodes
-                parentdict = self._get_lineage(parent_id)
+                parentdict = self._get_lineage(parent_id, top_level=False)
 
                 taxdict = parentdict.copy()
                 taxdict[this_rank] = node_data['tax_id']
@@ -246,7 +246,9 @@ class Taxonomy(object):
             cur.execute(cmd, taxdict)
 
             lineage = taxdict
-
+            if top_level:
+                self.con.commit()
+            
         return lineage
 
     def _get_tax_id(self, tax_name):
