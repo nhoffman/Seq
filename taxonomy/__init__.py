@@ -278,6 +278,9 @@ class Taxonomy(object):
         lineage = self._get_lineage(tax_id)
         node = self._get_node(tax_id)
 
+        if not node:
+            raise ValueError('No lineage available for tax_id "%s"' % tax_id)
+        
         # get names corresponding to tax_ids in lineage
         cmd = """
         select tax_name from names
