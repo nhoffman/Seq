@@ -100,8 +100,14 @@ findDuplicates -h prints options"""
 
     comp = options.compare_type
 
-    seqs = Seq.io_fasta.read(open(options.infile).read(),
+    infile = options.infile
+    if not infile:
+        log.error('Please provide an input file using -f/--fasta-file')
+        sys.exit(1)
+    
+    seqs = Seq.io_fasta.read(open(infile).read(),
                              degap=True, style='upper')
+    
 
     strings = tuple(seq.seq for seq in seqs)
     nstrings = len(strings)
