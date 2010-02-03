@@ -102,7 +102,8 @@ findDuplicates -h prints options"""
 
     infile = options.infile
     if not infile:
-        log.error('Please provide an input file using -f/--fasta-file')
+        log.error('Please provide an input file using -f/--fasta-file\n')
+        parser.print_usage()        
         sys.exit(1)
     
     seqs = Seq.io_fasta.read(open(infile).read(),
