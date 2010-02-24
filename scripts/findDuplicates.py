@@ -122,11 +122,11 @@ findDuplicates -h prints options"""
         chunksize = int(nstrings/options.nchunks) + 1
     else:
         chunksize = nstrings
-        
+
     log.warning('chunksize = %s' % chunksize)
 
     d = split_and_merge(strings, comp, chunksize)
-    
+
     log.warning('Input data can be represented by %s superstrings (%.2f%% of the input number)' % (len(d), 100*(len(d)/float(nstrings))))
     log.warning('grand total is %.2f secs' % (time.time()-start))
 

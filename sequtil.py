@@ -710,7 +710,9 @@ def coalesce(strings, idx=None, comp='contains', log=log):
      * strings - a tuple of N strings
      * idx - an optional sequence of integer indices into strings; if missing,
        will include all elements in strings.
-
+     * comp - 'contains' (default) or 'eq'
+     * log - a logging object; defualt is the root logger
+     
      Output
      ======
 
