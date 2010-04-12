@@ -11,14 +11,6 @@ from Seq.sequtil import split_and_merge
 
 log = logging
 
-# try:
-#     import psyco
-# except ImportError:
-#     log.error('could not import psyco')
-#     pass
-
-# izip_longest is new in Python 2.6, provide replacement for Python 2.5
-
 def rlist(d, seqs, fout):
 
     """write an R-format list of character vectors"""
@@ -42,8 +34,7 @@ def main():
 
 Read sequences in fasta format and identify a single sequence to
 represent each set of substrings or identical sequences.
-
-findDuplicates -h prints options"""
+"""
 
     parser = OptionParser(usage=usage, version="$Id: dan.py 3035 2008-12-19 23:30:39Z nhoffman $")
 
@@ -68,7 +59,6 @@ findDuplicates -h prints options"""
     parser.add_option("-r", "--r-output", dest="r_file",
         help='Output file containing an R-language list of character vectors',
         metavar='FILE')
-
 
     parser.add_option('-n','--nchunks', dest='nchunks', metavar='INT', type='int', help='Number of partitions.')
     parser.add_option('-c','--chunksize', dest='chunksize', metavar='INT', type='int', help='Number of strings in each partition (overrides --nchunks).')
@@ -103,12 +93,11 @@ findDuplicates -h prints options"""
     infile = options.infile
     if not infile:
         log.error('Please provide an input file using -f/--fasta-file\n')
-        parser.print_usage()        
+        parser.print_usage()
         sys.exit(1)
-    
+
     seqs = Seq.io_fasta.read(open(infile).read(),
                              degap=True, style='upper')
-    
 
     strings = tuple(seq.seq for seq in seqs)
     nstrings = len(strings)
