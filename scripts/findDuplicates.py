@@ -99,6 +99,7 @@ represent each set of substrings or identical sequences.
     seqs = Seq.io_fasta.read(open(infile).read(),
                              degap=True, style='upper')
 
+
     strings = tuple(seq.seq for seq in seqs)
     nstrings = len(strings)
     log.warning('Input contains %s items' % nstrings)

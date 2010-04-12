@@ -17,7 +17,7 @@ else:
     pp_ok = True
 
 from itertools import izip, chain, repeat, islice, takewhile
-    
+
 try:
     from itertools import izip_longest
 except ImportError:
@@ -712,7 +712,7 @@ def coalesce(strings, idx=None, comp='contains', log=log):
        will include all elements in strings.
      * comp - 'contains' (default) or 'eq'
      * log - a logging object; defualt is the root logger
-     
+
      Output
      ======
 
@@ -823,7 +823,7 @@ def merge(strings, d1, d2=None, comp='contains'):
 
 
     return d
-        
+
 def split_and_merge(strings, comp='contains', chunksize=None):
 
     """
@@ -845,11 +845,11 @@ def split_and_merge(strings, comp='contains', chunksize=None):
 
      * A dict mapping superrstrings to substrings, in which keys and
      values are indices in strings.
-       
+
     """
-    
+
     nstrings = len(strings)
-    
+
     if not chunksize:
         chunksize = nstrings
 
@@ -869,6 +869,6 @@ def split_and_merge(strings, comp='contains', chunksize=None):
     ### ... to here
 
     assert set(flatten(d)) == set(range(nstrings))
-    
+
     return d
-    
+
