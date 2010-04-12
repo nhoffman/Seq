@@ -14,7 +14,7 @@ import Menu
 
 from blast2tree import util, parsing, config
 
-__version__ = "$Id: alignView.py 403 2008-02-05 17:49:58Z ngh2 $"
+__version__ = "$Id$"
 
 log = logging.getLogger('')
 util.setup_logging(config.console_level)

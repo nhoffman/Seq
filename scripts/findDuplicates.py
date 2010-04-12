@@ -36,7 +36,7 @@ Read sequences in fasta format and identify a single sequence to
 represent each set of substrings or identical sequences.
 """
 
-    parser = OptionParser(usage=usage, version="$Id: dan.py 3035 2008-12-19 23:30:39Z nhoffman $")
+    parser = OptionParser(usage=usage, version="$Id$")
 
     parser.set_defaults(
     infile=None,
