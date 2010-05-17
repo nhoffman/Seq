@@ -35,13 +35,13 @@ class gbSeq(Seq):
             self.taxid = self.data['FEATURES'][1]['source'][1]['db_xref'][0].split(':')[1]
         except (KeyError,IndexError):
             self.taxid = None
-                
+
         try:
             self.organism = self.data['FEATURES'][1]['source'][1]['organism'][0]
         except (KeyError,IndexError):
             self.organism = None
 
-            
+
 def read(input,
          namefun=lambda d: d['ACCESSION'][0].split()[0],
          keep_origin=False):

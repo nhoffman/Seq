@@ -22,9 +22,9 @@ def read(input, degap=False, case=None, keep_struct=True, keep_ref=True, check_d
     * case - specify "upper" or "lower" to force sequences into either
     * keep_struct - keep structural model (#=GC SS_cons element)
     * keep_ref - keep reference sequence (#=GC RF element)
-    
+
     Raise a ValueError if sequence names are not unique.
-    
+
     return a list of Seq objects
     """
 
@@ -52,9 +52,9 @@ def read(input, degap=False, case=None, keep_struct=True, keep_ref=True, check_d
             if name not in seqdata:
                 names.append(name)
             seqdata[name] = seqdata.get(name, '') + seqstr.strip()
-    
+
     lcset = set(linecounts.values())
-    
+
     # all names should have the same number of lines
     if len(lcset) > 1:
         log.error('The following sequence names are not unique:')
@@ -67,7 +67,7 @@ def read(input, degap=False, case=None, keep_struct=True, keep_ref=True, check_d
         msg = 'The following sequence names are not unique: %s' % \
             ','.join(not_unique)
         raise ValueError(msg)
-    
+
     seqlist = []
     for name in names:
         seq = seqdata[name]
@@ -90,6 +90,6 @@ def read(input, degap=False, case=None, keep_struct=True, keep_ref=True, check_d
         seqlist.append(Seq(name, seq))
 
     log.info('writing %s of %s sequences' % (len(seqlist), len(names)))
-        
+
     return seqlist
 

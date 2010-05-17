@@ -21,7 +21,7 @@ def _toPhylip(seq, width=None, name=None):
 
     if width:
         output = textwrap.fill(output, width)
-        
+
     return output
 
 def read(*args, **kwargs):
@@ -38,7 +38,7 @@ def renumber():
     counter = itertools.count(1)
     while True:
         yield 's%s'%counter.next()
-    
+
 def write(seqs, width=60, renum=False):
     """Creates a string representing a sequential phylip2 format
     sequence alignment from a list of sequences. If renum is True,
@@ -49,11 +49,11 @@ def write(seqs, width=60, renum=False):
     output = ['%s %s' % (len(seqs), len(seqs[0]))]
 
     if renum:
-        renamer = renumber()        
+        renamer = renumber()
         output.extend(_toPhylip(s, width, renamer.next()) for s in seqs)
-    else:    
+    else:
         output.extend(_toPhylip(s, width) for s in seqs)
-    
+
     return '\n'.join(output) + '\n'
 
 if __name__ == '__main__':

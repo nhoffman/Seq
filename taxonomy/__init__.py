@@ -12,6 +12,7 @@ no rank
 root
 superkingdom
 kingdom
+subkingdom
 superphylum
 phylum
 subphylum
@@ -248,7 +249,7 @@ class Taxonomy(object):
             lineage = taxdict
             if top_level:
                 self.con.commit()
-            
+
         return lineage
 
     def _get_tax_id(self, tax_name):
@@ -259,7 +260,7 @@ class Taxonomy(object):
         result = cur.fetchone()
 
         return result and result.get('tax_id') or None
-        
+
     def lineage(self, tax_id=None, tax_name=None):
         """
         Return an object of class Lineage for the given tax_id
@@ -274,13 +275,13 @@ class Taxonomy(object):
 
             if not tax_id:
                 raise ValueError('No lineage available for tax_name "%s"' % tax_name)
-            
+
         lineage = self._get_lineage(tax_id)
         node = self._get_node(tax_id)
 
         if not node:
             raise ValueError('No lineage available for tax_id "%s"' % tax_id)
-        
+
         # get names corresponding to tax_ids in lineage
         cmd = """
         select tax_name from names
@@ -313,7 +314,13 @@ class Lineage(object):
         self._namedict = namedict
         self.tax_id = self._data['tax_id']
         self.parent_id = self._data['parent_id']
-
+        # list of (rank, tax_id) tuples
+        self.ranks = [(k,self._data.get(k)) for k in self.tax_keys]
+        try:
+            self.rank = [x[0] for x in self.ranks if x[1]][-1]
+        except IndexError:
+            self.rank = None
+            
     def __getattr__(self, name):
         """
         Access object._data as instance attribute.
@@ -333,8 +340,8 @@ class Lineage(object):
         """
 
         return self._data == other._data
-        
-    
+
+
     def __str__(self):
         """
         Representation of object using print

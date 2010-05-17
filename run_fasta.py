@@ -186,7 +186,7 @@ def parseFasta(instr):
         log.debug('header:\n %s', header)
         d = dict([get_tup(e) for e in header.split(';') if e.strip()])
         log.debug('dict of header info:\n%s',pprint.pformat(d))
-        
+
         # get the sequence names
         qlines = [e.strip() for e in query.split(';')]
         q_name = qlines.pop(0).split()[0]
@@ -206,13 +206,13 @@ def parseFasta(instr):
         for line in qlines:
             if line.startswith('al_display_start'):
                 line, q_al_str = line.split('\n',1)
-                q_data['q_al_str'] = q_al_str.replace('\n','') 
+                q_data['q_al_str'] = q_al_str.replace('\n','')
 
             k, v = get_tup(line, 't')
             q_data[k] = v
 
         log.debug('dict of query info:\n%s',pprint.pformat(q_data))
-        
+
         ## process the target
         log.debug('target:\n %s', target)
 
@@ -228,43 +228,43 @@ def parseFasta(instr):
             t_data[k] = v
 
         log.debug('dict of target info:\n%s',pprint.pformat(t_data))
-            
+
         ## add data
         d['q_name'] = q_name
         d.update(q_data)
 
         d['t_name'] = t_name
         d.update(t_data)
-        
+
         #add_calculated_values(d)
         assert not outputData.has_key(this_key)
 
         log.debug('Data from this aligned pair: %s\n' % pprint.pformat(d))
-        
+
         outputData[this_key] = d
 
 #   log.debug('output data:')
 #   log.debug(pprint.pformat(outputData))
 
     log.info('%s alignments processed: \n%s' % (len(outputData), pprint.pformat(outputData.keys())))
-        
+
     return outputData
 
 # def tabulate_results(fasta_results, headers=None):
 #     """
 #     Create a taular representation of results of fasta3*
-#     
+#
 #     * fasta_results - output of parseFasta (a dict of dicts keyed by ('qname','tname'))
-#     
+#
 #     Returns a tab-delimited string.
 #     """
-#     
+#
 #     # TODO: implement me
-#     
+#
 #     pass
-    
-    
-    
+
+
+
 def trim_align(seqlist, align_data):
     """Assumes align_data is keyed by seq.getName(). Returns
     a new list of Seq objects, trimmed according to al_start

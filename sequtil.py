@@ -767,7 +767,7 @@ def coalesce(strings, idx=None, comp='contains', log=log):
 
     if __debug__:
         dFlat = flatten(d)
-        log.info('checking d of length %s with min,max=%s,%s' % \
+        log.debug('checking d of length %s with min,max=%s,%s' % \
             (len(d), min(dFlat), max(dFlat)))
 
         assert set(idx_orig) == set(dFlat)
