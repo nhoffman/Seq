@@ -320,7 +320,7 @@ class Lineage(object):
             self.rank = [x[0] for x in self.ranks if x[1]][-1]
         except IndexError:
             self.rank = None
-            
+
     def __getattr__(self, name):
         """
         Access object._data as instance attribute.
