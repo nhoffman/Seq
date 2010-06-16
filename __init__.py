@@ -22,6 +22,7 @@ io_clustal
 io_embl
 io_fasta
 io_phylip
+io_pplacer
 io_uspto
 io_rdp
 import io_stockholm
@@ -39,6 +40,7 @@ import io_clustal
 import io_embl
 import io_fasta
 import io_phylip
+import io_pplacer
 import io_uspto
 import io_rdp
 import io_stockholm

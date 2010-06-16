@@ -37,9 +37,14 @@ def read(fname):
     8. The ML distance from the distal (farthest from the root) side of the edge
     9. The ML pendant branch length
     """
-    
-    counter = itertools.count
 
+    # indices of fields possibly occupied by a '-'
+    ppost = colnames.index('ppost')
+    bml = colnames.index('bml')
+
+    undash = lambda e: e if e != '-' else None
+    
+    counter = itertools.count    
     with open(fname) as lines:
         data = []
         skip = False
@@ -56,7 +61,9 @@ def read(fname):
                 data = []
                 count = counter(1)
             else:
-                data.append([seqname, str(count.next())] + line.split())
+                L = [seqname, str(count.next())] + line.split()
+                L[ppost], L[bml] = undash(L[ppost]), undash(L[bml])
+                data.append(L)
 
         yield data
 
@@ -68,7 +75,7 @@ Usage: %s placefile [outfile]
 Write tab-delimited file containing data in placefile to outfile
 (or stdout in the absence of a second argument).
 """ % os.path.split(sys.argv[0])[1]
-    
+
     try:
         fname = sys.argv[1]
         if fname.lower().strip('-').startswith('h'):

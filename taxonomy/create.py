@@ -63,7 +63,7 @@ def read_dmp(infile, keys, condition=None, rowfun=None):
       the named fields are retained.
     * condition - a function accepting a rowdict as its only argument, returning
       True if the row should be included in the output .
-      All rows will be accepted by default. 
+      All rows will be accepted by default.
     * rowfun - a function accepting a rowdict as its only argument which
       returns a modified version of rowdict.
     """
@@ -73,7 +73,7 @@ def read_dmp(infile, keys, condition=None, rowfun=None):
 
     if rowfun is None:
         rowfun = lambda rowdict: rowdict
-        
+
     for i, line in enumerate(open(infile,'rU')):
         splitline = line.rstrip('\t|\n').split('\t|\t')
         rowdict = dict(zip(keys, splitline))
@@ -123,7 +123,7 @@ def _bact_nodes_rowfun(rowdict):
 
     rowdict['rank'] = '_'.join(rowdict['rank'].split())
     return rowdict
-    
+
 def read_bacterial_taxonomy(names, nodes, primary_only=True, **args):
     """
     Parses names.dmp and nodes.dmp, filtering contents to retain data
@@ -143,7 +143,7 @@ def read_bacterial_taxonomy(names, nodes, primary_only=True, **args):
 
     names_data = read_dmp(infile=names, keys=names_keys, condition=condition)
     nodes_data = read_dmp(infile=nodes, keys=nodes_keys, condition=_bact_nodes_condition, rowfun=_bact_nodes_rowfun)
-    
+
     return (names_data, nodes_data)
 
 def make_nodes_db(con, data, keys=nodes_keys):
