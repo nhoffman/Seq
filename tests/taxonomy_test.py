@@ -66,6 +66,16 @@ class TestCreateDatabase(unittest.TestCase):
 
         self.assertEqual(expect, firstline)
 
+
+    def testReadTaxonomy(self):
+
+        names_data, nodes_data = taxonomy.read_taxonomy(self.namesfile, self.nodesfile)
+        self.assertEqual(
+            {'class': 'scientific name', 'unique': '', 'tax_name': 'root', 'tax_id': '1'},
+            names_data.next())
+
+        self.assertEqual(set(d['division_id'] for d in nodes_data), set(map(str, range(12))))
+        
     def testReadBacterialTaxonomy(self):
 
         names_data, nodes_data = taxonomy.read_bacterial_taxonomy(self.namesfile, self.nodesfile)
@@ -78,6 +88,31 @@ class TestCreateDatabase(unittest.TestCase):
             {'division_id': '8', 'parent_id': '1', 'embl_code': '', 'rank': 'no_rank', 'tax_id': '1'},
             nodes_data.next())
 
+        self.assertEqual(set(d['division_id'] for d in nodes_data), set(['0','1','4','8']))
+
+        
+    def testCreateTaxonomyDb01(self):
+
+        outfiles = taxonomy.get_ncbi_tax_data(dest_dir=outputdir)
+        names_data, nodes_data = taxonomy.read_bacterial_taxonomy(**outfiles)
+
+        dbname = taxonomy.create_taxonomy_db(
+            names_data=itertools.islice(names_data, 0, 1000),
+            nodes_data=itertools.islice(nodes_data, 0, 1000),
+            dbname=self.funcname+'.db',
+            dest_dir=outputdir
+            )
+
+        self.assertTrue(os.access(dbname, os.F_OK))
+
+        con = sqlite.connect(dbname)
+        synonyms = con.cursor().execute('select count(*) from names where is_primary = 0').fetchone()[0]
+        self.assertEqual(synonyms, 0)
+
+        ranks = con.cursor().execute('select rank from nodes group by rank').fetchall()
+        ## rank names should not contain whitespace
+        self.assertEqual(ranks, [('_'.join(x[0].split()),) for x in ranks])
+        
     def testCreateBacterialTaxonomyDb01(self):
 
         outfiles = taxonomy.get_ncbi_tax_data(dest_dir=outputdir)
@@ -100,7 +135,7 @@ class TestCreateDatabase(unittest.TestCase):
         ## rank names should not contain whitespace
         self.assertEqual(ranks, [('_'.join(x[0].split()),) for x in ranks])
 
-
+    
     def testCreateBacterialTaxonomyDb02(self):
 
         outfiles = taxonomy.get_ncbi_tax_data(dest_dir=outputdir)
@@ -117,7 +152,6 @@ class TestCreateDatabase(unittest.TestCase):
 
         con = sqlite.connect(dbname)
         synonyms = con.cursor().execute('select count(*) from names where is_primary = 0').fetchone()[0]
-        self.assertEqual(synonyms, 772)
 
         # nodes.source should be zero by default
         sources = con.cursor().execute('select source_id from nodes').fetchall()
@@ -257,13 +291,13 @@ class TestTaxonomyClass(unittest.TestCase):
 
         self.assertRaises(ValueError, tax.lineage,
                           tax_name='Actinomyces weirdii')
-        
-        lineage2 = tax.lineage(tax_name='Actinomyces odontolyticus')        
+
+        lineage2 = tax.lineage(tax_name='Actinomyces odontolyticus')
         log.info('\n'+str(lineage2))
 
         self.assertTrue(lineage1 == lineage2)
-        
-        
+
+
     def test60(self):
         shutil.copyfile(complete_test_db, self.dbname)
         tax = taxonomy.Taxonomy(dbname=self.dbname)

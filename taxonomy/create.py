@@ -114,7 +114,7 @@ def _bact_nodes_condition(rowdict):
     ok_divs = set(['0','4','8'])
     return (rowdict['division_id'] in ok_divs) or (rowdict['rank'] == 'superkingdom')
 
-def _bact_nodes_rowfun(rowdict):
+def _nodes_rowfun(rowdict):
     """
     Modify rows of nodes.dmp:
 
@@ -142,9 +142,32 @@ def read_bacterial_taxonomy(names, nodes, primary_only=True, **args):
         condition = None
 
     names_data = read_dmp(infile=names, keys=names_keys, condition=condition)
-    nodes_data = read_dmp(infile=nodes, keys=nodes_keys, condition=_bact_nodes_condition, rowfun=_bact_nodes_rowfun)
+    nodes_data = read_dmp(infile=nodes, keys=nodes_keys, condition=_bact_nodes_condition, rowfun=_nodes_rowfun)
 
     return (names_data, nodes_data)
+
+def read_taxonomy(names, nodes, primary_only=True, **args):
+    """
+    Parses names.dmp and nodes.dmp, filtering contents to retain data
+    required to construct the bacterial NCBI taxonomy.
+
+    * names - path to names.dmp
+    * nodes - path to nodes.dmp
+    * primary_only - if True, skip all but primary taxon names (ie, omit synonyms)
+
+    Returns tuple of iterators (names_data, nodes_data)
+    """
+
+    if primary_only:
+        condition = _is_primary_name
+    else:
+        condition = None
+
+    names_data = read_dmp(infile=names, keys=names_keys, condition=condition)
+    nodes_data = read_dmp(infile=nodes, keys=nodes_keys, condition=None, rowfun=_nodes_rowfun)
+
+    return (names_data, nodes_data)
+
 
 def make_nodes_db(con, data, keys=nodes_keys):
 
@@ -226,7 +249,7 @@ values
     )
     con.commit()
 
-def create_bacterial_taxonomy_db(names_data, nodes_data, dbname='ncbi_bact_taxonomy.db',
+def create_taxonomy_db(names_data, nodes_data, dbname='ncbi_bact_taxonomy.db',
     dest_dir='.', new=True):
 
     dbname = os.path.join(dest_dir, dbname)
@@ -242,3 +265,9 @@ def create_bacterial_taxonomy_db(names_data, nodes_data, dbname='ncbi_bact_taxon
     make_names_db(con, names_data)
     con.close()
     return dbname
+
+def create_bacterial_taxonomy_db(*args, **kwargs):
+
+    import warnings
+    warnings.warn('taxonomy.create_bacterial_taxonomy_db is deprecated; use create_taxonomy_db instead.')
+    return create_taxonomy_db(*args, **kwargs)
