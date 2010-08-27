@@ -360,9 +360,14 @@ class Lineage(object):
 
         return '<%(rank)s: %(tax_name)s (tax_id %(tax_id)s)>' % self
 
-    def get_name(self, rank):
+    def get_name(self, rank=None):
         """
-        Return tax_name corresponding to tax_id at rank
+        Return tax_name corresponding to tax_id at rank or to
+        self.tax_id if rank is not provided.
         """
 
-        return self._namedict.get(self[rank])
+        if rank:
+            return self._namedict.get(self[rank])
+        else:
+            return self._namedict.get(self.tax_id)
+
