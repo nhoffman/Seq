@@ -145,7 +145,7 @@ represent each set of substrings or identical sequences.
             s = seqs[parent]
             s.hea = ' '.join(seqs[c].name for c in children)
             if options.name_style == 'count':
-                s.name = '%s#%s' % (s.name, len(children))
+                s.name = '%s|%s' % (s.name, len(children))
             fout.write(Seq.io_fasta.write(seqs[parent], hea=True))
             
         fout.close()

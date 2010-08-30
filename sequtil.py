@@ -603,7 +603,7 @@ def reformat(seqs,
              nrow = 65, #
              ncol = 70, #
              add_consensus = True, #
-             compare_to = 'consensus', #
+             compare_to = None, #
              exclude_gapcols = True, #
              exclude_invariant = False, #
              min_subs = 1, #
@@ -652,8 +652,9 @@ def reformat(seqs,
     tabulated = tabulate(seqlist)
 
     consensus_str = ''.join([consensus(d, countGaps=countGaps) for d in tabulated])
+    consensus_name = 'CONSENSUS'
     if add_consensus:
-        seqlist.append(Seq.Seq('CONSENSUS', consensus_str[:]))
+        seqlist.append(Seq.Seq(consensus_name, consensus_str[:]))
 
     # change case if requested.
     if case:
@@ -664,12 +665,16 @@ def reformat(seqs,
     # comparison because the original sequences will be modified
     if compare_to:
         try:
-            seq_to_compare_to = consensus_str if compare_to == 'consensus' else seqdict[compare_to][:]
+            seq_to_compare_to = consensus_str if compare_to == consensus_name.lower() \
+                else seqdict[compare_to][:]
         except KeyError:
             raise ValueError('Error in compare_to="%s": name not found.' % compare_to)
         
-        for seq in seqlist[:-1]: # don't modify consensus
-            seq.seq = seqdiff(seq, seq_to_compare_to, simchar)
+        for seq in seqlist: # don't modify consensus
+            if re.match(r'^%s$' % compare_to, seq.name, re.I):
+                seq.name = '-(d)-> ' + seq.name
+            else:
+                seq.seq = seqdiff(seq, seq_to_compare_to, simchar)
             
     ii = range(len(seqlist[0]))
     mask = [True for i in ii]
