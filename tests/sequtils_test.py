@@ -25,5 +25,67 @@ class TestFunctions(unittest.TestCase):
         self.assertTrue(path)
         if path:
             out = subprocess.call([path], stdout=open(os.devnull,'w'))
-            
+
         self.assertTrue(out == 0)
+
+        
+class TestReformatAlignment(unittest.TestCase):
+
+    def setUp(self):
+        fastr = open(os.path.join(datadir,'10patients_aln.fasta')).read()
+        self.seqs = Seq.io_fasta.read(fastr)
+
+    def tearDown(self):
+        print ''
+        for page in self.reform:
+            for line in page:
+                print line
+            print ''
+                
+    def test01(self):
+        self.reform = Seq.sequtil.reformat_alignment(self.seqs)
+
+    def test02(self):
+        self.reform = Seq.sequtil.reformat_alignment(
+            self.seqs, exclude_invariant=True, min_subs=1)
+
+    def test03(self):
+        self.reform = Seq.sequtil.reformat_alignment(
+            self.seqs, exclude_invariant=True, min_subs=1,
+            seqrange=(50,500))
+        
+class TestReformat(unittest.TestCase):
+
+    def setUp(self):
+        fastr = open(os.path.join(datadir,'10patients_aln.fasta')).read()
+        self.seqs = Seq.io_fasta.read(fastr)
+
+    def tearDown(self):
+        print ''
+        for page in self.reform:
+            for line in page:
+                print line
+            print ''
+                
+    def test01(self):
+        self.reform = Seq.sequtil.reformat(self.seqs)
+
+    def test02(self):
+        self.reform = Seq.sequtil.reformat(
+            self.seqs,
+            exclude_invariant = True
+            )
+        
+    def test03(self):
+        self.reform = Seq.sequtil.reformat(
+            self.seqs,
+            exclude_invariant = False,
+            seqrange = (50,100)
+            )
+
+    def test04(self):
+        self.reform = Seq.sequtil.reformat(
+            self.seqs,
+            exclude_invariant = True,
+            seqrange = (50,100)
+            )

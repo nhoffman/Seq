@@ -51,6 +51,7 @@ import run_needle
 import run_clustalw
 import run_hmmer
 import run_infernal
+import pdfutils
 
 from sequtil import find_exec
 

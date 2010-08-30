@@ -82,6 +82,8 @@ def write( seq_or_list, linelength=60, hea=True ):
     * linelength - number of characters per line of sequence or
       None for no wrapping.
     * hea - write contents of hea attribute
+
+    TODO: needs to accept iterable
     """
 
     if type(seq_or_list) != type([]):

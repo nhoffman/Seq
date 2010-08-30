@@ -45,7 +45,9 @@ represent each set of substrings or identical sequences.
     chunksize=None,
     compare_type='contains',
     outfile=None,
-    r_file=None
+    r_file=None,
+    as_is=False,
+    name_style = 'list',
     )
 
     parser.add_option("-f", "--fasta-file", dest="infile",
@@ -60,14 +62,31 @@ represent each set of substrings or identical sequences.
         help='Output file containing an R-language list of character vectors',
         metavar='FILE')
 
-    parser.add_option('-n','--nchunks', dest='nchunks', metavar='INT', type='int', help='Number of partitions.')
-    parser.add_option('-c','--chunksize', dest='chunksize', metavar='INT', type='int', help='Number of strings in each partition (overrides --nchunks).')
-    parser.add_option('-t','--compare-type',dest='compare_type',metavar='VAL',type='choice',choices=['eq','contains'],
-                      help='Type of comparison: "contains" (the default; finds longest sequences containing sets of substrings) or "eq" (selects single representatives from groups of identical sequences).')
+    parser.add_option('-n','--nchunks', dest='nchunks', metavar='INT', type='int',
+                      help='Number of partitions [default: %default].')
+    parser.add_option('-c','--chunksize', dest='chunksize', metavar='INT',
+                      type='int',
+                      help='Number of strings in each partition (overrides --nchunks) [default: %default].')
+    parser.add_option('-t','--compare-type',dest='compare_type',metavar='VAL',
+                      type='choice',choices=['eq','contains'],
+                      help=('Type of comparison: "contains"'
+                            '(finds longest sequences containing sets of substrings)'
+                            ' or "eq" (selects single representatives from groups of'
+                            ' identical sequences) [default: %default].'))
+    parser.add_option("-a","--as-is", action="store_true", dest="as_is",
+                      help='If True, do not degap input sequences [default: %default].')
 
+    parser.add_option('-N','--name-style',dest='name_style',
+                      type='choice',choices=['list','count'],
+                      help=('Naming style of sequences.'
+                            '"list" - name of canonical sequence representing each group followed by list of members'
+                            ' or "count" - as above, with the count of group members appended to the seq name'
+                            ' identical sequences) [default: %default].'
+                            ))
+    
     parser.add_option("-v", "--verbose",
-        action="count", dest="verbose",
-        help="increase verbosity of screen output (eg, -v is verbose, -vv is more so)")
+                      action="count", dest="verbose",
+                      help="increase verbosity of screen output (eg, -v is verbose, -vv is more so)")
 
     options, args = parser.parse_args()
 
@@ -125,7 +144,10 @@ represent each set of substrings or identical sequences.
         for parent, children in sorted(d.items()):
             s = seqs[parent]
             s.hea = ' '.join(seqs[c].name for c in children)
+            if options.name_style == 'count':
+                s.name = '%s#%s' % (s.name, len(children))
             fout.write(Seq.io_fasta.write(seqs[parent], hea=True))
+            
         fout.close()
 
     if options.r_file:
