@@ -4,6 +4,7 @@ from create import *
 
 names_keys = 'tax_id tax_name unique class'.split()
 nodes_keys = 'tax_id parent_id rank embl_code division_id'.split()
+merged_keys = 'old_tax_id new_tax_id'.split()
 source_keys = 'source_id source_name'.split()
 # cut -f 3 -d '|' nodes.dmp | sort | uniq
 # see http://biowarehouse.ai.sri.com/repos/enumerations-loader/data/enumeration_inserts.txt

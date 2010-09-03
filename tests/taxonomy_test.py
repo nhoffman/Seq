@@ -75,7 +75,7 @@ class TestCreateDatabase(unittest.TestCase):
             names_data.next())
 
         self.assertEqual(set(d['division_id'] for d in nodes_data), set(map(str, range(12))))
-        
+
     def testReadBacterialTaxonomy(self):
 
         names_data, nodes_data = taxonomy.read_bacterial_taxonomy(self.namesfile, self.nodesfile)
@@ -90,7 +90,7 @@ class TestCreateDatabase(unittest.TestCase):
 
         self.assertEqual(set(d['division_id'] for d in nodes_data), set(['0','1','4','8']))
 
-        
+
     def testCreateTaxonomyDb01(self):
 
         outfiles = taxonomy.get_ncbi_tax_data(dest_dir=outputdir)
@@ -112,7 +112,7 @@ class TestCreateDatabase(unittest.TestCase):
         ranks = con.cursor().execute('select rank from nodes group by rank').fetchall()
         ## rank names should not contain whitespace
         self.assertEqual(ranks, [('_'.join(x[0].split()),) for x in ranks])
-        
+
     def testCreateBacterialTaxonomyDb01(self):
 
         outfiles = taxonomy.get_ncbi_tax_data(dest_dir=outputdir)
@@ -135,7 +135,7 @@ class TestCreateDatabase(unittest.TestCase):
         ## rank names should not contain whitespace
         self.assertEqual(ranks, [('_'.join(x[0].split()),) for x in ranks])
 
-    
+
     def testCreateBacterialTaxonomyDb02(self):
 
         outfiles = taxonomy.get_ncbi_tax_data(dest_dir=outputdir)
@@ -177,6 +177,23 @@ class Test00CreateFullDatabase(unittest.TestCase):
             self.assertTrue(os.access(dbname, os.F_OK))
         else:
             log.info('%s exists, skipping this test' % dbname)
+
+class TestCreateTable(unittest.TestCase):
+
+    def setUp(self):
+        self.funcname = '_'.join(self.id().split('.')[-2:])
+        self.dbname = os.path.join(outputdir, self.funcname+'.db')
+        try:
+            os.remove(self.dbname)
+        except OSError:
+            pass
+        self.con = sqlite.connect(self.dbname)
+
+    def tearDown(self):
+        self.con.close()
+
+    def testCreateRanks01(self):
+        taxonomy.make_ranks_db(self.con, ranks=taxonomy.tax_keys)
 
 class TestTaxonomyClass(unittest.TestCase):
 

@@ -43,8 +43,8 @@ def read(fname):
     bml = colnames.index('bml')
 
     undash = lambda e: e if e != '-' else None
-    
-    counter = itertools.count    
+
+    counter = itertools.count
     with open(fname) as lines:
         data = []
         skip = False
@@ -61,10 +61,15 @@ def read(fname):
                 data = []
                 count = counter(1)
             else:
-                L = [seqname, str(count.next())] + line.split()
-                L[ppost], L[bml] = undash(L[ppost]), undash(L[bml])
-                data.append(L)
+                try:
+                    L = [seqname, str(count.next())] + line.split()
+                    L[ppost], L[bml] = undash(L[ppost]), undash(L[bml])
+                    data.append(L)
+                except IndexError:
+                    log.error('error reading line in placefile: \n--->\n%s\n<---\n' % line)
+                    sys.exit(1)
 
+                    
         yield data
 
 def main():

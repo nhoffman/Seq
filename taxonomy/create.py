@@ -5,12 +5,13 @@ import zipfile
 import stat
 import pprint
 import sqlite3 as sqlite
+import sys
 
-from __init__ import names_keys, nodes_keys, insert_cmd
+from __init__ import names_keys, nodes_keys, merged_keys, insert_cmd, tax_keys
 
 log = logging
 
-def get_ncbi_tax_data(dest_dir='.', expand=['nodes.dmp','names.dmp','readme.txt'], new=False):
+def get_ncbi_tax_data(dest_dir='.', expand=['nodes.dmp','names.dmp','merged.dmp','readme.txt'], new=False):
     """
     Download data from NCBI required to generate local
     taxonomy database from url
@@ -42,14 +43,15 @@ def get_ncbi_tax_data(dest_dir='.', expand=['nodes.dmp','names.dmp','readme.txt'
     for arcname in expand:
 
         destfile = os.path.join(dest_dir, arcname)
-        outfiles[arcname.rstrip('.dmp')] = destfile
+        outfiles[os.path.splitext(arcname)[0]] = destfile
 
         if not os.access(destfile, os.F_OK) and not new:
             log.info('expanding %s' % arcname)
             open(destfile,'wb').write(zfile.read(arcname))
 
-        mb = 1024*1024
-        file_size = '%i mb' % ((os.stat(destfile)[stat.ST_SIZE])/mb) # convert to kb
+        kb = 1024
+        mb = kb*kb
+        file_size = '%i kb' % ((os.stat(destfile)[stat.ST_SIZE])/kb) # convert to kb
         log.info('%s: %s' % (destfile, file_size))
 
     return outfiles
@@ -59,7 +61,7 @@ def read_dmp(infile, keys, condition=None, rowfun=None):
     Parse file.dmp contained in taxdmp.zip
 
     * infile - a file name keys - a list of strings naming fields; if
-    * keys contains fewer elemens than the the number of fields, only
+      keys contains fewer elemens than the the number of fields, only
       the named fields are retained.
     * condition - a function accepting a rowdict as its only argument, returning
       True if the row should be included in the output .
@@ -124,7 +126,7 @@ def _nodes_rowfun(rowdict):
     rowdict['rank'] = '_'.join(rowdict['rank'].split())
     return rowdict
 
-def read_bacterial_taxonomy(names, nodes, primary_only=True, **args):
+def read_bacterial_taxonomy(names, nodes, merged=None, primary_only=True, **args):
     """
     Parses names.dmp and nodes.dmp, filtering contents to retain data
     required to construct the bacterial NCBI taxonomy.
@@ -143,20 +145,25 @@ def read_bacterial_taxonomy(names, nodes, primary_only=True, **args):
 
     names_data = read_dmp(infile=names, keys=names_keys, condition=condition)
     nodes_data = read_dmp(infile=nodes, keys=nodes_keys, condition=_bact_nodes_condition, rowfun=_nodes_rowfun)
+    merged_data = read_dmp(infile=merged, keys=merged_keys) if merged else None
 
-    return (names_data, nodes_data)
+    return (names_data, nodes_data, merged_data)
 
-def read_taxonomy(names, nodes, primary_only=True, **args):
+def read_taxonomy(names, nodes, merged=None, primary_only=True, **args):
     """
     Parses names.dmp and nodes.dmp, filtering contents to retain data
     required to construct the bacterial NCBI taxonomy.
 
     * names - path to names.dmp
     * nodes - path to nodes.dmp
+    * merged - path to merged.dmp (optional)
     * primary_only - if True, skip all but primary taxon names (ie, omit synonyms)
 
     Returns tuple of iterators (names_data, nodes_data)
     """
+
+    if not merged:
+        raise Exception
 
     if primary_only:
         condition = _is_primary_name
@@ -165,9 +172,9 @@ def read_taxonomy(names, nodes, primary_only=True, **args):
 
     names_data = read_dmp(infile=names, keys=names_keys, condition=condition)
     nodes_data = read_dmp(infile=nodes, keys=nodes_keys, condition=None, rowfun=_nodes_rowfun)
+    merged_data = read_dmp(infile=merged, keys=merged_keys) if merged else None
 
-    return (names_data, nodes_data)
-
+    return (names_data, nodes_data, merged_data)
 
 def make_nodes_db(con, data, keys=nodes_keys):
 
@@ -249,7 +256,58 @@ values
     )
     con.commit()
 
-def create_taxonomy_db(names_data, nodes_data, dbname='ncbi_bact_taxonomy.db',
+def make_merged_db(con, data, keys=merged_keys):
+
+    cmds = []
+    cmds.append("""
+CREATE TABLE merged
+(
+old_tax_id TEXT,
+new_tax_id TEXT
+)""")
+    cmds.append("""CREATE INDEX merged_old ON merged(old_tax_id)""")
+    cmds.append("""CREATE INDEX merged_new ON merged(new_tax_id)""")
+
+    for cmd in cmds:
+        log.info(cmd)
+        con.execute(cmd)
+
+    cmd = 'insert into merged values (?, ?)'
+    log.info(cmd)
+
+    con.executemany(
+        cmd,
+        ((row['old_tax_id'], row['new_tax_id']) for row in data)
+        )
+    con.commit()
+
+
+def make_ranks_db(con, ranks):
+    """
+    Create a table with columns (rank, level) indicating the order of
+    each rank in ascending order of specificity (ie, kingdom < species).
+    """
+
+    cmds = []
+    cmds.append("""
+CREATE TABLE ranks
+(
+rank TEXT,
+level INTEGER
+)""")
+    cmds.append('CREATE INDEX ranks_rank on ranks(rank)')
+    cmds.append('CREATE INDEX ranks_level on ranks(level)')
+
+    for cmd in cmds:
+        log.info(cmd)
+        con.execute(cmd)
+
+    con.executemany('insert into ranks values (?,?)',
+                    ((r,i) for i,r in enumerate(ranks)))
+
+    con.commit()
+
+def create_taxonomy_db(names_data, nodes_data, merged_data=None, dbname='ncbi_taxonomy.db',
     dest_dir='.', new=True):
 
     dbname = os.path.join(dest_dir, dbname)
@@ -261,8 +319,13 @@ def create_taxonomy_db(names_data, nodes_data, dbname='ncbi_bact_taxonomy.db',
             pass
 
     con = sqlite.connect(dbname)
+
     make_nodes_db(con, nodes_data)
     make_names_db(con, names_data)
+    make_ranks_db(con, tax_keys)
+    if merged_data:
+        make_merged_db(con, merged_data)
+
     con.close()
     return dbname
 
