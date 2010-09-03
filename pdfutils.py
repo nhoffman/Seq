@@ -9,7 +9,8 @@ try:
     from reportlab.lib.units import inch, cm
     from reportlab.lib.pagesizes import letter, landscape, portrait
 except ImportError, msg:
-    log.error(msg)
+    #log.error(msg)
+    pass
 
 def pdf_align(pages, outfile, fontsize = 7, orientation='portrait',
               blocks_per_page=1):
@@ -65,10 +66,10 @@ def pdf_align(pages, outfile, fontsize = 7, orientation='portrait',
             # separate blocks
             if blocks_per_page > 1 and i + 1 < blocks_per_page:
                 tx.textLine('')
-            
+
         canv.drawText(tx)
         canv.showPage()
 
 
-        
+
     canv.save()

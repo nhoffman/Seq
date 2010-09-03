@@ -61,15 +61,18 @@ def read(fname):
                 data = []
                 count = counter(1)
             else:
-                try:
-                    L = [seqname, str(count.next())] + line.split()
-                    L[ppost], L[bml] = undash(L[ppost]), undash(L[bml])
-                    data.append(L)
-                except IndexError:
-                    log.error('error reading line in placefile: \n--->\n%s\n<---\n' % line)
-                    sys.exit(1)
+                L = [seqname, str(count.next())] + line.split()
+                L[ppost], L[bml] = undash(L[ppost]), undash(L[bml])
+                data.append(L)
 
-                    
+                # try:
+                #     L = [seqname, str(count.next())] + line.split()
+                #     L[ppost], L[bml] = undash(L[ppost]), undash(L[bml])
+                #     data.append(L)
+                # except IndexError:
+                #     log.error('error reading line in placefile: \n--->\n%s\n<---\n' % line)
+                #     break
+
         yield data
 
 def main():
