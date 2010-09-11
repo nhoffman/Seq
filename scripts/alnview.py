@@ -20,8 +20,8 @@ Create formatted sequence alignments with optional pdf output.
 
     parser.set_defaults(
         add_consensus = False,
-        compare_to = 'consensus',
-        number_by = 'consensus',
+        compare_to = 0,
+        # number_by = 0,
         exclude_invariant = False,
         exclude_gapcols = False,
         min_subs = 1,
@@ -33,7 +33,8 @@ Create formatted sequence alignments with optional pdf output.
         orientation = 'portrait',
         blocks_per_page = 1,
         verbose = 0,
-        quiet = False
+        quiet = False,
+        seqnums = False
     )
 
     parser.add_option("-f", "--infile", dest="infile",
@@ -47,13 +48,25 @@ Create formatted sequence alignments with optional pdf output.
         action='store_true')
 
     parser.add_option("-d", "--compare-to", dest="compare_to",
-        help="if the value is 'consensus' display positions identical to the corresponding position in the consensus as a '.', or provide the name of a sequence in the alignment for comparison. Provide None to suppress character replacement [%default].")
+        help="""
+Number of the sequence to use as a reference. Nucleotide positions
+identical to the reference will be shown as a '.' The default behavior is
+to use the consensus sequence as a reference. Use the -i option to display
+the sequence numbers for reference. A value of -1 suppresses this behavior.
+""", type='int')
 
-    parser.add_option("-N", "--number_by", dest="number_by",
-        help="number the aligned positins according to the indicated sequence. This option is useful for generating an alignment numbered according to a reference strain, for example. [%default]")
+#     parser.add_option("-N", "--number_by", dest="number_by",
+#         help="""Number columns according to this sequence (uses the consensus by default).
+# This option is useful for generating an alignment numbered according
+# to a reference strain, for example.""", type='int')
 
+    parser.add_option("-i", "--number-sequences", dest="seqnums",
+        help="Show sequence number to left of name. [%default]",
+        action='store_true')
+    
     parser.add_option("-x", "--exclude-invariant", dest="exclude_invariant",
-        help="only show columns with at least min_subs non-consensus bases (set min_subs using the -i option)",
+        help="""only show columns with at least min_subs non-consensus
+bases (set min_subs using the -s option)""",
         action='store_true')
 
     parser.add_option("-g", "--exclude-gapcols", dest="exclude_gapcols",
@@ -69,7 +82,7 @@ Create formatted sequence alignments with optional pdf output.
         metavar="NUMBER", type='int')
 
     parser.add_option("-w", "--width", dest="ncol",
-        help="Width of sequence to display in each block",
+        help="Width of sequence to display in each block in characters [%default]",
         metavar="NUMBER", type='int')
 
     parser.add_option("-F", "--fontsize", dest="fontsize",
@@ -95,7 +108,7 @@ Create formatted sequence alignments with optional pdf output.
     parser.add_option("-b", "--blocks-per-page", dest="blocks_per_page",
                       metavar="NUMBER", type='int',
                       help="Number of aligned blocks of sequence per page [%default]")
-    
+
     parser.add_option("-q", "--quiet", dest="quiet",
         help="Suppress output of alignment to screen.",
         action='store_true')
@@ -141,7 +154,7 @@ Create formatted sequence alignments with optional pdf output.
             log.info('Restricting alignment to positions %s' % str(seqrange))
     else:
         seqrange = None
-            
+
     pages = Seq.sequtil.reformat(
         seqs,
         name_min = 10,
@@ -154,15 +167,16 @@ Create formatted sequence alignments with optional pdf output.
         exclude_invariant = options.exclude_invariant,
         min_subs = options.min_subs,
         simchar = '.',
-        number_by = options.number_by,
+        # number_by = options.number_by,
         countGaps = False,
         case = options.case,
-        seqrange = seqrange)
+        seqrange = seqrange,
+        seqnums = options.seqnums)
 
     if not options.quiet:
         for page in pages:
             for line in page:
-                print line
+                print line.rstrip()
             print ''
 
     if options.outfile:

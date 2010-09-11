@@ -5,6 +5,8 @@ import string
 import Seq
 import os
 import logging
+import math
+import itertools
 
 import time
 import operator
@@ -478,8 +480,8 @@ def reformat_alignment(seqlist,
       when exclude_invariant==True.
     * case - None (to change to input), 'upper' (force all to uppercase),
       'lower' (force all to lowercase)
-    * seqrange - optional two-tuple specifying start and ending coordinates (0-index) 
-      
+    * seqrange - optional two-tuple specifying start and ending coordinates (0-index)
+
     """
 
     min_name_width = 10
@@ -495,7 +497,7 @@ def reformat_alignment(seqlist,
 
     consensus_str = ''.join([consensus(d, countGaps=countGaps) for d in tabulated])
     cons_seq = Seq.Seq('CONSENSUS', consensus_str)
-         
+
     if case == 'upper':
         for seq in seqlist:
             seq.seq = seq.seq.upper()
@@ -523,7 +525,7 @@ def reformat_alignment(seqlist,
             raise ValueError, 'Error: the sequence name provided for the number_by argument (%s) is not found' % number_by
         vnumstrs = vnumbers
 
-    # we use a mask to define columns to include in the output        
+    # we use a mask to define columns to include in the output
     if exclude_invariant:
         compare = lambda d: count_subs(d, countGaps=countGaps) >= min_subs
         mask = [compare(d) for d in tabulated]
@@ -531,7 +533,7 @@ def reformat_alignment(seqlist,
         if seqrange:
             rr = range(*seqrange)
             mask = [m and i in rr for i,m in enumerate(mask)]
-        
+
         apply_mask = lambda instr: ''.join(c for c,m in zip(instr, mask) if m)
 
         for seq in seqlist:
@@ -551,7 +553,7 @@ def reformat_alignment(seqlist,
 
     seqcount = len(seqlist)
     align_start, align_stop = 0, len(seqlist[0])
-    
+
     out = []
     for start in range(align_start, align_stop, seq_width):
         stop = min([start + seq_width, align_stop])
@@ -603,15 +605,17 @@ def reformat(seqs,
              nrow = 65, #
              ncol = 70, #
              add_consensus = True, #
-             compare_to = None, #
+             compare_to = -1, #
              exclude_gapcols = True, #
              exclude_invariant = False, #
              min_subs = 1, #
              simchar = '.',
-             number_by = 'consensus', #
+             number_by = 0, #
              countGaps = False,
              case = None, #
-             seqrange = None):
+             seqrange = None,
+             seqnums = False
+             ):
 
     """
     Reformat an alignment of sequences for display. Return a list of
@@ -624,30 +628,32 @@ def reformat(seqs,
     * ncol - width in characters of sequence on each line
     * add_consensus - If True, include consensus sequence.
     * compare_to - may take the following values:
-      - 'consensus' - (default) each position in each sequence compared to
+      - 0 - (default) each position in each sequence compared to
          corresponding position in consensus and replaced with simchar
-      - [seq_name] - compare each sequence to sequence with name = seq_name
-      - None - make no character replacements
+      - 1 <= i <= len(seqlist) - compare each sequence to sequence at index (i - 1)
+      - -1 - make no character replacements
     * exclude_gapcols - if True, mask columns with no non-gap characters
     * exclude_invariant - if True, mask columns without minimal polymorphism
-    * min_subs - 
+    * min_subs -
     * simchar - character indicating identity to corresponding position in compare_to
-      * number_by - sequence according to which numbering should be calculated
+    * number_by - sequence (1-index) according to which numbering should be calculated
+      or 0 for the consensus.
     * countGaps - include gaps in calculation of consensus and columns to display
     * case - None (to change to input), 'upper' (force all to uppercase),
       'lower' (force all to lowercase)
-    * seqrange - optional two-tuple specifying start and ending coordinates (1-index, inclusive)       
+    * seqrange - optional two-tuple specifying start and ending coordinates (1-index, inclusive)
+    * seqnums - show sequence numbers (1-index) to left of name if True
     """
-
+    
     name_min = 10
 
     # avoid making modifications to input seqlist object in place
     seqlist = copy.deepcopy(seqs)
     nseqs = len(seqlist)
-    
+
     # make a dictionary of seq names
     seqdict = dict([(s.name,s) for s in seqlist])
-    
+
     # a list of dicts
     tabulated = tabulate(seqlist)
 
@@ -660,32 +666,34 @@ def reformat(seqs,
     if case:
         for seq in seqlist:
             seq.seq = getattr(seq.seq, case)()
-        
+
     # for compare_to and number_by, make a copy of the sequence for
     # comparison because the original sequences will be modified
-    if compare_to:
+    if compare_to >= 0:
         try:
-            seq_to_compare_to = consensus_str if compare_to == consensus_name.lower() \
-                else seqdict[compare_to][:]
-        except KeyError:
-            raise ValueError('Error in compare_to="%s": name not found.' % compare_to)
-        
-        for seq in seqlist: # don't modify consensus
-            if re.match(r'^%s$' % compare_to, seq.name, re.I):
-                seq.name = '-(d)-> ' + seq.name
+            seq_to_compare_to = consensus_str \
+                if compare_to == 0 \
+                else seqlist[compare_to - 1][:]
+        except IndexError:
+            raise ValueError('Error in compare_to="%s": index out of range.' % compare_to)
+
+        for i, seq in enumerate(seqlist): # don't modify reference sequence
+            if (compare_to == 0 and seq.name == consensus_name) or compare_to == i + 1:
+                # if re.match(r'^%s$' % compare_to, seq.name, re.I):
+                seq.name = '-ref-> ' + seq.name
             else:
                 seq.seq = seqdiff(seq, seq_to_compare_to, simchar)
-            
+
     ii = range(len(seqlist[0]))
     mask = [True for i in ii]
     if seqrange:
         start, stop = seqrange
         mask = [start <= i+1 <= stop for i in ii]
-        
+
     if exclude_gapcols:
         mask1 = [d.get('-',0) != nseqs for d in tabulated]
         mask = [m and m1 for m,m1 in zip(mask, mask1)]
-        
+
     if exclude_invariant:
         mask1 = [count_subs(d, countGaps=countGaps) >= min_subs for d in tabulated]
         mask = [m and m1 for m,m1 in zip(mask, mask1)]
@@ -697,24 +705,32 @@ def reformat(seqs,
             seq.seq = apply_mask(seq)
 
         try:
-            number_by_str = consensus_str if number_by == 'consensus' else seqdict[number_by][:]
-        except KeyError:
-            raise ValueError('Error in number_by="%s": name not found.' % number_by)            
+            number_by_str = consensus_str if number_by == 0 else seqlist[number_by - 1][:]
+        except IndexError:
+            raise ValueError('Error in number_by="%s": index out of range.' % number_by)
 
         vnumstrs = [apply_mask(s) for s in get_vnumbers(number_by_str, leadingZeros=True)]
 
+    seqcount = len(seqlist)
+                
     longest_name = max([len(s.name) for s in seqlist])
     name_width = max([name_min, min([longest_name, name_max])])
 
-    fstr = '%%(name)%(name_width)ss %%(seqstr)-%(ncol)ss' % locals()
-
-    seqcount = len(seqlist)
-    colstop = len(seqlist[0])
+    num_width = math.floor(math.log10(seqcount)) + 1
     
+    fstr = '%%(name)%(name_width)ss %%(seqstr)-%(ncol)ss' % locals()
+    if seqnums:
+        fstr = ('%%(count)%(num_width)is ' % locals()) + fstr
+    
+    colstop = len(seqlist[0])
+
     out = []
+    # start is leftmost column for each block of columns
     for start in xrange(0, colstop, ncol):
         stop = min([start + ncol, colstop])
 
+        # breaks into vertical blocks of sequences
+        counter = itertools.count(1)
         for first in xrange(0, seqcount, nrow):
             out.append([])
             last = min([first + nrow, seqcount])
@@ -732,11 +748,11 @@ def reformat(seqs,
 
             this_seqlist = seqlist[first:last]
 
-            if exclude_invariant or exclude_gapcols or number_by != 'consensus':
+            if exclude_invariant or exclude_gapcols or number_by > 0:
                 # label each position
                 for s in vnumstrs:
                     out[-1].append(
-                    fstr % {'name':'#','seqstr':s[start:stop]} )
+                    fstr % {'count':'','name':'#','seqstr':s[start:stop]} )
             else:
                 # label position at beginning and end of block
                 half_ncol = int((stop-start)/2)
@@ -745,6 +761,7 @@ def reformat(seqs,
                 out[-1].append( numstr % (start + 1, stop) )
 
             for seq in this_seqlist:
+                count = counter.next()
                 seqstr = seq[start:stop]
                 name = seq.name[:name_width]
                 out[-1].append( fstr % locals() )
