@@ -63,7 +63,7 @@ the sequence numbers for reference. A value of -1 suppresses this behavior.
     parser.add_option("-i", "--number-sequences", dest="seqnums",
         help="Show sequence number to left of name. [%default]",
         action='store_true')
-    
+
     parser.add_option("-x", "--exclude-invariant", dest="exclude_invariant",
         help="""only show columns with at least min_subs non-consensus
 bases (set min_subs using the -s option)""",

@@ -644,7 +644,7 @@ def reformat(seqs,
     * seqrange - optional two-tuple specifying start and ending coordinates (1-index, inclusive)
     * seqnums - show sequence numbers (1-index) to left of name if True
     """
-    
+
     name_min = 10
 
     # avoid making modifications to input seqlist object in place
@@ -712,16 +712,16 @@ def reformat(seqs,
         vnumstrs = [apply_mask(s) for s in get_vnumbers(number_by_str, leadingZeros=True)]
 
     seqcount = len(seqlist)
-                
+
     longest_name = max([len(s.name) for s in seqlist])
     name_width = max([name_min, min([longest_name, name_max])])
 
     num_width = math.floor(math.log10(seqcount)) + 1
-    
+
     fstr = '%%(name)%(name_width)ss %%(seqstr)-%(ncol)ss' % locals()
     if seqnums:
         fstr = ('%%(count)%(num_width)is ' % locals()) + fstr
-    
+
     colstop = len(seqlist[0])
 
     out = []

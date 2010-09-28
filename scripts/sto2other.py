@@ -30,20 +30,20 @@ Infernal cmalign) and prints fasta-format sequences to stdout."""
     parser.add_option("-c", "--case", dest="case", type='choice',
                       choices=['upper','lower','input'],
                       help="change case of sequence text to upper case ('upper') lower case ('lower') or leave unchanged ('input')")
-    parser.add_option("-F","--format", dest="format", type="choice", choices=["fasta","phylip"],
+    parser.add_option("-F","--format", dest="format", type="choice", choices=["fasta","phylip","phylip_relaxed"],
                       metavar=[],help="Choose FORMAT for output file.")
     parser.add_option("-n","--numbers", dest="renum", metavar='FILE',
                       help="Replace names in output with s1, s2, s3...sN and write mapping of names to FILE (phylip format only).")
     parser.add_option('-R','--seq-range',dest='seq_range',metavar='x,y',
                       help='Restrict output to sequences in range x,y inclusive (1-index).')
-    
+
     # TODO: add width argument, pass to io_fasta, io_phylip
-    
+
     options, args = parser.parse_args()
 
 
     infile = options.infile
-    
+
     if options.case == 'input':
         style=None
     else:
@@ -58,7 +58,7 @@ Infernal cmalign) and prints fasta-format sequences to stdout."""
     if options.seq_range:
         start,stop=options.seq_range.split(',')
         seqs = [seqs[i] for i in xrange(int(start)-1,int(stop))]
-    
+
     if options.format == 'fasta':
         output = Seq.io_fasta.write(seqs)
     elif options.format == 'phylip':
@@ -71,9 +71,12 @@ Infernal cmalign) and prints fasta-format sequences to stdout."""
             renum = True
         else:
             renum = False
-
         output = Seq.io_phylip.write(seqs, width=None, renum=renum)
-
+    elif options.format == 'phylip_relaxed':
+        output = '%s %s\n' % (len(seqs), len(seqs[0]))
+        for seq in seqs:
+            output += '%s %s\n' % (seq.name, seq.seq)
+        
     sys.stdout.write(output)
 
 if __name__ == '__main__':
