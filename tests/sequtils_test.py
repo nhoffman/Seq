@@ -28,7 +28,7 @@ class TestFunctions(unittest.TestCase):
 
         self.assertTrue(out == 0)
 
-        
+
 class TestReformatAlignment(unittest.TestCase):
 
     def setUp(self):
@@ -41,7 +41,7 @@ class TestReformatAlignment(unittest.TestCase):
             for line in page:
                 print line
             print ''
-                
+
     def test01(self):
         self.reform = Seq.sequtil.reformat_alignment(self.seqs)
 
@@ -53,7 +53,7 @@ class TestReformatAlignment(unittest.TestCase):
         self.reform = Seq.sequtil.reformat_alignment(
             self.seqs, exclude_invariant=True, min_subs=1,
             seqrange=(50,500))
-        
+
 class TestReformat(unittest.TestCase):
 
     def setUp(self):
@@ -66,7 +66,7 @@ class TestReformat(unittest.TestCase):
             for line in page:
                 print line
             print ''
-                
+
     def test01(self):
         self.reform = Seq.sequtil.reformat(self.seqs)
 
@@ -75,7 +75,7 @@ class TestReformat(unittest.TestCase):
             self.seqs,
             exclude_invariant = True
             )
-        
+
     def test03(self):
         self.reform = Seq.sequtil.reformat(
             self.seqs,
@@ -89,3 +89,24 @@ class TestReformat(unittest.TestCase):
             exclude_invariant = True,
             seqrange = (50,100)
             )
+
+class TestCoalesce(unittest.TestCase):
+    def setUp(self):
+        self.funcname = '_'.join(self.id().split('.')[-2:])
+
+    def test01(self):
+        infile = os.path.join(datadir, '474_0_0.txt')
+        names, seqs = zip(*(line.split() for line in open(infile) if line.strip()))
+        
+        d = Seq.sequtil.coalesce(seqs)
+        parents = [seqs[i] for i in d.keys()]
+
+        # canonical sequences should all be unique
+        self.assertTrue(len(parents) == len(set(parents)))
+
+        d1 = Seq.sequtil.coalesce(parents)
+        self.assertTrue(len(d1) == len(parents))
+
+        
+        
+        

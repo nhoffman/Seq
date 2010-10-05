@@ -877,7 +877,7 @@ def flatten(d):
 
 #### the real work is done in coalesce and merge
 
-def coalesce(strings, idx=None, comp='contains', log=log):
+def coalesce(strings, comp='contains', log=log):
 
     """
     Groups a collection of strings by identifying the longest string
@@ -888,8 +888,6 @@ def coalesce(strings, idx=None, comp='contains', log=log):
     =====
 
      * strings - a tuple of N strings
-     * idx - an optional sequence of integer indices into strings; if missing,
-       will include all elements in strings.
      * comp - 'contains' (default) or 'eq'
      * log - a logging object; defualt is the root logger
 
@@ -903,10 +901,7 @@ def coalesce(strings, idx=None, comp='contains', log=log):
 
     start = time.time()
 
-    if idx:
-        idx = list(idx)
-    else:
-        idx = range(len(strings))
+    idx = range(len(strings))
 
     if __debug__:
         idx_orig = idx[:]
@@ -916,7 +911,6 @@ def coalesce(strings, idx=None, comp='contains', log=log):
     log.debug('sort completed at %s secs' % (time.time()-start))
     nstrings = len(idx)
 
-    #d = collections.defaultdict(list, ((i,list()) for i in idx))
     d = dict((i,list()) for i in idx)
 
     # operator.eq(a,b) <==> a == b
@@ -929,22 +923,22 @@ def coalesce(strings, idx=None, comp='contains', log=log):
         parent_str = strings[parent_i]
         if __debug__: # suppress using python -O
             cycle += 1
-            log.debug('cycle %3s, %3s remaining, parent length=%4s' % \
-                (cycle, len(idx), len(strings[parent_i])))
+            log.debug('cycle %3s i=%-5s length = %-4s %5s remaining' % \
+                (cycle,
+                 parent_i,
+                 len(strings[parent_i]),
+                 len(idx)
+                 ))
 
-        for i, child_i in enumerate(idx):
-            # if strings[child_i] in parent_str:
-            if compfun(parent_str,strings[child_i]):
-                # assert child_i == idx.pop(i)
-                d[parent_i].append(idx.pop(i))
-                del d[child_i]
-
-        if __debug__:
-            log.debug("i=%-5s len(parent)=%3s children:%s" % \
-                (parent_i, len(strings[parent_i]), d.get(parent_i, 'no children')))
-
+        children = set(i for i in idx if compfun(parent_str,strings[i]))
+        d[parent_i].extend(children)
+        idx = [x for x in idx if x not in children]
+            
+    for i in chain(*d.values()):
+        del d[i]
+        
     log.info('Coalesce %s strings to %s in %.2f secs' % (nstrings, len(d), time.time()-start))
-
+    
     if __debug__:
         dFlat = flatten(d)
         log.debug('checking d of length %s with min,max=%s,%s' % \
@@ -955,7 +949,7 @@ def coalesce(strings, idx=None, comp='contains', log=log):
         for parent, children in d.items():
             for child in children:
                 assert strings[child] in strings[parent]
-
+                
     return d
 
 def merge(strings, d1, d2=None, comp='contains'):

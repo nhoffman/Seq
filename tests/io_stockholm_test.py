@@ -59,10 +59,9 @@ class TestReadStockholm2(unittest.TestCase):
         self.assertTrue(len(seqs)==9)
 
     def test4(self):
-        seqs = Seq.io_stockholm.read(self.instr, keep_ref=False)    
+        seqs = Seq.io_stockholm.read(self.instr, keep_ref=False)
         self.assertTrue(len(seqs)==10)
 
     def test5(self):
         seqs = Seq.io_stockholm.read(self.instr, keep_struct=False, keep_ref=False)
         self.assertTrue(len(seqs)==9)
-        
