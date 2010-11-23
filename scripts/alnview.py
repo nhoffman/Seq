@@ -168,7 +168,7 @@ bases (set min_subs using the -s option) [%default]""",
         min_subs = options.min_subs,
         simchar = '.',
         # number_by = options.number_by,
-        countGaps = False,
+        countGaps = True,
         case = options.case,
         seqrange = seqrange,
         seqnums = options.seqnums)

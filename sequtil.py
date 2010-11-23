@@ -611,7 +611,7 @@ def reformat(seqs,
              min_subs = 1, #
              simchar = '.',
              number_by = 0, #
-             countGaps = False,
+             countGaps = True,
              case = None, #
              seqrange = None,
              seqnums = False
@@ -649,6 +649,7 @@ def reformat(seqs,
 
     # avoid making modifications to input seqlist object in place
     seqlist = copy.deepcopy(seqs)
+    seqnames = [seq.name for seq in seqs]
     nseqs = len(seqlist)
 
     # make a dictionary of seq names
@@ -685,6 +686,7 @@ def reformat(seqs,
                 seq.seq = seqdiff(seq, seq_to_compare_to, simchar)
 
     ii = range(len(seqlist[0]))
+    # show columns where mask is True
     mask = [True for i in ii]
     if seqrange:
         start, stop = seqrange
@@ -706,6 +708,7 @@ def reformat(seqs,
 
         try:
             number_by_str = consensus_str if number_by == 0 else seqlist[number_by - 1][:]
+            number_by_name = consensus_name if number_by == 0 else seqnames[number_by - 1][:]
         except IndexError:
             raise ValueError('Error in number_by="%s": index out of range.' % number_by)
 
@@ -740,8 +743,8 @@ def reformat(seqs,
                 msg += 'sequences %s to %s of %s' % \
                 (first+1, last, seqcount)
 
-            if number_by != 'consensus':
-                msg += (' alignment numbered according to %s' % number_by)
+            if number_by != 0:
+                msg += (' alignment numbered according to %s' % number_by_name)
 
             if msg:
                 out[-1].append(msg)
@@ -756,7 +759,7 @@ def reformat(seqs,
             else:
                 # label position at beginning and end of block
                 half_ncol = int((stop-start)/2)
-                numstr = ' '*name_width + \
+                numstr = '#'+' '*name_width + \
                     ' %%-%(half_ncol)ss%%%(half_ncol)ss\n' % locals()
                 out[-1].append( numstr % (start + 1, stop) )
 
