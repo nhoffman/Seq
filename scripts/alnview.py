@@ -66,11 +66,11 @@ the sequence numbers for reference. A value of -1 suppresses this behavior.
 
     parser.add_option("-x", "--exclude-invariant", dest="exclude_invariant",
         help="""only show columns with at least min_subs non-consensus
-bases (set min_subs using the -s option)""",
+bases (set min_subs using the -s option) [%default]""",
         action='store_true')
 
     parser.add_option("-g", "--exclude-gapcols", dest="exclude_gapcols",
-        help="Remove columns containing only gap characters.",
+        help="Remove columns containing only gap characters. [%default]",
         action='store_true')
 
     parser.add_option("-s", "--min_subs", dest="min_subs",
@@ -78,7 +78,7 @@ bases (set min_subs using the -s option)""",
         metavar="NUMBER", type='int')
 
     parser.add_option("-n", "--name-max", dest="name_max",
-        help="maximum width of sequence name",
+        help="maximum width of sequence name. [%default]",
         metavar="NUMBER", type='int')
 
     parser.add_option("-w", "--width", dest="ncol",
@@ -102,7 +102,7 @@ bases (set min_subs using the -s option)""",
                       metavar='RANGE')
 
     parser.add_option("-O", "--orientation", dest="orientation",
-        help="Choose from portrait or landscape",
+        help="Choose from portrait or landscape. [%default]",
         metavar="ORIENTATION")
 
     parser.add_option("-b", "--blocks-per-page", dest="blocks_per_page",
@@ -110,7 +110,7 @@ bases (set min_subs using the -s option)""",
                       help="Number of aligned blocks of sequence per page [%default]")
 
     parser.add_option("-q", "--quiet", dest="quiet",
-        help="Suppress output of alignment to screen.",
+        help="Suppress output of alignment to screen. [%default]",
         action='store_true')
 
     parser.add_option("-v", "--verbose",

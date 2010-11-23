@@ -933,12 +933,12 @@ def coalesce(strings, comp='contains', log=log):
         children = set(i for i in idx if compfun(parent_str,strings[i]))
         d[parent_i].extend(children)
         idx = [x for x in idx if x not in children]
-            
+
     for i in chain(*d.values()):
         del d[i]
-        
+
     log.info('Coalesce %s strings to %s in %.2f secs' % (nstrings, len(d), time.time()-start))
-    
+
     if __debug__:
         dFlat = flatten(d)
         log.debug('checking d of length %s with min,max=%s,%s' % \
@@ -949,7 +949,7 @@ def coalesce(strings, comp='contains', log=log):
         for parent, children in d.items():
             for child in children:
                 assert strings[child] in strings[parent]
-                
+
     return d
 
 def merge(strings, d1, d2=None, comp='contains'):

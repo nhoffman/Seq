@@ -97,7 +97,7 @@ class TestCoalesce(unittest.TestCase):
     def test01(self):
         infile = os.path.join(datadir, '474_0_0.txt')
         names, seqs = zip(*(line.split() for line in open(infile) if line.strip()))
-        
+
         d = Seq.sequtil.coalesce(seqs)
         parents = [seqs[i] for i in d.keys()]
 
@@ -107,6 +107,6 @@ class TestCoalesce(unittest.TestCase):
         d1 = Seq.sequtil.coalesce(parents)
         self.assertTrue(len(d1) == len(parents))
 
-        
-        
-        
+
+
+
