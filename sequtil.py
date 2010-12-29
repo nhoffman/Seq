@@ -42,7 +42,7 @@ log = logging
 
 from Dictionaries import translationWithoutAmbiguity, translationWithAmbiguity, translationWithoutAmbiguity3, translationWithAmbiguity3, complementDict, threeToOneLetterAADict, IUPAC_rev
 
-__version__ = '$Id$'
+__version__ = '$Id: sequtil.py 3408 2010-11-23 23:19:46Z nhoffman $'
 
 #to find all single gaps
 singleGapsReo = re.compile( r'[-.~]', re.I)
@@ -408,18 +408,20 @@ def count_subs(tabdict, countGaps=False, gap='-'):
 
     return substitutions
 
-def seqdiff(seq, templateseq, simchar='.'):
-    """Compares seq and templateseq (can be Seq objects or strings) and returns
-a string in which characters in seq that are identical
-at that position to templateseq are replaced with simchar. Return object is the
-length of the shorter of seq and templateseq"""
+def seqdiff(seq, templateseq, simchar='.', gapchar='-'):
+    """Compares seq and templateseq (can be Seq objects or strings)
+    and returns a string in which characters in seq that are identical
+    at that position to templateseq are replaced with simchar. Return
+    object is the length of the shorter of seq and templateseq"""
 
     seqstr = seq[:].upper()
     templatestr = templateseq[:].upper()
 
     lout = []
     for s,t in zip(seqstr, templatestr):
-        if s == t:
+        if s == gapchar:
+            lout.append(gapchar)
+        elif s == t:
             lout.append(simchar)
         else:
             lout.append(s)
