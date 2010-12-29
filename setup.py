@@ -8,6 +8,9 @@ Create windows package: python setup.py bdist_wininst
 from distutils.core import setup
 import glob, os, sys
 
+from __init__ import __version__
+
+
 revision = '$Revision$'
 
 files = ['__init__.py','Sequence.py','Dictionaries.py','sequtil.py']
@@ -25,7 +28,7 @@ files.extend(glob.glob('run_*.py'))
 # testfiles_dir = os.path.join(site_packages,'Seq','testfiles')
 
 params = {'name':'Seq',
-          'version':revision[:-1].split(':')[1].strip(),
+          'version':__version__,
           'packages':['Seq','taxonomy'],
           'package_dir':{'Seq':'.', 'taxonomy':'taxonomy'},
           # 'data_files':[(data_dir, files_in_data),(testfiles_dir, files_in_testfiles)],

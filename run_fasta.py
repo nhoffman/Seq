@@ -5,7 +5,6 @@
 import sys, os, re, logging, copy, random, tempfile, string, commands, logging, pprint, glob
 from sequtil import cast
 import Seq
-from __init__ import ExecutionError
 
 ###### copy this code into each module to set up logging
 log = logging
@@ -117,7 +116,7 @@ def run(query, target, e_val=10, outfile=None,
         log.critical(cmd)
         log.critical('...with output:')
         log.critical(cmd_output)
-        raise ExecutionError, cmd_output
+        raise Seq.ExecutionError(cmd_output)
 
     # parse the data
     data = parseFasta(open(outfile).read())

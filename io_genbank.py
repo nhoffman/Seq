@@ -213,7 +213,7 @@ def _read(input,
                 # a feature key
                 k,v = line.split(None, 1)
                 features.append([])
-                addto = 
+                # addto = 
                 
                 
                     

@@ -1,6 +1,6 @@
 import sys
 
-__version__ = '0.1.'+'$Rev$ 0'.split()[1]
+__version__ = '0.2.0'
 __version_info__ = tuple([ int(num) for num in __version__.split('.')])
 
 _min_python_version = '2.5.0'
@@ -57,3 +57,4 @@ from sequtil import find_exec
 
 class ExecutionError(Exception):
     pass
+
