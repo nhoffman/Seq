@@ -19,21 +19,30 @@ datadir = config.datadir
 class TestReadGenbank1(unittest.TestCase):
 
     testfile = 'sequences.gb'
-
+    
     def setUp(self):
         self.infile = os.path.join(datadir, self.testfile)
         self.instr = open(os.path.join(datadir, self.testfile)).read()
-
+        self.seqs = list(Seq.io_genbank.read(self.infile))
+        
     def test1(self):
-        seqs = list(Seq.io_genbank.read(self.infile))
-        self.assertTrue(len(seqs)==self.instr.count('LOCUS'))
-
+        self.assertTrue(len(self.seqs)==self.instr.count('LOCUS'))
+        
     def test2(self):
-        seqs = Seq.io_genbank.read(self.infile)
-        for seq in seqs:
+        for seq in self.seqs:
             seqlen = int(seq.data['LOCUS'][0].split()[1])
             self.assertTrue(len(seq) == seqlen)
             self.assertTrue(seq.taxid is not None and seq.taxid.isdigit())
-
+            
 class TestReadGenbank2(TestReadGenbank1):
     testfile = 'sequences2.gb'
+
+# biopython_gb_files = '/home/bvdiversity/src/biopython/Tests/GenBank'
+    
+# class TestReadGenbank3(TestReadGenbank1):
+#     testfile = os.path.join(biopython_gb_files, 'NC_000932.gb')
+
+#     def test3(self):
+#         seq = self.seqs[0]
+#         pprint.pprint(seq.data)
+    
