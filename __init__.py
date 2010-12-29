@@ -3,7 +3,7 @@ import sys
 __version__ = '0.2.0'
 __version_info__ = tuple([ int(num) for num in __version__.split('.')])
 
-_min_python_version = '2.5.0'
+_min_python_version = '2.6.0'
 
 def _check_python_version():
     vsplit = lambda x: tuple([int(n) for n in x.split('.')])
