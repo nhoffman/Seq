@@ -9,8 +9,7 @@ sequence file formats (fasta, genbank, etc), you should probably go
 there instead. However, there are a few goodies in here that I haven't
 found elsewhere. Some highlights:
 
- * code for de-duplicating sequences
- .. code-block:: python
+ * code for de-duplicating sequences::
   py> import Seq
   py> seqs = ('TATATA','TATATA', 'TATAT', 'AAGCAG', 'AAGC', 'TTTTT')
   py> print Seq.sequtil.coalesce(seqs)
