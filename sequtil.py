@@ -1,15 +1,13 @@
-import re
 import copy
-import random
-import string
-import Seq
-import os
+import itertools
 import logging
 import math
-import itertools
-
-import time
 import operator
+import os
+import random
+import re
+import string
+import time
 
 try:
     import pp
@@ -39,6 +37,8 @@ except ImportError:
 
 
 log = logging
+
+import Seq
 
 from Dictionaries import translationWithoutAmbiguity, translationWithAmbiguity, translationWithoutAmbiguity3, translationWithAmbiguity3, complementDict, threeToOneLetterAADict, IUPAC_rev
 
