@@ -1,6 +1,8 @@
 Package: Seq
 ============
 
+**This project is deprecated - I'm leaving it here because some very old projects depend on it, but please don't use this for anything new!**
+
 This package contains many utilities for biological sequence
 manipulation that I have accumulated over the years. The first thing
 to point out is that there is much duplication of functionality
